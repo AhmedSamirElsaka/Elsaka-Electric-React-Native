@@ -6,6 +6,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import React, { useState } from "react";
@@ -14,7 +15,8 @@ import FormField from "@/components/FormField";
 import CustomButton from "@/components/CustomButton";
 import { Link, router } from "expo-router";
 import { getCurrentUser, signIn } from "@/lib/appwrite";
-import { useGlobalContext } from "../../context/GlobalProvider";
+import { useGlobalContext } from "@/context/GlobalProvider";
+import { useNavigation } from "@react-navigation/native";
 
 const SignIn = () => {
   const { setUser, setIsLogged }: any = useGlobalContext();
@@ -24,6 +26,7 @@ const SignIn = () => {
     password: "",
   });
 
+  const navigation = useNavigation();
   const submit = async () => {
     if (form.email === "" || form.password === "") {
       Alert.alert("Error", "Please fill in all fields");
@@ -38,7 +41,8 @@ const SignIn = () => {
       setIsLogged(true);
 
       Alert.alert("Success", "User signed in successfully");
-      router.replace("/home");
+
+      navigation.navigate("Home");
     } catch (error: any) {
       Alert.alert("Error", error.message);
     } finally {
@@ -93,12 +97,13 @@ const SignIn = () => {
             <Text className="text-lg text-gray-100 font-pregular">
               Don't have an account?
             </Text>
-            <Link
-              href="/sign-up"
-              className="text-lg font-psemibold text-secondary"
+            <TouchableWithoutFeedback
+              onPress={() => navigation.navigate("Home")}
             >
-              Signup
-            </Link>
+              <Text className="text-lg font-psemibold text-secondary">
+                Signup
+              </Text>
+            </TouchableWithoutFeedback>
           </View>
         </View>
       </ScrollView>
