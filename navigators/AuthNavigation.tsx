@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import SignInScreen from "@/screens/SignInScreen";
 const AuthNavigation = () => {
   const Stack = createStackNavigator();
   return (
