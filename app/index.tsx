@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import OnboardingScreen from "@/screens/OnboardingScreen";
+import AuthNavigation from "@/navigators/AuthNavigation";
 export default function Index() {
   const Stack = createStackNavigator();
   return (
@@ -11,6 +12,11 @@ export default function Index() {
         <Stack.Screen
           component={OnboardingScreen}
           name="Onboarding"
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          component={AuthNavigation}
+          name="auth"
           options={{ headerShown: false }}
         />
         {/* <Stack.Screen component={AuthScreen} name="auth"/>
