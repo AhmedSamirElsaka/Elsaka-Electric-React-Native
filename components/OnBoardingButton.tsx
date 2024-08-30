@@ -98,7 +98,7 @@ const OnBoardingButton = ({
             index: flatListIndex.value + 1,
           });
         } else {
-          navigation.navigate("Home");
+          navigation.navigate("auth");
         }
       }}
     >

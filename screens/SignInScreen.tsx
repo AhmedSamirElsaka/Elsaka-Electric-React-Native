@@ -42,7 +42,7 @@ const SignIn = () => {
 
       Alert.alert("Success", "User signed in successfully");
 
-      navigation.navigate("Home");
+      navigation.navigate("tabs");
     } catch (error: any) {
       Alert.alert("Error", error.message);
     } finally {
@@ -50,7 +50,7 @@ const SignIn = () => {
     }
   };
   return (
-    <SafeAreaView className="bg-primary h-full">
+    <SafeAreaView className="bg-mainBackground h-full">
       <ScrollView>
         <View
           className="w-full flex justify-center h-full px-4 "
@@ -58,14 +58,14 @@ const SignIn = () => {
             minHeight: Dimensions.get("window").height - 100,
           }}
         >
-          <Image
+          {/* <Image
             source={images.logo}
             resizeMode="contain"
             className="w-[115px] h-[34px]"
-          />
+          /> */}
 
           <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">
-            Log in to Aora
+            Log in to Elsaka Electric
           </Text>
 
           <FormField
@@ -93,15 +93,16 @@ const SignIn = () => {
             isLoading={isSubmitting}
           />
 
-          <View className="flex justify-center pt-5 flex-row gap-2">
-            <Text className="text-lg text-gray-100 font-pregular">
+          <View className="flex justify-center items-center pt-5 flex-row">
+            <Text className="text-lg text-gray-100 font-pregular mr-2">
               Don't have an account?
             </Text>
             <TouchableWithoutFeedback
-              onPress={() => navigation.navigate("Home")}
+              onPress={() => navigation.navigate("signUp")}
+              className="flex-1"
             >
-              <Text className="text-lg font-psemibold text-secondary">
-                Signup
+              <Text className="text-xl font-psemibold text-secondary text-center font-bold">
+                SignUp
               </Text>
             </TouchableWithoutFeedback>
           </View>

@@ -102,7 +102,7 @@ const OnboardingScreen = () => {
       <View style={styles.bottomContainer}>
         <TouchableWithoutFeedback
           onPress={() => {
-            navigation.navigate("Home");
+            navigation.navigate("auth");
           }}
         >
           <Animated.Text style={[styles.skipText, skipTextAnimation]}>
