@@ -36,8 +36,8 @@ const OnBoardingButton = ({
   const animatedBackgroundColor = useAnimatedStyle(() => {
     const backgroundColor = interpolateColor(
       x.value,
-      [0, SCREEN_WIDTH, 2 * SCREEN_WIDTH],
-      ["transparent", "transparent", "#F15937"]
+      [0, SCREEN_WIDTH, 2 * SCREEN_WIDTH, 3 * SCREEN_WIDTH, 4 * SCREEN_WIDTH],
+      ["transparent", "transparent", "transparent", "transparent", "#D17842"]
     );
 
     return {
@@ -49,7 +49,7 @@ const OnBoardingButton = ({
     return {
       width:
         flatListIndex.value === dataLength - 1
-          ? withTiming(120)
+          ? withTiming(140)
           : withTiming(60),
 
       height:
@@ -110,7 +110,7 @@ const OnBoardingButton = ({
         ]}
       >
         <Animated.Text
-          style={[styles.textButton, getStartedTextAnimationStyle]}
+          style={[styles.getStartedText, getStartedTextAnimationStyle]}
         >
           Get Started
         </Animated.Text>
@@ -136,23 +136,18 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   nextText: {
-    fontSize: 20,
+    fontSize: 24,
     alignContent: "center",
     justifyContent: "center",
     textAlign: "right",
-  },
-  textButton: {
     color: "white",
-    fontSize: 16,
+  },
+  getStartedText: {
+    color: "white",
+    fontSize: 20,
     fontWeight: "bold",
     flex: 1,
     position: "absolute",
-    textAlign: "right",
-  },
-  lastScreenText: {
-    backgroundColor: "#F15937",
-  },
-  allScreensText: {
-    backgroundColor: "transparent",
+    textAlign: "center",
   },
 });

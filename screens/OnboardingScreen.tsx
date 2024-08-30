@@ -7,7 +7,7 @@ import {
   Text,
   TouchableWithoutFeedback,
 } from "react-native";
-import React from "react";
+import React, { useRef } from "react";
 import Animated, {
   useSharedValue,
   useAnimatedScrollHandler,
@@ -26,6 +26,7 @@ const OnboardingScreen = () => {
   const x = useSharedValue(0);
   const flatListIndex = useSharedValue(0);
   const navigation = useNavigation();
+  const statusBarRef = useRef<StatusBar>(null);
   const onViewableItemsChanged = ({
     viewableItems,
   }: {
@@ -61,7 +62,7 @@ const OnboardingScreen = () => {
         {
           translateX:
             flatListIndex.value === data.length - 1
-              ? withTiming(-100)
+              ? withTiming(-60)
               : withTiming(0),
         },
       ],
@@ -69,6 +70,15 @@ const OnboardingScreen = () => {
   });
   return (
     <View style={styles.container}>
+      {/* {data.map((item, index) => {
+        return (
+          <StatusBar
+            barStyle="light-content"
+            backgroundColor={item.backgroundColor}
+          />
+        );
+      })} */}
+
       <StatusBar hidden={true} />
       <Animated.FlatList
         ref={flatListRef}
@@ -140,6 +150,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   skipText: {
-    fontSize: 20,
+    fontSize: 24,
+    color: "white",
   },
 });

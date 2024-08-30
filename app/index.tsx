@@ -6,7 +6,7 @@ export default function Index() {
   const Stack = createStackNavigator();
   return (
     <NavigationContainer independent={true}>
-      <StatusBar barStyle="light-content" backgroundColor={"#161622"} />
+      {/* <StatusBar barStyle="light-content" backgroundColor={"#161622"} /> */}
       <Stack.Navigator>
         <Stack.Screen
           component={OnboardingScreen}

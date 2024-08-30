@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View, useWindowDimensions } from "react-native";
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+  useWindowDimensions,
+} from "react-native";
 import React from "react";
 import Animated, {
   Extrapolation,
@@ -53,7 +59,7 @@ const OnBoardingScreenItem = ({ index, x, item }: Props) => {
   });
 
   return (
-    <View style={[styles.itemContainer, { width: SCREEN_WIDTH }]}>
+    <View style={[styles.container, { width: SCREEN_WIDTH }]}>
       <View style={styles.circleContainer}>
         <Animated.View
           style={[
@@ -78,10 +84,21 @@ const OnBoardingScreenItem = ({ index, x, item }: Props) => {
           loop
         />
       </Animated.View>
-      <Animated.Text style={[styles.itemText, { color: item.textColor }]}>
-        {item.text}
+      <Animated.Text style={[styles.titleText, { color: item.textColor }]}>
+        {item.title}
       </Animated.Text>
-      <Text>Hello</Text>
+      <Animated.Text
+        style={[
+          {
+            color: "white",
+            fontSize: 18,
+            textAlign: "center",
+            marginHorizontal: 24,
+          },
+        ]}
+      >
+        {item.description}
+      </Animated.Text>
     </View>
   );
 };
@@ -89,17 +106,18 @@ const OnBoardingScreenItem = ({ index, x, item }: Props) => {
 export default OnBoardingScreenItem;
 
 const styles = StyleSheet.create({
-  itemContainer: {
+  container: {
     flex: 1,
     alignItems: "center",
-    marginBottom: 120,
+    paddingTop: 124,
   },
-  itemText: {
+  titleText: {
     textAlign: "center",
-    fontSize: 36,
+    fontSize: 30,
     fontWeight: "bold",
-    marginBottom: 10,
-    marginHorizontal: 20,
+    marginBottom: 24,
+    marginTop: 24,
+    marginHorizontal: 16,
   },
   circleContainer: {
     ...StyleSheet.absoluteFillObject,
