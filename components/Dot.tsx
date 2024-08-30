@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const OnboardingScreen = () => {
+const Dot = () => {
   return (
-    <View className="bg-mainBackground flex-1">
-      <Text>OnboardingScreen</Text>
+    <View>
+      <Text>Dot</Text>
     </View>
   );
 };
 
-export default OnboardingScreen;
+export default Dot;
 
 const styles = StyleSheet.create({});
