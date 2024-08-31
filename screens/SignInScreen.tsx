@@ -4,6 +4,7 @@ import {
   Image,
   SafeAreaView,
   ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
@@ -51,6 +52,7 @@ const SignIn = () => {
   };
   return (
     <SafeAreaView className="bg-mainBackground h-full">
+      <StatusBar barStyle="light-content" backgroundColor={"#000"} />
       <ScrollView>
         <View
           className="w-full flex justify-center h-full px-4 "
@@ -58,11 +60,11 @@ const SignIn = () => {
             minHeight: Dimensions.get("window").height - 100,
           }}
         >
-          {/* <Image
+          <Image
             source={images.logo}
             resizeMode="contain"
-            className="w-[115px] h-[34px]"
-          /> */}
+            className="w-[200px] h-[100px]"
+          />
 
           <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">
             Log in to Elsaka Electric

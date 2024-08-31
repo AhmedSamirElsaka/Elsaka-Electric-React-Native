@@ -12,16 +12,16 @@ export default function Index() {
       <NavigationContainer independent={true}>
         {/* <StatusBar barStyle="light-content" backgroundColor={"#161622"} /> */}
         <Stack.Navigator>
-          <Stack.Screen
+          {/* <Stack.Screen
             component={OnboardingScreen}
             name="Onboarding"
             options={{ headerShown: false }}
-          />
-          <Stack.Screen
+          /> */}
+          {/* <Stack.Screen
             component={AuthNavigator}
             name="auth"
             options={{ headerShown: false }}
-          />
+          /> */}
           <Stack.Screen
             component={TabsNavigator}
             name="tabs"
