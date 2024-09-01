@@ -41,7 +41,7 @@ const SignUp = () => {
       setUser(result);
       setIsLogged(true);
 
-      navigation.navigate("tabs");
+      navigation.navigate("tabs" as never);
     } catch (error: any) {
       Alert.alert("Error", error.message);
     } finally {
@@ -107,7 +107,7 @@ const SignUp = () => {
               Don't have an account?
             </Text>
             <TouchableWithoutFeedback
-              onPress={() => navigation.navigate("signIn")}
+              onPress={() => navigation.navigate("signIn" as never)}
               className="flex-1"
             >
               <Text className="text-xl font-psemibold text-secondary text-center font-bold">
