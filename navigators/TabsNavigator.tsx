@@ -4,6 +4,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "@/screens/HomeScreen";
 import { HomeIcon } from "react-native-heroicons/solid";
 import * as Icons from "react-native-heroicons/solid";
+import ProfileScreen from "@/screens/ProfileScreen";
+import CartScreen from "@/screens/CartScreen";
 const TabIcon = ({ icon, color, name, focused }: any) => {
   return (
     <View className="items-center justify-center gap-2">
@@ -42,6 +44,40 @@ const TabsNavigator = () => {
       <Tab.Screen
         name="home"
         component={HomeScreen}
+        options={{
+          headerShown: false,
+          title: "Home",
+          tabBarIcon: ({ focused, color, size }) => (
+            // <TabIcon
+            //   icon={icons.home}
+            //   color={color}
+            //   name={"home"}
+            //   focused={focused}
+            // />
+            <HomeIcon size={30} color={color} className="w-6 h-6" />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="home"
+        component={CartScreen}
+        options={{
+          headerShown: false,
+          title: "Home",
+          tabBarIcon: ({ focused, color, size }) => (
+            // <TabIcon
+            //   icon={icons.home}
+            //   color={color}
+            //   name={"home"}
+            //   focused={focused}
+            // />
+            <HomeIcon size={30} color={color} className="w-6 h-6" />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="home"
+        component={ProfileScreen}
         options={{
           headerShown: false,
           title: "Home",
