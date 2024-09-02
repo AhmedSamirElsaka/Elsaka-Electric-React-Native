@@ -2,19 +2,34 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "@/screens/HomeScreen";
-import { HomeIcon } from "react-native-heroicons/solid";
+// import { HomeIcon } from "react-native-heroicons/solid";
 import * as Icons from "react-native-heroicons/solid";
 import ProfileScreen from "@/screens/ProfileScreen";
 import CartScreen from "@/screens/CartScreen";
-const TabIcon = ({ icon, color, name, focused }: any) => {
+import AllProductsScreen from "@/screens/AllProductsScreen";
+const TabIcon = ({
+  home = false,
+  cart = false,
+  profile = false,
+  allProducts = false,
+  color,
+  name,
+  focused,
+}: any) => {
   return (
     <View className="items-center justify-center gap-2">
-      <Image
+      {/* <Image
         source={icon}
         resizeMode="contain"
         tintColor={color}
         className="w-6 h-6"
-      />
+      /> */}
+
+      {home && <Icons.HomeIcon size={24} color={color} />}
+      {cart && <Icons.ShoppingBagIcon size={24} color={color} />}
+
+      {profile && <Icons.UserIcon size={24} color={color} />}
+      {allProducts && <Icons.ShoppingCartIcon size={24} color={color} />}
 
       <Text
         className={`${focused ? "font-psemibold" : "font-pregular"} text-xs`}
@@ -48,47 +63,64 @@ const TabsNavigator = () => {
           headerShown: false,
           title: "Home",
           tabBarIcon: ({ focused, color, size }) => (
-            // <TabIcon
-            //   icon={icons.home}
-            //   color={color}
-            //   name={"home"}
-            //   focused={focused}
-            // />
-            <HomeIcon size={30} color={color} className="w-6 h-6" />
+            <TabIcon
+              color={color}
+              name={"home"}
+              focused={focused}
+              home={true}
+            />
+            // <HomeIcon size={30} color={color} className="w-6 h-6" />
           ),
         }}
       />
       <Tab.Screen
-        name="home"
+        name="cart"
         component={CartScreen}
         options={{
           headerShown: false,
-          title: "Home",
+          title: "Cart",
           tabBarIcon: ({ focused, color, size }) => (
-            // <TabIcon
-            //   icon={icons.home}
-            //   color={color}
-            //   name={"home"}
-            //   focused={focused}
-            // />
-            <HomeIcon size={30} color={color} className="w-6 h-6" />
+            <TabIcon
+              color={color}
+              name={"cart"}
+              focused={focused}
+              cart={true}
+            />
+            // <HomeIcon size={30} color={color} className="w-6 h-6" />
           ),
         }}
       />
       <Tab.Screen
-        name="home"
+        name="allProducts"
+        component={AllProductsScreen}
+        options={{
+          headerShown: false,
+          title: "allProducts",
+          tabBarIcon: ({ focused, color, size }) => (
+            <TabIcon
+              color={color}
+              name={"allProducts"}
+              focused={focused}
+              allProducts={true}
+            />
+            // <HomeIcon size={30} color={color} className="w-6 h-6" />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="profile"
         component={ProfileScreen}
         options={{
           headerShown: false,
-          title: "Home",
+          title: "Profile",
           tabBarIcon: ({ focused, color, size }) => (
-            // <TabIcon
-            //   icon={icons.home}
-            //   color={color}
-            //   name={"home"}
-            //   focused={focused}
-            // />
-            <HomeIcon size={30} color={color} className="w-6 h-6" />
+            <TabIcon
+              color={color}
+              name={"profile"}
+              focused={focused}
+              profile={true}
+            />
+            // <HomeIcon size={30} color={color} className="w-6 h-6" />
           ),
         }}
       />
