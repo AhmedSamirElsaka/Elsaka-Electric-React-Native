@@ -1,23 +1,20 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import * as Icons from "react-native-heroicons/solid";
-import { LinearGradient } from "expo-linear-gradient";
+import GradientHeaderIcon from "./GradientHeaderIcon";
 
-const Header = () => {
+const Header = ({ title = "" }) => {
   return (
-    <View>
-      <LinearGradient
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        colors={["#252A32", "#0C0F14"]}
-        className="border-2 border-secondaryDarkGreyHex rounded-lg bg-secondaryDarkGreyHex p-2"
-      >
-        <Icons.Squares2X2Icon
-          size={24}
-          color="white"
-          className="opacity-[0.8]"
+    <View className="h-auto  w-full  flex-row justify-between content-center  px-6 py-8">
+      <GradientHeaderIcon />
+      <Text className="text-white font-bold text-2xl">{title}</Text>
+      <View className=" border-secondaryDarkGreyHex rounded-xl border-2 bg-secondaryDarkGreyHex content-center justify-center">
+        <Image
+          source={require("../assets/images/imageDemo.png")}
+          className="w-10 h-10"
+          resizeMode="contain"
         />
-      </LinearGradient>
+      </View>
     </View>
   );
 };
