@@ -3,10 +3,7 @@ import React from "react";
 
 const HomeScreen = () => {
   return (
-    <View className="flex-1 justify-center items-center bg-mainBackground">
-      <StatusBar barStyle="light-content" backgroundColor={"#000"} />
-      <Text>HomeScreen</Text>
-    </View>
+    <View className="flex-1 justify-center items-center bg-mainBackground"></View>
   );
 };
 

@@ -7,6 +7,7 @@ import * as Icons from "react-native-heroicons/solid";
 import ProfileScreen from "@/screens/ProfileScreen";
 import CartScreen from "@/screens/CartScreen";
 import AllProductsScreen from "@/screens/AllProductsScreen";
+import { StatusBar } from "react-native";
 const TabIcon = ({
   home = false,
   cart = false,
@@ -32,7 +33,7 @@ const TabIcon = ({
       {allProducts && <Icons.ShoppingCartIcon size={24} color={color} />}
 
       <Text
-        className={`${focused ? "font-psemibold" : "font-pregular"} text-xs`}
+        className={`${focused ? "font-psemibold" : "font-pregular"} text-s`}
         style={{ color: color }}
       >
         {name}
