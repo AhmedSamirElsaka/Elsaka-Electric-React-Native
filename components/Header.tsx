@@ -8,11 +8,11 @@ const Header = ({ title = "" }) => {
     <View className="h-auto  w-full  flex-row justify-between content-center  px-6 py-8">
       <GradientHeaderIcon />
       <Text className="text-white font-bold text-2xl">{title}</Text>
-      <View className=" border-secondaryDarkGreyHex rounded-xl border-2 bg-secondaryDarkGreyHex content-center justify-center">
+      <View className=" border-secondaryDarkGreyHex w-10 h-10 flex rounded-xl border-2  content-center justify-center">
         <Image
           source={require("../assets/images/imageDemo.png")}
-          className="w-10 h-10"
-          resizeMode="contain"
+          className="w-10 h-10 rounded-xl"
+          resizeMode="stretch"
         />
       </View>
     </View>
