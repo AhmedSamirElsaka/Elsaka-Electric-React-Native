@@ -6,7 +6,7 @@ const ProductDetails = () => {
   return (
     <View className="flex-1">
       <View className="flex-row justify-between px-6 content-center">
-        <BackIcon />
+        <BackIcon onPress={() => {}} />
       </View>
     </View>
   );

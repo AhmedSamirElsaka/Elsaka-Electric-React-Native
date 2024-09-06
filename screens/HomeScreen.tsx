@@ -5,6 +5,8 @@ import SearchInput from "@/components/SearchInput";
 import CategoriesList from "@/components/CategoriesList";
 import ProductCard from "@/components/ProductCard";
 import ProductList from "@/components/ProductList";
+import BackIcon from "@/components/BackIcon";
+import ProductDetails from "@/components/ProductDetails";
 
 const HomeScreen = () => {
   return (
@@ -42,7 +44,7 @@ const HomeScreen = () => {
             />
           </View>
 
-          <ProductList
+          {/* <ProductList
             title="Electrical Products"
             items={[
               {
@@ -145,7 +147,8 @@ const HomeScreen = () => {
                 rate: "4.5",
               },
             ]}
-          />
+          /> */}
+          <ProductDetails />
         </View>
       </ScrollView>
     </View>
