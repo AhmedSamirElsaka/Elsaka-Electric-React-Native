@@ -5,4 +5,5 @@ export type Product = {
   image: string;
   price: string;
   rate: string;
+  numberOfRates?: string;
 };

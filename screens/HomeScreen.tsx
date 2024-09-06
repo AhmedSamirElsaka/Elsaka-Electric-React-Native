@@ -148,7 +148,6 @@ const HomeScreen = () => {
               },
             ]}
           /> */}
-          <ProductDetails />
         </View>
       </ScrollView>
     </View>
