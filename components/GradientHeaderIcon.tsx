@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Icons from "react-native-heroicons/solid";
 
-const GradientHeaderIcon = () => {
+const GradientHeaderIcon = ({onPress} : {onPress: () => void}) => {
   return (
-    <View>
+    <TouchableOpacity onPress={onPress}>
       <LinearGradient
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
@@ -18,7 +18,7 @@ const GradientHeaderIcon = () => {
           className="opacity-[0.5]"
         />
       </LinearGradient>
-    </View>
+    </Toucop>
   );
 };
 
