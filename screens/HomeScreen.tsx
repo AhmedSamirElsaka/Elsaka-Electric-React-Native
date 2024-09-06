@@ -41,7 +41,7 @@ const HomeScreen = () => {
             />
           </View>
 
-          <ProductCard />
+          {/* <ProductCard /> */}
         </View>
       </ScrollView>
     </View>
