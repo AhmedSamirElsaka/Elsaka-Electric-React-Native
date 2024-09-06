@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import SearchInput from "@/components/SearchInput";
 import CategoriesList from "@/components/CategoriesList";
 import ProductCard from "@/components/ProductCard";
+import ProductList from "@/components/ProductList";
 
 const HomeScreen = () => {
   return (
@@ -41,7 +42,110 @@ const HomeScreen = () => {
             />
           </View>
 
-          {/* <ProductCard /> */}
+          <ProductList
+            title="Electrical Products"
+            items={[
+              {
+                id: "1",
+                title: "Electrical Product",
+                price: "10000",
+                image:
+                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+                description: "Electrical Product Description",
+                rate: "4.5",
+              },
+              {
+                id: "12",
+                title: "Electrical Product",
+                price: "10000",
+                image:
+                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+                description: "Electrical Product Description",
+                rate: "4.5",
+              },
+              {
+                id: "14",
+                title: "Electrical Product",
+                price: "10000",
+                image:
+                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+                description: "Electrical Product Description",
+                rate: "4.5",
+              },
+              {
+                id: "16",
+                title: "Electrical Product",
+                price: "10000",
+                image:
+                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+                description: "Electrical Product Description",
+                rate: "4.5",
+              },
+              {
+                id: "17",
+                title: "Electrical Product",
+                price: "10000",
+                image:
+                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+                description: "Electrical Product Description",
+                rate: "4.5",
+              },
+              {
+                id: "18",
+                title: "Electrical Product",
+                price: "10000",
+                image:
+                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+                description: "Electrical Product Description",
+                rate: "4.5",
+              },
+              {
+                id: "19",
+                title: "Electrical Product",
+                price: "10000",
+                image:
+                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+                description: "Electrical Product Description",
+                rate: "4.5",
+              },
+              {
+                id: "10",
+                title: "Electrical Product",
+                price: "10000",
+                image:
+                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+                description: "Electrical Product Description",
+                rate: "4.5",
+              },
+              {
+                id: "100",
+                title: "Electrical Product",
+                price: "10000",
+                image:
+                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+                description: "Electrical Product Description",
+                rate: "4.5",
+              },
+              {
+                id: "146",
+                title: "Electrical Product",
+                price: "10000",
+                image:
+                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+                description: "Electrical Product Description",
+                rate: "4.5",
+              },
+              {
+                id: "1345",
+                title: "Electrical Product",
+                price: "10000",
+                image:
+                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+                description: "Electrical Product Description",
+                rate: "4.5",
+              },
+            ]}
+          />
         </View>
       </ScrollView>
     </View>
