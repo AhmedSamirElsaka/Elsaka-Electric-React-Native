@@ -12,13 +12,13 @@ const BackIcon = ({ onPress }: { onPress: () => void }) => {
         colors={["#252A32", "#0C0F14"]}
         className="border-2 border-secondaryDarkGreyHex rounded-xl bg-secondaryDarkGreyHex p-2"
       >
-        <Icons.ArrowLeftIcon
+        <Icons.ChevronLeftIcon
           size={24}
           color="white"
           className="opacity-[0.5]"
         />
       </LinearGradient>
-    </ToucOp>
+    </TouchableOpacity>
   );
 };
 
