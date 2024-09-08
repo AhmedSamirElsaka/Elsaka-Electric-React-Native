@@ -38,7 +38,9 @@ const ProductDetails = ({ product }: { product: Product }) => {
             </Text>
           </View>
         </View>
-        <View>{/* <CategoryIcon category={product.category} /> */}</View>
+        <View>
+          <CategoryIcon category={product.category} />
+        </View>
       </View>
     </View>
   );
