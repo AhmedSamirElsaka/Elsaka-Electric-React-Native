@@ -5,5 +5,11 @@ export type Product = {
   image: string;
   price: string;
   rate: string;
-  numberOfRates?: string;
+  numberOfRates: string;
+  category: Category[];
+};
+export type Category = {
+  id: string;
+  name: string;
+  icon: string;
 };

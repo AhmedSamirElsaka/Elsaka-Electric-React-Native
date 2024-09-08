@@ -15,6 +15,18 @@ const CartScreen = () => {
           description: "Electrical Product Description",
           rate: "4.5",
           numberOfRates: "6534",
+          category: [
+            {
+              id: "1",
+              name: "Electrical",
+              icon: "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+            },
+            {
+              id: "2",
+              name: "home",
+              icon: "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+            },
+          ],
         }}
       />
     </View>

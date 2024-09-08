@@ -4,6 +4,7 @@ import BackIcon from "./BackIcon";
 import LoveIcon from "./LoveIcon";
 import { Product } from "@/types/types";
 import * as Icons from "react-native-heroicons/solid";
+import CategoryIcon from "./CategoryIcon";
 
 const ProductDetails = ({ product }: { product: Product }) => {
   return (
@@ -38,8 +39,10 @@ const ProductDetails = ({ product }: { product: Product }) => {
             </Text>
           </View>
         </View>
-        <View>
-          <CategoryIcon category={product.category} />
+        <View className="flex-1 flex-row justify-between px-6 pt-4">
+          {product.category?.map((element) => (
+            <CategoryIcon category={element} key={element.id} />
+          ))}
         </View>
       </View>
     </View>
