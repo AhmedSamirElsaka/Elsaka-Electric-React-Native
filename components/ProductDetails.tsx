@@ -1,4 +1,11 @@
-import { Image, StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React from "react";
 import BackIcon from "./BackIcon";
 import LoveIcon from "./LoveIcon";
@@ -48,47 +55,49 @@ const ProductDetails = ({ product }: { product: Product }) => {
           ))}
         </View>
       </View>
-      <View>
-        <Text className="text-white font-bold text-xl px-6 pt-4">
-          Description
-        </Text>
-        <Text
-          className="text-gray-200 px-6 pt-4"
-          numberOfLines={5}
-          ellipsizeMode="tail"
-        >
-          {product.description}
-        </Text>
-        <Text className="text-white font-bold text-xl px-6 pt-4">Size</Text>
+      <ScrollView>
+        <View className="pb-4">
+          <Text className="text-white font-bold text-xl px-6 pt-4">
+            Description
+          </Text>
+          <Text
+            className="text-gray-200 px-6 pt-4"
+            numberOfLines={5}
+            ellipsizeMode="tail"
+          >
+            {product.description}
+          </Text>
+          <Text className="text-white font-bold text-xl px-6 pt-4">Size</Text>
 
-        <View className="px-6 pt-2">
-          <FlatList
-            data={product.productSize}
-            renderItem={({ item }) => (
-              <ProductSizeComponent productSize={item} />
-            )}
-            keyExtractor={(item) => item.size}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            ItemSeparatorComponent={() => <View className="w-6" />}
-          />
-        </View>
-        <View className="flex-row px-6 pt-8 justify-between">
-          <View className="justify-center items-center">
-            <Text className="text-white font-bold text-lg">Price</Text>
-            <Text className="text-white font-bold text-xl">
-              <Text className="text-primary text-2xl">$ </Text>
-              {10.5}
-            </Text>
+          <View className="px-6 pt-2">
+            <FlatList
+              data={product.productSize}
+              renderItem={({ item }) => (
+                <ProductSizeComponent productSize={item} />
+              )}
+              keyExtractor={(item) => item.size}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              ItemSeparatorComponent={() => <View className="w-6" />}
+            />
           </View>
-          <CustomButton
-            title="Add To Cart"
-            handlePress={() => {}}
-            textStyles="text-white text-lg text-bold"
-            containerStyles="bg-primary flex-1 ml-16"
-          />
+          <View className="flex-row px-6 pt-8 justify-between">
+            <View className="justify-center items-center">
+              <Text className="text-white font-bold text-lg">Price</Text>
+              <Text className="text-white font-bold text-xl">
+                <Text className="text-primary text-2xl">$ </Text>
+                {10.5}
+              </Text>
+            </View>
+            <CustomButton
+              title="Add To Cart"
+              handlePress={() => {}}
+              textStyles="text-white text-lg text-bold"
+              containerStyles="bg-primary flex-1 ml-16"
+            />
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };

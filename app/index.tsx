@@ -23,16 +23,16 @@ export default function Index() {
             name="auth"
             options={{ headerShown: false }}
           /> */}
-          {/* <Stack.Screen
+          <Stack.Screen
             component={TabsNavigator}
             name="tabs"
             options={{ headerShown: false }}
-          /> */}
-          <Stack.Screen
+          />
+          {/* <Stack.Screen
             component={CartScreen}
             name="tabs"
             options={{ headerShown: false }}
-          />
+          /> */}
           {/* <Stack.Screen component={AuthScreen} name="auth"/>
         <Stack.Screen component={TabsScreen} name="tabs"/> */}
         </Stack.Navigator>
