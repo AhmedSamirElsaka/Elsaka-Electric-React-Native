@@ -2,8 +2,9 @@ import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import CustomButton from "./CustomButton";
 import { LinearGradient } from "expo-linear-gradient";
+import ProductCardCount from "./ProductCardCount";
 
-const CartProductCard = ({ isSingleElement = true }) => {
+const CartProductCard = ({ isSingleElement = false }) => {
   return isSingleElement ? (
     <View>
       <LinearGradient
@@ -39,6 +40,7 @@ const CartProductCard = ({ isSingleElement = true }) => {
                 {10.5}
               </Text>
             </View>
+            <ProductCardCount productQuantity={1} />
           </View>
         </View>
       </LinearGradient>
