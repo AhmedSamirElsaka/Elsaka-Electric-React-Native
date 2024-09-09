@@ -93,7 +93,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
               title="Add To Cart"
               handlePress={() => {}}
               textStyles="text-white text-lg text-bold"
-              containerStyles="bg-primary flex-1 ml-16"
+              containerStyles="bg-primary flex-1 ml-12"
             />
           </View>
         </View>
