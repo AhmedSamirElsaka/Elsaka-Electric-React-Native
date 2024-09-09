@@ -15,11 +15,11 @@ const CategoryIcon = ({ category }: { category: Category }) => {
         {/* <Icons.HeartIcon size={24} color={IsPressed ? "red" : "white"} /> */}
         <Image
           source={require("../assets/images/testicon.png")}
-          className="w-6  h-6"
-          resizeMode="stretch"
+          className="w-6  h-8"
+          resizeMode="contain"
           style={{ tintColor: "#D17842" }}
         />
-        <Text className="text-white text-sm">{category.name}</Text>
+        <Text className="text-white text-xs">{category.name}</Text>
       </LinearGradient>
     </View>
   );
