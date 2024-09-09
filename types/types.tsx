@@ -7,9 +7,15 @@ export type Product = {
   rate: string;
   numberOfRates: string;
   category: Category[];
+  productSize: ProductSize[];
 };
 export type Category = {
   id: string;
   name: string;
   icon: string;
+};
+export type ProductSize = {
+  size: string;
+  unit: string;
+  price: string;
 };

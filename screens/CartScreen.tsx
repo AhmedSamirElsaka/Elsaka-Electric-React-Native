@@ -28,6 +28,38 @@ const CartScreen = () => {
               icon: "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
             },
           ],
+          productSize: [
+            {
+              size: "250",
+              unit: "gm",
+              price: "10000",
+            },
+            {
+              size: "500",
+              unit: "gm",
+              price: "10000",
+            },
+            {
+              size: "750",
+              unit: "gm",
+              price: "10000",
+            },
+            {
+              size: "1",
+              unit: "kg",
+              price: "10000",
+            },
+            {
+              size: "1.25",
+              unit: "kg",
+              price: "10000",
+            },
+            {
+              size: "1,5",
+              unit: "kg",
+              price: "10000",
+            },
+          ],
         }}
       />
     </View>

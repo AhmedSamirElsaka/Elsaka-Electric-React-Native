@@ -5,6 +5,9 @@ import LoveIcon from "./LoveIcon";
 import { Product } from "@/types/types";
 import * as Icons from "react-native-heroicons/solid";
 import CategoryIcon from "./CategoryIcon";
+import ProductSizeComponent from "./ProductSizeComponent";
+import { FlatList } from "react-native-gesture-handler";
+import CustomButton from "./CustomButton";
 
 const ProductDetails = ({ product }: { product: Product }) => {
   return (
@@ -32,7 +35,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
           <Text className="text-white font-bold text-2xl pt-4">Cappuccino</Text>
           <Text className="text-gray-300 ">With Steamed Milk</Text>
           <View className="flex-row items-center pt-8 space-x-2">
-            <Icons.StarIcon size={30} color={"gold"} />
+            <Icons.StarIcon size={30} color={"#D17842"} />
             <Text className=" text-white text-xl">{product.rate}</Text>
             <Text className=" text-gray-300 text-lg">
               ({product.numberOfRates})
@@ -57,6 +60,34 @@ const ProductDetails = ({ product }: { product: Product }) => {
           {product.description}
         </Text>
         <Text className="text-white font-bold text-xl px-6 pt-4">Size</Text>
+
+        <View className="px-6 pt-2">
+          <FlatList
+            data={product.productSize}
+            renderItem={({ item }) => (
+              <ProductSizeComponent productSize={item} />
+            )}
+            keyExtractor={(item) => item.size}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            ItemSeparatorComponent={() => <View className="w-6" />}
+          />
+        </View>
+        <View className="flex-row px-6 pt-8 justify-between">
+          <View className="justify-center items-center">
+            <Text className="text-white font-bold text-lg">Price</Text>
+            <Text className="text-white font-bold text-xl">
+              <Text className="text-primary text-2xl">$ </Text>
+              {10.5}
+            </Text>
+          </View>
+          <CustomButton
+            title="Add To Cart"
+            handlePress={() => {}}
+            textStyles="text-white text-lg text-bold"
+            containerStyles="bg-primary flex-1 ml-16"
+          />
+        </View>
       </View>
     </View>
   );

@@ -5,6 +5,7 @@ import OnboardingScreen from "@/screens/OnboardingScreen";
 import GlobalProvider from "@/context/GlobalProvider";
 import TabsNavigator from "@/navigators/TabsNavigator";
 import AuthNavigator from "@/navigators/AuthNavigator";
+import CartScreen from "@/screens/CartScreen";
 export default function Index() {
   const Stack = createStackNavigator();
   return (
@@ -22,8 +23,13 @@ export default function Index() {
             name="auth"
             options={{ headerShown: false }}
           /> */}
-          <Stack.Screen
+          {/* <Stack.Screen
             component={TabsNavigator}
+            name="tabs"
+            options={{ headerShown: false }}
+          /> */}
+          <Stack.Screen
+            component={CartScreen}
             name="tabs"
             options={{ headerShown: false }}
           />
