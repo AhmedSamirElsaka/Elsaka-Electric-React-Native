@@ -5,7 +5,7 @@ import * as Icons from "react-native-heroicons/solid";
 const ProductCardCount = ({ productQuantity }: { productQuantity: number }) => {
   const [quantity, setQuantity] = useState(productQuantity);
   return (
-    <View className="flex-row pl-8 pt-4 justify-between items-center">
+    <View className="flex-row  justify-between items-center">
       <TouchableOpacity
         onPress={() =>
           quantity > 0 ? setQuantity(quantity - 1) : setQuantity(0)
@@ -20,7 +20,7 @@ const ProductCardCount = ({ productQuantity }: { productQuantity: number }) => {
       </TouchableOpacity>
       <View
         className="border-2 border-primary rounded-xl 
-              items-center content-center bg-[#0C0F14] p-2 w-auto h-12 px-8"
+              items-center content-center bg-[#0C0F14] p-2 w-14 h-12"
       >
         <Text className="text-white text-lg" numberOfLines={1}>
           {quantity}
