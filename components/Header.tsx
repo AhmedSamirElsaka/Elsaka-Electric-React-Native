@@ -5,7 +5,7 @@ import GradientHeaderIcon from "./GradientHeaderIcon";
 
 const Header = ({ title = "" }) => {
   return (
-    <View className="h-auto  w-full  flex-row justify-between content-center  px-6 py-8">
+    <View className="h-auto  w-full  flex-row justify-between content-center  px-6 py-4">
       <GradientHeaderIcon onPress={() => {}} />
       <Text className="text-white font-bold text-2xl">{title}</Text>
       <View className=" border-secondaryDarkGreyHex w-10 h-10 flex rounded-xl border-2  content-center justify-center">

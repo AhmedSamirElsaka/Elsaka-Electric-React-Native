@@ -7,14 +7,14 @@ import {
   View,
 } from "react-native";
 import React from "react";
-import BackIcon from "./BackIcon";
-import LoveIcon from "./LoveIcon";
+import BackIcon from "../components/BackIcon";
+import LoveIcon from "../components/LoveIcon";
 import { Product } from "@/types/types";
 import * as Icons from "react-native-heroicons/solid";
-import CategoryIcon from "./CategoryIcon";
-import ProductSizeComponent from "./ProductSizeComponent";
+import CategoryIcon from "../components/CategoryIcon";
+import ProductSizeComponent from "../components/ProductSizeComponent";
 import { FlatList } from "react-native-gesture-handler";
-import CustomButton from "./CustomButton";
+import CustomButton from "../components/CustomButton";
 
 const ProductDetails = ({ product }: { product: Product }) => {
   return (
@@ -93,7 +93,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
               title="Add To Cart"
               handlePress={() => {}}
               textStyles="text-white text-lg text-bold"
-              containerStyles="bg-primary flex-1 ml-12"
+              containerStyles="bg-primary flex-1 ml-8"
             />
           </View>
         </View>

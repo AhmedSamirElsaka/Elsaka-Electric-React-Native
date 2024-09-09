@@ -6,7 +6,6 @@ import CategoriesList from "@/components/CategoriesList";
 import ProductCard from "@/components/ProductCard";
 import ProductList from "@/components/ProductList";
 import BackIcon from "@/components/BackIcon";
-import ProductDetails from "@/components/ProductDetails";
 
 const HomeScreen = () => {
   return (
@@ -15,7 +14,7 @@ const HomeScreen = () => {
       <ScrollView>
         <View className="flex-1  bg-mainBackground">
           <Header title="Home" />
-          <Text className="text-white font-bold text-2xl pl-8 pr-12">
+          <Text className="text-white font-bold text-2xl pl-8 pr-12 pt-4">
             Find the best{" "}
             <Text className="text-primary">Electrical Product</Text> for your
             home
