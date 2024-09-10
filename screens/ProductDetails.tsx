@@ -43,7 +43,9 @@ const ProductDetails = ({ product }: { product: Product }) => {
           <Text className="text-gray-300 ">With Steamed Milk</Text>
           <View className="flex-row items-center pt-8 space-x-2">
             <Icons.StarIcon size={30} color={"#D17842"} />
-            <Text className=" text-white text-xl">{product.rate}</Text>
+            <Text className=" text-white text-xl font-bold">
+              {product.rate}
+            </Text>
             <Text className=" text-gray-300 text-lg">
               ({product.numberOfRates})
             </Text>
