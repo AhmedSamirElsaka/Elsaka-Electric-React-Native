@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const AllProductsScreen = () => {
+const FavoriteProductCard = () => {
   return (
     <View>
-      <Text>AllProductsScreen</Text>
+      <Text>FavoriteProductCard</Text>
     </View>
   );
 };
 
-export default AllProductsScreen;
+export default FavoriteProductCard;
 
 const styles = StyleSheet.create({});

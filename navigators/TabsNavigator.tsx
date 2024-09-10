@@ -6,13 +6,13 @@ import HomeScreen from "@/screens/HomeScreen";
 import * as Icons from "react-native-heroicons/solid";
 import ProfileScreen from "@/screens/ProfileScreen";
 import CartScreen from "@/screens/CartScreen";
-import AllProductsScreen from "@/screens/AllProductsScreen";
 import { StatusBar } from "react-native";
+import FavoritesScreen from "@/screens/FavoritesScreen";
 const TabIcon = ({
   home = false,
   cart = false,
   profile = false,
-  allProducts = false,
+  favorites = false,
   color,
   name,
   focused,
@@ -30,7 +30,7 @@ const TabIcon = ({
       {cart && <Icons.ShoppingBagIcon size={24} color={color} />}
 
       {profile && <Icons.UserIcon size={24} color={color} />}
-      {allProducts && <Icons.ShoppingCartIcon size={24} color={color} />}
+      {favorites && <Icons.HeartIcon size={24} color={color} />}
 
       <Text
         className={`${focused ? "font-psemibold" : "font-pregular"} text-s`}
@@ -93,17 +93,17 @@ const TabsNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="allProducts"
-        component={AllProductsScreen}
+        name="favorites"
+        component={FavoritesScreen}
         options={{
           headerShown: false,
           title: "allProducts",
           tabBarIcon: ({ focused, color, size }) => (
             <TabIcon
               color={color}
-              name={"allProducts"}
+              name={"favorites"}
               focused={focused}
-              allProducts={true}
+              favorites={true}
             />
             // <HomeIcon size={30} color={color} className="w-6 h-6" />
           ),
