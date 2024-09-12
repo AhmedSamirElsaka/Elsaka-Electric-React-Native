@@ -399,6 +399,7 @@ const ProductsScreen = () => {
             ],
           },
         ]}
+        isHorizontal={true}
       />
     </View>
   );

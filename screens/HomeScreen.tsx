@@ -3,8 +3,7 @@ import React from "react";
 import Header from "@/components/Header";
 import SearchInput from "@/components/SearchInput";
 import CategoriesList from "@/components/CategoriesList";
-import ProductCard from "@/components/ProductCard";
-import ProductList from "@/components/ProductList";
+
 import BackIcon from "@/components/BackIcon";
 
 const HomeScreen = () => {
