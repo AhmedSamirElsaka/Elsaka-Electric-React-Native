@@ -21,7 +21,7 @@ const ShopProductList = ({
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => <HomeProductCard product={item} />}
           ItemSeparatorComponent={() => <View className="h-6" />}
-          className="pt-8"
+          className="pt-4"
           numColumns={2}
           columnWrapperStyle={{ justifyContent: "space-around" }}
           key={1}
@@ -32,7 +32,7 @@ const ShopProductList = ({
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => <ShopProductCard product={item} />}
           ItemSeparatorComponent={() => <View className="h-6" />}
-          className="pt-8"
+          className="pt-4"
           key={2}
         />
       )}

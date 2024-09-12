@@ -3,8 +3,10 @@ import React from "react";
 
 const SortScreen = () => {
   return (
-    <View>
-      <Text>SortScreen</Text>
+    <View className="">
+      <Text className="text-white font-bold text-lg px-6 text-center">
+        sort
+      </Text>
     </View>
   );
 };
