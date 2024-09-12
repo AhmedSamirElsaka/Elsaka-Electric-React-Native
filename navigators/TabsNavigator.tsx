@@ -9,6 +9,7 @@ import CartScreen from "@/screens/CartScreen";
 import { StatusBar } from "react-native";
 import FavoritesScreen from "@/screens/FavoritesScreen";
 import ShopScreen from "@/screens/ShopScreen";
+import ProductsScreen from "@/screens/ProductsScreen";
 const TabIcon = ({
   home = false,
   cart = false,
@@ -80,7 +81,7 @@ const TabsNavigator = () => {
       />
       <Tab.Screen
         name="shop"
-        component={ShopScreen}
+        component={ProductsScreen}
         options={{
           headerShown: false,
           title: "Shop",
