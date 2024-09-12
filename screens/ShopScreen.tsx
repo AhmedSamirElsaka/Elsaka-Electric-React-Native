@@ -6,7 +6,7 @@ import ShopCategoryCard from "@/components/ShopCategoryCard";
 
 const ShopScreen = () => {
   return (
-    <View className="flex-1 bg-mainBackground ">
+    <View className="flex-1 bg-mainBackground pt-4">
       <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
       <Header title="Categories" />
       <View className="pt-4">

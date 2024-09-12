@@ -9,11 +9,11 @@ import BackIcon from "@/components/BackIcon";
 
 const HomeScreen = () => {
   return (
-    <View className="flex-1  bg-mainBackground">
+    <View className="flex-1  bg-mainBackground pt-4">
       <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
+      <Header title="Home" />
       <ScrollView>
         <View className="flex-1  bg-mainBackground">
-          <Header title="Home" />
           <Text className="text-white font-bold text-2xl pl-8 pr-12 pt-4">
             Find the best{" "}
             <Text className="text-primary">Electrical Product</Text> for your
