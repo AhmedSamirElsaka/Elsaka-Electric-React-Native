@@ -8,11 +8,13 @@ import ProfileScreen from "@/screens/ProfileScreen";
 import CartScreen from "@/screens/CartScreen";
 import { StatusBar } from "react-native";
 import FavoritesScreen from "@/screens/FavoritesScreen";
+import ShopScreen from "@/screens/ShopScreen";
 const TabIcon = ({
   home = false,
   cart = false,
   profile = false,
   favorites = false,
+  shop = false,
   color,
   name,
   focused,
@@ -31,6 +33,7 @@ const TabIcon = ({
 
       {profile && <Icons.UserIcon size={24} color={color} />}
       {favorites && <Icons.HeartIcon size={24} color={color} />}
+      {shop && <Icons.ShoppingCartIcon size={24} color={color} />}
 
       <Text
         className={`${focused ? "font-psemibold" : "font-pregular"} text-s`}
@@ -70,6 +73,23 @@ const TabsNavigator = () => {
               name={"home"}
               focused={focused}
               home={true}
+            />
+            // <HomeIcon size={30} color={color} className="w-6 h-6" />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="shop"
+        component={ShopScreen}
+        options={{
+          headerShown: false,
+          title: "Shop",
+          tabBarIcon: ({ focused, color, size }) => (
+            <TabIcon
+              color={color}
+              name={"shop"}
+              focused={focused}
+              shop={true}
             />
             // <HomeIcon size={30} color={color} className="w-6 h-6" />
           ),
