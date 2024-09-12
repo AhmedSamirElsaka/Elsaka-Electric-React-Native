@@ -5,7 +5,7 @@ import * as Icons from "react-native-heroicons/solid";
 import * as OutlineIcons from "react-native-heroicons/outline";
 import { Product } from "@/types/types";
 
-const ProductCard = ({ product }: { product: Product }) => {
+const HomeProductCard = ({ product }: { product: Product }) => {
   return (
     <View className="w-44 h-72 bg-green-800 rounded-3xl">
       <LinearGradient
@@ -31,10 +31,10 @@ const ProductCard = ({ product }: { product: Product }) => {
           <Text className="text-white font-semibold text-lg w-32 h-6">
             {product.title}
           </Text>
-          <Text className="text-white  text-sm h-4">{product.description}</Text>
+          <Text className="text-white text-sm h-4">{product.description}</Text>
         </View>
 
-        <View className="flex-row items-center mt-4 w-32 justify-between">
+        <View className="flex-row items-center mt-4 w-32 justify-between pt-2">
           <Text className="text-white font-semibold text-lg">
             <Text className="text-primary">$ </Text> {product.price}
           </Text>
@@ -49,6 +49,6 @@ const ProductCard = ({ product }: { product: Product }) => {
   );
 };
 
-export default ProductCard;
+export default HomeProductCard;
 
 const styles = StyleSheet.create({});
