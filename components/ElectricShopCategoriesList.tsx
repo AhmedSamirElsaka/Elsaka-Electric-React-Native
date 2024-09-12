@@ -1,10 +1,19 @@
-import { StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import MainCategoryItem from "./MainCategoryItem";
 
-const ElectricShopCategoriesList = () => {
+const ElectricShopCategoriesList = ({
+  mainCategories,
+}: {
+  mainCategories: string[];
+}) => {
   return (
     <View>
-      <Text>ElectricShopCategoriesList</Text>
+      <FlatList
+        data={mainCategories}
+        keyExtractor={(item) => item}
+        renderItem={({ item }) => <MainCategoryItem category={item} />}
+      />
     </View>
   );
 };
