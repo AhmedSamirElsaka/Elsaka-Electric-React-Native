@@ -81,7 +81,7 @@ const TabsNavigator = () => {
       />
       <Tab.Screen
         name="shop"
-        component={ProductsScreen}
+        component={CartScreen}
         options={{
           headerShown: false,
           title: "Shop",

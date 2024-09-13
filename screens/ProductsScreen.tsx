@@ -421,17 +421,16 @@ const ProductsScreen = () => {
           },
         ]}
         isHorizontal={true}
-        dis
-        d
       />
       {/* <View className="flex-1 bg-gray-400"> */}
       <BottomSheet
         ref={bottomSheetRef}
         onChange={handleSheetChanges}
-        snapPoints={[600]}
+        snapPoints={[380]}
         index={0}
         backgroundStyle={{ backgroundColor: "#2B2D31" }}
         handleIndicatorStyle={{ backgroundColor: "white" }}
+        handleStyle={{ borderRadius: 30 }}
         containerHeight={500}
         containerStyle={{ backgroundColor: "#00000059" }}
       >
