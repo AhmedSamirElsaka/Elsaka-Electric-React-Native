@@ -19,6 +19,7 @@ import CustomButton from "../components/CustomButton";
 import ProductCardCount from "@/components/ProductCardCount";
 import HomeProductCard from "@/components/HomeProductCard";
 import { Icon } from "@rneui/themed";
+import ReviewCard from "@/components/ReviewCard";
 
 const ProductDetails = ({ product }: { product: Product }) => {
   const [isReviewsWithPhotoShown, setIsReviewsWithPhotoShown] = useState(true);
@@ -173,6 +174,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
               <Text className="text-white ml-2 text-base">With Photo</Text>
             </View>
           </View>
+          <ReviewCard />
 
           <Text className="text-white font-bold text-2xl px-6 pt-8">
             You can also like this
