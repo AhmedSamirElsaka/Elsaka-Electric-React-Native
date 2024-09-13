@@ -4,9 +4,10 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import BackIcon from "../components/BackIcon";
 import LoveIcon from "../components/LoveIcon";
 import { Product } from "@/types/types";
@@ -17,8 +18,10 @@ import { FlatList } from "react-native-gesture-handler";
 import CustomButton from "../components/CustomButton";
 import ProductCardCount from "@/components/ProductCardCount";
 import HomeProductCard from "@/components/HomeProductCard";
+import { Icon } from "@rneui/themed";
 
 const ProductDetails = ({ product }: { product: Product }) => {
+  const [isReviewsWithPhotoShown, setIsReviewsWithPhotoShown] = useState(true);
   return (
     <View className="flex-1 bg-mainBackground ">
       {/* Transparent StatusBar */}
@@ -142,9 +145,34 @@ const ProductDetails = ({ product }: { product: Product }) => {
             </View>
           </View>
 
-          <Text className="text-white font-bold text-2xl px-6 pt-10">
-            20 Reviews
-          </Text>
+          <View className="px-6 pt-10 flex-row justify-between">
+            <Text className="text-white font-bold text-2xl ">20 Reviews</Text>
+            <View className="flex-row items-center">
+              <TouchableOpacity
+                onPress={() => {
+                  setIsReviewsWithPhotoShown(!isReviewsWithPhotoShown);
+                }}
+                activeOpacity={0.7}
+              >
+                {isReviewsWithPhotoShown ? (
+                  <Icon
+                    name="check-box"
+                    type="material"
+                    color="#D17842"
+                    size={26}
+                  />
+                ) : (
+                  <Icon
+                    name="check-box-outline-blank"
+                    type="material"
+                    color="#D17842"
+                    size={26}
+                  />
+                )}
+              </TouchableOpacity>
+              <Text className="text-white ml-2 text-base">With Photo</Text>
+            </View>
+          </View>
 
           <Text className="text-white font-bold text-2xl px-6 pt-8">
             You can also like this
