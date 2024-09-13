@@ -73,9 +73,9 @@ const ProductDetails = ({ product }: { product: Product }) => {
           >
             {product.description}
           </Text>
-          <Text className="text-white font-bold text-xl px-6 pt-4">Size</Text>
+          <Text className="text-white font-bold text-xl px-6 pt-6">Size</Text>
 
-          <View className="px-6 pt-2">
+          <View className="px-6 pt-4">
             <FlatList
               data={product.productSize}
               renderItem={({ item }) => (
@@ -96,7 +96,6 @@ const ProductDetails = ({ product }: { product: Product }) => {
                 {product.rate}
               </Text>
               <Text className="text-gray-300 text-base">
-                {" "}
                 {product.numberOfRates} ratings
               </Text>
             </View>
@@ -128,13 +127,13 @@ const ProductDetails = ({ product }: { product: Product }) => {
               </View>
             </View>
             <View className="space-y-3">
-              <View className={`w-24 h-2 bg-primary rounded-full`} />
-              <View className="w-16 h-2 bg-primary rounded-full" />
-              <View className="w-12 h-2 bg-primary rounded-full" />
-              <View className="w-8 h-2 bg-primary rounded-full" />
-              <View className="w-4 h-2 bg-primary rounded-full" />
+              <View className={`w-24 h-2 bg-amber-400 rounded-full`} />
+              <View className="w-16 h-2 bg-amber-400 rounded-full" />
+              <View className="w-12 h-2 bg-amber-400 rounded-full" />
+              <View className="w-8 h-2 bg-amber-400 rounded-full" />
+              <View className="w-4 h-2 bg-amber-400 rounded-full" />
             </View>
-            <View className="">
+            <View className="items-center">
               <Text className="text-white text-sm">1000</Text>
               <Text className="text-white text-sm">90</Text>
               <Text className="text-white text-sm">1200</Text>
@@ -142,6 +141,10 @@ const ProductDetails = ({ product }: { product: Product }) => {
               <Text className="text-white text-sm">50</Text>
             </View>
           </View>
+
+          <Text className="text-white font-bold text-2xl px-6 pt-10">
+            20 Reviews
+          </Text>
 
           <Text className="text-white font-bold text-2xl px-6 pt-8">
             You can also like this
