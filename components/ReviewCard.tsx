@@ -11,7 +11,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import * as SolidIcons from "react-native-heroicons/solid";
 import * as OutlineIcons from "react-native-heroicons/outline";
 
-const ReviewCard = () => {
+const ReviewCard = ({ isWithPhotos }: { isWithPhotos: boolean }) => {
   const [isHelpful, setIsHelpful] = useState(false);
   return (
     <LinearGradient
@@ -46,20 +46,22 @@ const ReviewCard = () => {
         my upper body. When I put it on I felt like it thinned me put and I got
         so many compliments.
       </Text>
-      <FlatList
-        data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-        keyExtractor={(item) => item.toString()}
-        renderItem={() => (
-          <Image
-            source={require("../assets/images/imageDemo.png")}
-            className="w-32 h-32 rounded-xl"
-          />
-        )}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        ItemSeparatorComponent={() => <View className="w-6" />}
-        className="pt-6 px-4"
-      />
+      {isWithPhotos && (
+        <FlatList
+          data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+          keyExtractor={(item) => item.toString()}
+          renderItem={() => (
+            <Image
+              source={require("../assets/images/imageDemo.png")}
+              className="w-32 h-32 rounded-xl"
+            />
+          )}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          ItemSeparatorComponent={() => <View className="w-6" />}
+          className="pt-6 px-4"
+        />
+      )}
       <View className="flex-row space-x-2 items-center justify-end  p-4">
         <Text className="text-gray-300 font-semibold text-base">Helpful</Text>
         <TouchableOpacity

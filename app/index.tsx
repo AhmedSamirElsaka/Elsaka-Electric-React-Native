@@ -11,7 +11,7 @@ export default function Index() {
   return (
     <GlobalProvider>
       <NavigationContainer independent={true}>
-        <StatusBar barStyle="light-content" backgroundColor={"#000"} />
+        <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
         <Stack.Navigator>
           {/* <Stack.Screen
             component={OnboardingScreen}

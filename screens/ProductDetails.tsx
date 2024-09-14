@@ -23,6 +23,371 @@ import ReviewCard from "@/components/ReviewCard";
 
 const ProductDetails = ({ product }: { product: Product }) => {
   const [isReviewsWithPhotoShown, setIsReviewsWithPhotoShown] = useState(true);
+  const data = [
+    {
+      id: "1",
+      title: "Electrical Product",
+      price: "10000",
+      image:
+        "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+      description: "Electrical Product Description",
+      rate: "4.5",
+      numberOfRates: "6534",
+      category: [],
+      productSize: [
+        {
+          size: "250",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "500",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "750",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "1",
+          unit: "kg",
+          price: "10000",
+        },
+      ],
+    },
+    {
+      id: "12",
+      title: "Electrical Product",
+      price: "10000",
+      image:
+        "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+      description: "Electrical Product Description",
+      rate: "4.5",
+      numberOfRates: "6534",
+      category: [],
+      productSize: [
+        {
+          size: "250",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "500",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "750",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "1",
+          unit: "kg",
+          price: "10000",
+        },
+      ],
+    },
+    {
+      id: "14",
+      title: "Electrical Product",
+      price: "10000",
+      image:
+        "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+      description: "Electrical Product Description",
+      rate: "4.5",
+      numberOfRates: "6534",
+      category: [],
+      productSize: [
+        {
+          size: "250",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "500",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "750",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "1",
+          unit: "kg",
+          price: "10000",
+        },
+      ],
+    },
+    {
+      id: "16",
+      title: "Electrical Product",
+      price: "10000",
+      image:
+        "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+      description: "Electrical Product Description",
+      rate: "4.5",
+      numberOfRates: "6534",
+      category: [],
+      productSize: [
+        {
+          size: "250",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "500",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "750",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "1",
+          unit: "kg",
+          price: "10000",
+        },
+      ],
+    },
+    {
+      id: "17",
+      title: "Electrical Product",
+      price: "10000",
+      image:
+        "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+      description: "Electrical Product Description",
+      rate: "4.5",
+      numberOfRates: "6534",
+      category: [],
+      productSize: [
+        {
+          size: "250",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "500",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "750",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "1",
+          unit: "kg",
+          price: "10000",
+        },
+      ],
+    },
+    {
+      id: "18",
+      title: "Electrical Product",
+      price: "10000",
+      image:
+        "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+      description: "Electrical Product Description",
+      rate: "4.5",
+      numberOfRates: "6534",
+      category: [],
+      productSize: [
+        {
+          size: "250",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "500",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "750",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "1",
+          unit: "kg",
+          price: "10000",
+        },
+      ],
+    },
+    {
+      id: "19",
+      title: "Electrical Product",
+      price: "10000",
+      image:
+        "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+      description: "Electrical Product Description",
+      rate: "4.5",
+      numberOfRates: "6534",
+      category: [],
+      productSize: [
+        {
+          size: "250",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "500",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "750",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "1",
+          unit: "kg",
+          price: "10000",
+        },
+      ],
+    },
+    {
+      id: "10",
+      title: "Electrical Product",
+      price: "10000",
+      image:
+        "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+      description: "Electrical Product Description",
+      rate: "4.5",
+      numberOfRates: "6534",
+      category: [],
+      productSize: [
+        {
+          size: "250",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "500",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "750",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "1",
+          unit: "kg",
+          price: "10000",
+        },
+      ],
+    },
+    {
+      id: "100",
+      title: "Electrical Product",
+      price: "10000",
+      image:
+        "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+      description: "Electrical Product Description",
+      rate: "4.5",
+      numberOfRates: "6534",
+      category: [],
+      productSize: [
+        {
+          size: "250",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "500",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "750",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "1",
+          unit: "kg",
+          price: "10000",
+        },
+      ],
+    },
+    {
+      id: "146",
+      title: "Electrical Product",
+      price: "10000",
+      image:
+        "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+      description: "Electrical Product Description",
+      rate: "4.5",
+      numberOfRates: "6534",
+      category: [],
+      productSize: [
+        {
+          size: "250",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "500",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "750",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "1",
+          unit: "kg",
+          price: "10000",
+        },
+      ],
+    },
+    {
+      id: "1345",
+      title: "Electrical Product",
+      price: "10000",
+      image:
+        "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
+      description: "Electrical Product Description",
+      rate: "4.5",
+      numberOfRates: "6534",
+      category: [],
+      productSize: [
+        {
+          size: "250",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "500",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "750",
+          unit: "gm",
+          price: "10000",
+        },
+        {
+          size: "1",
+          unit: "kg",
+          price: "10000",
+        },
+      ],
+    },
+  ];
   return (
     <View className="flex-1 bg-mainBackground ">
       {/* Transparent StatusBar */}
@@ -146,6 +511,30 @@ const ProductDetails = ({ product }: { product: Product }) => {
             </View>
           </View>
 
+          {/* <FlatList
+            data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+            renderItem={({ item }) => (
+              <ReviewCard isWithPhotos={isReviewsWithPhotoShown} />
+            )}
+            keyExtractor={(item) => item.toString()}
+          /> */}
+
+          <Text className="text-white font-bold text-2xl px-6 pt-8">
+            You can also like this
+          </Text>
+
+          <FlatList
+            data={data}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => {
+              return <HomeProductCard product={item} />;
+            }}
+            showsHorizontalScrollIndicator={false}
+            ItemSeparatorComponent={() => <View className="w-4" />}
+            className="mx-4 pt-4"
+            horizontal
+          />
+          <ProductReviewsSection data={data} />
           <View className="px-6 pt-10 flex-row justify-between">
             <Text className="text-white font-bold text-2xl ">20 Reviews</Text>
             <View className="flex-row items-center">
@@ -174,387 +563,9 @@ const ProductDetails = ({ product }: { product: Product }) => {
               <Text className="text-white ml-2 text-base">With Photo</Text>
             </View>
           </View>
-          <ReviewCard />
-
-          <Text className="text-white font-bold text-2xl px-6 pt-8">
-            You can also like this
-          </Text>
-
-          <FlatList
-            data={[
-              {
-                id: "1",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-                numberOfRates: "6534",
-                category: [],
-                productSize: [
-                  {
-                    size: "250",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "500",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "750",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "1",
-                    unit: "kg",
-                    price: "10000",
-                  },
-                ],
-              },
-              {
-                id: "12",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-                numberOfRates: "6534",
-                category: [],
-                productSize: [
-                  {
-                    size: "250",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "500",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "750",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "1",
-                    unit: "kg",
-                    price: "10000",
-                  },
-                ],
-              },
-              {
-                id: "14",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-                numberOfRates: "6534",
-                category: [],
-                productSize: [
-                  {
-                    size: "250",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "500",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "750",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "1",
-                    unit: "kg",
-                    price: "10000",
-                  },
-                ],
-              },
-              {
-                id: "16",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-                numberOfRates: "6534",
-                category: [],
-                productSize: [
-                  {
-                    size: "250",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "500",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "750",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "1",
-                    unit: "kg",
-                    price: "10000",
-                  },
-                ],
-              },
-              {
-                id: "17",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-                numberOfRates: "6534",
-                category: [],
-                productSize: [
-                  {
-                    size: "250",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "500",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "750",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "1",
-                    unit: "kg",
-                    price: "10000",
-                  },
-                ],
-              },
-              {
-                id: "18",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-                numberOfRates: "6534",
-                category: [],
-                productSize: [
-                  {
-                    size: "250",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "500",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "750",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "1",
-                    unit: "kg",
-                    price: "10000",
-                  },
-                ],
-              },
-              {
-                id: "19",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-                numberOfRates: "6534",
-                category: [],
-                productSize: [
-                  {
-                    size: "250",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "500",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "750",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "1",
-                    unit: "kg",
-                    price: "10000",
-                  },
-                ],
-              },
-              {
-                id: "10",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-                numberOfRates: "6534",
-                category: [],
-                productSize: [
-                  {
-                    size: "250",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "500",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "750",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "1",
-                    unit: "kg",
-                    price: "10000",
-                  },
-                ],
-              },
-              {
-                id: "100",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-                numberOfRates: "6534",
-                category: [],
-                productSize: [
-                  {
-                    size: "250",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "500",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "750",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "1",
-                    unit: "kg",
-                    price: "10000",
-                  },
-                ],
-              },
-              {
-                id: "146",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-                numberOfRates: "6534",
-                category: [],
-                productSize: [
-                  {
-                    size: "250",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "500",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "750",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "1",
-                    unit: "kg",
-                    price: "10000",
-                  },
-                ],
-              },
-              {
-                id: "1345",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-                numberOfRates: "6534",
-                category: [],
-                productSize: [
-                  {
-                    size: "250",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "500",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "750",
-                    unit: "gm",
-                    price: "10000",
-                  },
-                  {
-                    size: "1",
-                    unit: "kg",
-                    price: "10000",
-                  },
-                ],
-              },
-            ]}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => {
-              return <HomeProductCard product={item} />;
-            }}
-            showsHorizontalScrollIndicator={false}
-            ItemSeparatorComponent={() => <View className="w-4" />}
-            className="mx-4 pt-4"
-            horizontal
-          />
+          {data.map((item) => (
+            <ReviewCard isWithPhotos={isReviewsWithPhotoShown} key={item.id} />
+          ))}
         </View>
       </ScrollView>
       <View className="flex-row px-6 pt-8 justify-between mb-4">
