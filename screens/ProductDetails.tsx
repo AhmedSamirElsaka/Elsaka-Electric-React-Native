@@ -20,6 +20,7 @@ import ProductCardCount from "@/components/ProductCardCount";
 import HomeProductCard from "@/components/HomeProductCard";
 import { Icon } from "@rneui/themed";
 import ReviewCard from "@/components/ReviewCard";
+import ProductReviewsSection from "@/components/ProductReviewsSection";
 
 const ProductDetails = ({ product }: { product: Product }) => {
   const [isReviewsWithPhotoShown, setIsReviewsWithPhotoShown] = useState(true);
@@ -535,41 +536,11 @@ const ProductDetails = ({ product }: { product: Product }) => {
             horizontal
           />
           <ProductReviewsSection data={data} />
-          <View className="px-6 pt-10 flex-row justify-between">
-            <Text className="text-white font-bold text-2xl ">20 Reviews</Text>
-            <View className="flex-row items-center">
-              <TouchableOpacity
-                onPress={() => {
-                  setIsReviewsWithPhotoShown(!isReviewsWithPhotoShown);
-                }}
-                activeOpacity={0.7}
-              >
-                {isReviewsWithPhotoShown ? (
-                  <Icon
-                    name="check-box"
-                    type="material"
-                    color="#D17842"
-                    size={26}
-                  />
-                ) : (
-                  <Icon
-                    name="check-box-outline-blank"
-                    type="material"
-                    color="#D17842"
-                    size={26}
-                  />
-                )}
-              </TouchableOpacity>
-              <Text className="text-white ml-2 text-base">With Photo</Text>
-            </View>
-          </View>
-          {data.map((item) => (
-            <ReviewCard isWithPhotos={isReviewsWithPhotoShown} key={item.id} />
-          ))}
         </View>
       </ScrollView>
-      <View className="flex-row px-6 pt-8 justify-between mb-4">
-        <View className="justify-center items-center">
+
+      <View className="flex-row  pt-8 justify-between mb-4">
+        <View className="justify-center items-center pr-10  pl-6">
           <Text className="text-white font-bold text-lg">Price</Text>
           <Text className="text-white font-bold text-xl">
             <Text className="text-primary text-2xl">$ </Text>
@@ -580,7 +551,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
           title="Add To Cart"
           handlePress={() => {}}
           textStyles="text-white text-lg text-bold"
-          containerStyles="bg-primary flex-1 ml-8"
+          containerStyles="bg-primary flex-1 mr-6"
         />
       </View>
     </View>

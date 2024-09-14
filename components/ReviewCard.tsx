@@ -10,8 +10,15 @@ import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import * as SolidIcons from "react-native-heroicons/solid";
 import * as OutlineIcons from "react-native-heroicons/outline";
+import { Product } from "@/types/types";
 
-const ReviewCard = ({ isWithPhotos }: { isWithPhotos: boolean }) => {
+const ReviewCard = ({
+  isWithPhotos,
+  product,
+}: {
+  isWithPhotos: boolean;
+  product: Product;
+}) => {
   const [isHelpful, setIsHelpful] = useState(false);
   return (
     <LinearGradient
