@@ -457,6 +457,8 @@ const ProductDetails = ({ product }: { product: Product }) => {
               ItemSeparatorComponent={() => <View className="w-6" />}
             />
           </View>
+          <ProductRatingSection product={product} />
+
           <Text className="text-white font-bold text-2xl px-6 pt-10">
             Rating&Reviews
           </Text>
@@ -539,7 +541,15 @@ const ProductDetails = ({ product }: { product: Product }) => {
         </View>
       </ScrollView>
 
-      <View className="flex-row  pt-8 justify-between mb-4">
+      <TouchableOpacity className="items-end bg-[#fff0] -mt-12">
+        <View className="px-6 py-4 bg-primary rounded-full w-44 flex-row space-x-2 items-center content-center">
+          <Icons.PencilIcon size={20} color={"#FFFFFF"} />
+          <Text className="text-white font-bold text-center">
+            Write A Review
+          </Text>
+        </View>
+      </TouchableOpacity>
+      <View className="flex-row  pt-4 justify-between mb-4">
         <View className="justify-center items-center pr-10  pl-6">
           <Text className="text-white font-bold text-lg">Price</Text>
           <Text className="text-white font-bold text-xl">
