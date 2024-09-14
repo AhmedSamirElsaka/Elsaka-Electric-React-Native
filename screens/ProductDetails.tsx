@@ -21,6 +21,7 @@ import HomeProductCard from "@/components/HomeProductCard";
 import { Icon } from "@rneui/themed";
 import ReviewCard from "@/components/ReviewCard";
 import ProductReviewsSection from "@/components/ProductReviewsSection";
+import ProductRatingSection from "@/components/ProductRatingSection";
 
 const ProductDetails = ({ product }: { product: Product }) => {
   const [isReviewsWithPhotoShown, setIsReviewsWithPhotoShown] = useState(true);
@@ -443,6 +444,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
           >
             {product.description}
           </Text>
+
           <Text className="text-white font-bold text-xl px-6 pt-6">Size</Text>
 
           <View className="px-6 pt-4">
@@ -458,70 +460,6 @@ const ProductDetails = ({ product }: { product: Product }) => {
             />
           </View>
           <ProductRatingSection product={product} />
-
-          <Text className="text-white font-bold text-2xl px-6 pt-10">
-            Rating&Reviews
-          </Text>
-          <View className="pt-8 px-6 justify-between w-auto flex-row items-center">
-            <View className=" w-auto -mt-12">
-              <Text className="text-white font-bold text-3xl ">
-                {product.rate}
-              </Text>
-              <Text className="text-gray-300 text-base">
-                {product.numberOfRates} ratings
-              </Text>
-            </View>
-            <View className="scale-x-[-1]">
-              <View className="flex-row">
-                <Icons.StarIcon size={20} color={"#D17842"} />
-                <Icons.StarIcon size={20} color={"#D17842"} />
-                <Icons.StarIcon size={20} color={"#D17842"} />
-                <Icons.StarIcon size={20} color={"#D17842"} />
-                <Icons.StarIcon size={20} color={"#D17842"} />
-              </View>
-              <View className="flex-row ">
-                <Icons.StarIcon size={20} color={"#D17842"} />
-                <Icons.StarIcon size={20} color={"#D17842"} />
-                <Icons.StarIcon size={20} color={"#D17842"} />
-                <Icons.StarIcon size={20} color={"#D17842"} />
-              </View>
-              <View className="flex-row">
-                <Icons.StarIcon size={20} color={"#D17842"} />
-                <Icons.StarIcon size={20} color={"#D17842"} />
-                <Icons.StarIcon size={20} color={"#D17842"} />
-              </View>
-              <View className="flex-row">
-                <Icons.StarIcon size={20} color={"#D17842"} />
-                <Icons.StarIcon size={20} color={"#D17842"} />
-              </View>
-              <View className="flex-row">
-                <Icons.StarIcon size={20} color={"#D17842"} />
-              </View>
-            </View>
-            <View className="space-y-3">
-              <View className={`w-24 h-2 bg-amber-400 rounded-full`} />
-              <View className="w-16 h-2 bg-amber-400 rounded-full" />
-              <View className="w-12 h-2 bg-amber-400 rounded-full" />
-              <View className="w-8 h-2 bg-amber-400 rounded-full" />
-              <View className="w-4 h-2 bg-amber-400 rounded-full" />
-            </View>
-            <View className="items-center">
-              <Text className="text-white text-sm">1000</Text>
-              <Text className="text-white text-sm">90</Text>
-              <Text className="text-white text-sm">1200</Text>
-              <Text className="text-white text-sm">200</Text>
-              <Text className="text-white text-sm">50</Text>
-            </View>
-          </View>
-
-          {/* <FlatList
-            data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-            renderItem={({ item }) => (
-              <ReviewCard isWithPhotos={isReviewsWithPhotoShown} />
-            )}
-            keyExtractor={(item) => item.toString()}
-          /> */}
-
           <Text className="text-white font-bold text-2xl px-6 pt-8">
             You can also like this
           </Text>
