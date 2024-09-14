@@ -82,7 +82,7 @@ const TabsNavigator = () => {
       />
       <Tab.Screen
         name="shop"
-        component={WriteReviewScreen}
+        component={ShopScreen}
         options={{
           headerShown: false,
           title: "Shop",
