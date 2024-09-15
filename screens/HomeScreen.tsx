@@ -12,8 +12,14 @@ import SearchInput from "@/components/SearchInput";
 import CategoriesList from "@/components/CategoriesList";
 
 import BackIcon from "@/components/BackIcon";
+import useAppwrite from "@/lib/useAppwrite";
+import { getAllCategories } from "@/lib/appwrite";
 
 const HomeScreen = () => {
+  const { data: categories, refetch }: { data: string[]; refetch: () => void } =
+    useAppwrite(getAllCategories);
+
+  console.log(categories);
   return (
     <View className="flex-1  bg-mainBackground pt-4">
       <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
@@ -21,8 +27,8 @@ const HomeScreen = () => {
       <ScrollView>
         <View className="flex-1  bg-mainBackground">
           <Text className="text-white font-bold text-2xl pl-8 pr-12 pt-4">
-            Find the best{" "}
-            <Text className="text-primary">Electrical Product</Text> for your
+            Find the best
+            <Text className="text-primary"> Electrical Product</Text> for your
             home
           </Text>
 
@@ -31,22 +37,7 @@ const HomeScreen = () => {
           </View>
 
           <View className="px-6">
-            <CategoriesList
-              categories={[
-                "All",
-                "Lighting",
-                "Wires & Cables",
-                "Switches & Sockets",
-                "Plugs & Connectors",
-                "Electrical Tools",
-                "Circuit Protection",
-                "Power Supplies",
-                "Conduits & Accessories",
-                "Heating & Cooling",
-                "Smart Home Devices",
-              ]}
-              selectedItem="All"
-            />
+            <CategoriesList categories={categories} selectedItem="All" />
           </View>
 
           {/* <ProductList

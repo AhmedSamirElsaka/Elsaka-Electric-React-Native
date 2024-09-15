@@ -15,6 +15,7 @@ export const appwriteConfig = {
   projectId: "66d1d66d002baaf15d33",
   databaseId: "66d1d90e003cb70104ce",
   userCollectionId: "66d1d931003d64508125",
+  categoriesCollectionId: "66e6b67f003cf43f1fe0",
 };
 
 const client = new Client();
@@ -122,6 +123,20 @@ export async function signOut() {
     const session = await account.deleteSession("current");
 
     return session;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}
+
+// Get all categories
+export async function getAllCategories() {
+  try {
+    const categories = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.categoriesCollectionId
+    );
+
+    return categories.documents.map((category) => category.name);
   } catch (error: any) {
     throw new Error(error);
   }
