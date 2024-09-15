@@ -1,4 +1,11 @@
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React from "react";
 import Header from "@/components/Header";
 import SearchInput from "@/components/SearchInput";
@@ -9,8 +16,8 @@ import BackIcon from "@/components/BackIcon";
 const HomeScreen = () => {
   return (
     <View className="flex-1  bg-mainBackground pt-4">
-      <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
       <Header title="Home" />
+      <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
       <ScrollView>
         <View className="flex-1  bg-mainBackground">
           <Text className="text-white font-bold text-2xl pl-8 pr-12 pt-4">
