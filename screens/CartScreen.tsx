@@ -8,21 +8,35 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import Header from "@/components/Header";
 import CustomButton from "@/components/CustomButton";
 import CartProductCard from "@/components/CartProductCard";
 import ProductDetails from "./ProductDetails";
 import * as Icons from "react-native-heroicons/solid";
 import { LinearGradient } from "expo-linear-gradient";
-import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
+import BottomSheet, {
+  BottomSheetFlatList,
+  BottomSheetView,
+} from "@gorhom/bottom-sheet";
 import PromoCodeComponent from "@/components/PromoCodeComponent";
+import PersonalPromoCodeCard from "@/components/PersonalPromoCodeCard";
 
 const CartScreen = () => {
   const [isPromoCodeBottomSheetShown, setIsPromoCodeBottomSheetShown] =
     useState(false);
   const bottomSheetRef = useRef<BottomSheet>(null);
+  const [promoCode, setPromoCode] = useState("");
 
+  // render
+  // const renderItem = useCallback(
+  //   ({ item }: any) => (
+  //     <View className="h-4 w-44 bg-white">
+  //       <Text className="text-white text-xl">hello ahmed samir</Text>
+  //     </View>
+  //   ),
+  //   []
+  // );
   return (
     // <View className="flex-1 bg-mainBackground">
     //   <ProductDetails
@@ -78,6 +92,10 @@ const CartScreen = () => {
           bottomSheetRef.current?.expand();
         }}
         onPress={() => {}}
+        onTextChange={(text) => {
+          setPromoCode(text);
+        }}
+        textValue={promoCode}
       />
       {/* <LinearGradient
         start={{ x: 0, y: 0 }}
@@ -120,8 +138,8 @@ const CartScreen = () => {
       <BottomSheet
         ref={bottomSheetRef}
         // onChange={handleSheetChanges}
-        snapPoints={[450]}
-        index={0}
+        snapPoints={[450, 700]}
+        index={-1}
         backgroundStyle={{ backgroundColor: "#2B2D31" }}
         handleIndicatorStyle={{ backgroundColor: "white" }}
         handleStyle={{ borderRadius: 30 }}
@@ -130,16 +148,34 @@ const CartScreen = () => {
         enablePanDownToClose
         // containerStyle={{ backgroundColor: "#00000059" }}
       >
-        <BottomSheetView className="bg-red flex-1 opacity-100">
+        <BottomSheetView>
           <PromoCodeComponent
             onFocus={() => {}}
             onPress={() => {
               bottomSheetRef.current?.close();
             }}
+            onTextChange={(text) => {
+              setPromoCode(text);
+            }}
+            textValue={promoCode}
           />
           <Text className="text-white text-xl font-semibold px-6 pt-6">
             Your Promo Codes
           </Text>
+
+          <FlatList
+            data={[1, 2, 3, 4, 45, 6, 7, 8]}
+            keyExtractor={(i) => i.toString()}
+            renderItem={({ item }) => (
+              <PersonalPromoCodeCard
+                onApplyPromoCode={(text: string) => {
+                  setPromoCode(text);
+                }}
+                bottomSheetRef={bottomSheetRef}
+              />
+            )}
+          />
+          {/* <PersonalPromoCodeCard /> */}
         </BottomSheetView>
       </BottomSheet>
     </View>

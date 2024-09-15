@@ -11,9 +11,13 @@ import { LinearGradient } from "expo-linear-gradient";
 const PromoCodeComponent = ({
   onFocus,
   onPress,
+  onTextChange,
+  textValue,
 }: {
   onFocus: () => void;
   onPress: () => void;
+  onTextChange: (text: string) => void;
+  textValue: string;
 }) => {
   return (
     <LinearGradient
@@ -28,6 +32,9 @@ const PromoCodeComponent = ({
         multiline={false}
         onFocus={onFocus}
         placeholderTextColor={"gray"}
+        autoFocus={false}
+        onChange={(e) => onTextChange(e.nativeEvent.text)}
+        value={textValue}
       />
       <TouchableOpacity
         className="bg-white rounded-full p-2 -mr-6"

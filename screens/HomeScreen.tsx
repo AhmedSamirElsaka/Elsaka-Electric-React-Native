@@ -16,8 +16,8 @@ import BackIcon from "@/components/BackIcon";
 const HomeScreen = () => {
   return (
     <View className="flex-1  bg-mainBackground pt-4">
-      <Header title="Home" />
       <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
+      <Header title="Home" />
       <ScrollView>
         <View className="flex-1  bg-mainBackground">
           <Text className="text-white font-bold text-2xl pl-8 pr-12 pt-4">
