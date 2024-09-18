@@ -159,7 +159,7 @@ export async function getShopScreenCategories() {
       appwriteConfig.shopScreenCategories
     );
 
-    console.log(categories.documents);
+    // console.log(categories.documents);
     return categories.documents.map((category) => {
       return {
         id: category.id,

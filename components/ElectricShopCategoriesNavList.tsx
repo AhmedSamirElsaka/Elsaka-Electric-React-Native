@@ -12,15 +12,21 @@ import { Category } from "@/types/types";
 const ElectricShopCategoriesNavList = ({
   mainCategories,
   selectedItem,
+  onChangeCategory,
 }: {
   mainCategories: Category[];
   selectedItem?: string;
+  onChangeCategory: (selectedItem: string) => void;
 }) => {
+  console.log(mainCategories);
   const [selectedItemState, setSelectedItemState] = useState(selectedItem);
   const renderItem = (item: Category) => {
     return (
       <TouchableOpacity
-        onPress={() => setSelectedItemState(item.name)}
+        onPress={() => {
+          setSelectedItemState(item.name);
+          onChangeCategory(item.name);
+        }}
         activeOpacity={0.7}
       >
         <MainCategoryNavItem
@@ -35,6 +41,7 @@ const ElectricShopCategoriesNavList = ({
       <FlatList
         data={mainCategories}
         keyExtractor={(item) => item.id}
+        renderItem={({ item }) => renderItem(item)}
         horizontal
         showsHorizontalScrollIndicator={false}
       />
