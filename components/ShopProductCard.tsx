@@ -15,7 +15,7 @@ const ShopProductCard = ({ product }: { product: Product }) => {
       className="border-2 flex-row mx-4  border-secondaryDarkGreyHex rounded-xl bg-secondaryDarkGreyHex  "
     >
       <Image
-        source={{ uri: product.image }}
+        source={{ uri: product.images }}
         className="w-32 h-36 rounded-l-xl bg-red-800"
       />
       <View className="pt-2 ml-4">

@@ -7,20 +7,28 @@ import HomeProductCard from "./HomeProductCard";
 const HomeProductList = ({
   title,
   items,
+  navigation,
 }: {
   title: String;
   items: Product[];
+  navigation: any;
 }) => {
   return (
-    <View className="px-6 mt-4 space-y-2">
-      <Text className="text-2xl font-semibold text-white">{title}</Text>
+    <View className="px-6 mt-6 space-y-2">
+      {title && (
+        <Text className="text-2xl font-semibold text-white">{title}</Text>
+      )}
 
       <FlatList
         data={items}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <HomeProductCard product={item} />}
+        renderItem={({ item }) => (
+          // console.log(item),
+          <HomeProductCard product={item} navigation={navigation} />
+        )}
         showsVerticalScrollIndicator={false}
         horizontal
+        ItemSeparatorComponent={() => <View className="w-4" />}
       />
     </View>
   );

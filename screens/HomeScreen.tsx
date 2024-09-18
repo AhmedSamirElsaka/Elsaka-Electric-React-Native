@@ -6,22 +6,60 @@ import {
   Text,
   View,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import SearchInput from "@/components/SearchInput";
-import CategoriesList from "@/components/CategoriesList";
+import CategoriesList, { shuffle } from "@/components/CategoriesList";
 
 import BackIcon from "@/components/BackIcon";
 import useAppwrite from "@/lib/useAppwrite";
-import { getAllCategories } from "@/lib/appwrite";
+import { getAllCategories, getAllProducts } from "@/lib/appwrite";
+import { Category, Product } from "@/types/types";
+import HomeProductList from "@/components/HomeProductList";
 
-const HomeScreen = () => {
-  const { data: categories, refetch }: { data: string[]; refetch: () => void } =
-    useAppwrite(getAllCategories);
+const HomeScreen = ({ navigation }: { navigation: any }) => {
+  const {
+    data: categories,
+    refetch: refetchCategories,
+  }: { data: Category[]; refetch: () => void } = useAppwrite(getAllCategories);
 
-  console.log(categories);
+  const {
+    data: products,
+    refetch: refetchProducts,
+  }: { data: Product[]; refetch: () => void } = useAppwrite(getAllProducts);
+
+  // console.log(categories[0]);
+  // Check if categories are loaded before accessing them
+  const [productsToShow, setProductsToShow] = useState<Product[]>([]);
+
+  useEffect(() => {
+    // Check if categories and products exist before setting state
+    if (products.length > 0 && products) {
+      setProductsToShow(
+        shuffle(
+          products.map((product) => {
+            return {
+              id: product.id,
+              title: product.title,
+              description: product.description,
+              images: product.images,
+              price: product.price,
+              rate: product.rate,
+              numberOfRates: product.numberOfRates,
+              category: product.category,
+              productSize: product.productSize,
+            };
+          })
+        )
+      );
+    } else {
+      setProductsToShow([]); // Provide an empty array if no products exist
+    }
+  }, [products]);
+
+  // console.log(products);
   return (
-    <View className="flex-1  bg-mainBackground pt-4">
+    <View className="flex-1  bg-mainBackground pt-4 pb-4">
       <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
       <Header title="Home" />
       <ScrollView>
@@ -32,118 +70,61 @@ const HomeScreen = () => {
             home
           </Text>
 
-          <View className="pt-8 px-6 mb-6">
+          <View className="pt-8 px-6 mb-8">
             <SearchInput initialQuery={""} />
           </View>
 
           <View className="px-6">
-            <CategoriesList categories={categories} selectedItem="All" />
+            <CategoriesList
+              categories={categories}
+              selectedItem="All"
+              onChangeCategory={(selectedItem) => {
+                setProductsToShow(
+                  products.filter(
+                    (product) =>
+                      Array.isArray(product.category) &&
+                      product.category.some((cat) => cat.name === selectedItem)
+                  )
+                );
+              }}
+            />
           </View>
 
-          {/* <ProductList
-            title="Electrical Products"
-            items={[
-              {
-                id: "1",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-              },
-              {
-                id: "12",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-              },
-              {
-                id: "14",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-              },
-              {
-                id: "16",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-              },
-              {
-                id: "17",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-              },
-              {
-                id: "18",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-              },
-              {
-                id: "19",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-              },
-              {
-                id: "10",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-              },
-              {
-                id: "100",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-              },
-              {
-                id: "146",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-              },
-              {
-                id: "1345",
-                title: "Electrical Product",
-                price: "10000",
-                image:
-                  "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-                description: "Electrical Product Description",
-                rate: "4.5",
-              },
-            ]}
-          /> */}
+          <HomeProductList
+            title=""
+            items={shuffle(productsToShow)}
+            navigation={navigation}
+          />
+          <HomeProductList
+            title="New"
+            items={shuffle(products)}
+            navigation={navigation}
+          />
+          <HomeProductList
+            title="Sale"
+            items={shuffle(products)}
+            navigation={navigation}
+          />
+          <HomeProductList
+            title="Featured"
+            items={shuffle(products)}
+            navigation={navigation}
+          />
+          <HomeProductList
+            title="Trending"
+            items={shuffle(products)}
+            navigation={navigation}
+          />
+          <HomeProductList
+            title="Best Selling"
+            items={shuffle(products)}
+            navigation={navigation}
+          />
+          <HomeProductList
+            title="Top Rated"
+            items={shuffle(products)}
+            navigation={navigation}
+          />
         </View>
       </ScrollView>
     </View>

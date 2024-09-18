@@ -11,6 +11,7 @@ import FavoritesScreen from "@/screens/FavoritesScreen";
 import ShopScreen from "@/screens/ShopScreen";
 import ProductsScreen from "@/screens/ProductsScreen";
 import WriteReviewScreen from "@/screens/WriteReviewScreen";
+import HomeNavigator from "./HomeNavigator";
 const TabIcon = ({
   home = false,
   cart = false,
@@ -64,11 +65,11 @@ const TabsNavigator = () => {
       }}
     >
       <Tab.Screen
-        name="home"
-        component={HomeScreen}
+        name="homeNavigator"
+        component={HomeNavigator}
         options={{
           headerShown: false,
-          title: "Home",
+          title: "HomeNavigator",
           tabBarIcon: ({ focused, color, size }) => (
             <TabIcon
               color={color}

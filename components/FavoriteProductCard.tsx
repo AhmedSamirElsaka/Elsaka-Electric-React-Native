@@ -13,7 +13,7 @@ const FavoriteProductCard = ({ product }: { product: Product }) => {
 
       <View className="flex-row">
         <Image
-          source={{ uri: product.image }}
+          source={{ uri: product.images }}
           className="w-full h-[50vh] rounded-tr-3xl rounded-tl-3xl"
         />
         <View className="w-11 h-auto z-50 -ml-16 mt-6">

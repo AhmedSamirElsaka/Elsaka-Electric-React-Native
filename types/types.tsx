@@ -2,7 +2,7 @@ export type Product = {
   id: string;
   title: string;
   description: string;
-  image: string;
+  images: string[];
   price: string;
   rate: string;
   numberOfRates: string;
@@ -13,6 +13,7 @@ export type Category = {
   id: string;
   name: string;
   icon: string;
+  products: Product[];
 };
 export type ProductSize = {
   size: string;

@@ -1,3 +1,4 @@
+import { Category, Product } from "@/types/types";
 import {
   Account,
   Avatars,
@@ -8,7 +9,6 @@ import {
   Query,
   Storage,
 } from "react-native-appwrite";
-
 export const appwriteConfig = {
   endpoint: "https://cloud.appwrite.io/v1",
   platform: "com.ahmedsamir.elsakaelectric",
@@ -16,6 +16,7 @@ export const appwriteConfig = {
   databaseId: "66d1d90e003cb70104ce",
   userCollectionId: "66d1d931003d64508125",
   categoriesCollectionId: "66e6b67f003cf43f1fe0",
+  productsCollectionId: "66e7bbb6003830f8ff6d",
 };
 
 const client = new Client();
@@ -136,7 +137,40 @@ export async function getAllCategories() {
       appwriteConfig.categoriesCollectionId
     );
 
-    return categories.documents.map((category) => category.name);
+    return categories.documents.map((category) => {
+      return {
+        id: category.id,
+        name: category.name,
+        icon: category.icon,
+        products: category.products,
+      } as Category;
+    });
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}
+
+// Get all products
+export async function getAllProducts() {
+  try {
+    const products = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.productsCollectionId
+    );
+
+    return products.documents.map((product) => {
+      return {
+        id: product.id,
+        title: product.title,
+        description: product.description,
+        images: product.images,
+        price: product.price,
+        rate: product.rate,
+        numberOfRates: product.numberOfRates,
+        category: product.categories,
+        productSize: product.productSize,
+      } as Product;
+    }) as Product[];
   } catch (error: any) {
     throw new Error(error);
   }

@@ -1,13 +1,28 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Icons from "react-native-heroicons/solid";
 import * as OutlineIcons from "react-native-heroicons/outline";
 import { Product } from "@/types/types";
+import ProductDetails from "@/screens/ProductDetails";
 
-const HomeProductCard = ({ product }: { product: Product }) => {
+const HomeProductCard = ({
+  product,
+  navigation,
+}: {
+  product: Product;
+  navigation: any;
+}) => {
   return (
-    <View className="w-44 h-72 bg-green-800 rounded-3xl">
+    <TouchableOpacity
+      className="w-44 h-72 bg-green-800 rounded-3xl"
+      activeOpacity={0.7}
+      onPress={() => {
+        // console.log(product);
+        // console.log(navigation);
+        navigation.push("productDetails", { productDetails: product });
+      }}
+    >
       <LinearGradient
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
@@ -18,9 +33,9 @@ const HomeProductCard = ({ product }: { product: Product }) => {
       >
         <View className="flex-row w-36 h-40">
           <Image
-            source={{ uri: product.image }}
+            source={{ uri: product.images[0] }}
             className="w-36 h-40 rounded-3xl bg-red-800"
-            resizeMode="stretch"
+            resizeMode="cover"
           />
           <View className="-ml-20  w-20 bg-[#000000b9] flex-row items-center justify-center space-x-1 h-8 rounded-tr-3xl rounded-bl-3xl ">
             <Icons.StarIcon size={14} color={"gold"} />
@@ -36,7 +51,7 @@ const HomeProductCard = ({ product }: { product: Product }) => {
 
         <View className="flex-row items-center mt-4 w-32 justify-between pt-2">
           <Text className="text-white font-semibold text-lg">
-            <Text className="text-primary">$ </Text> {product.price}
+            <Text className="text-primary">EGP </Text> {product.price}
           </Text>
           <Icons.PlusIcon
             size={4}
@@ -45,7 +60,7 @@ const HomeProductCard = ({ product }: { product: Product }) => {
           />
         </View>
       </LinearGradient>
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -15,7 +15,7 @@ const ProductSizeComponent = ({
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         colors={["#252A32", "#0C0F14"]}
-        className={` w-28 h-14 border-2 flex-row border-secondaryDarkGreyHex ${
+        className={` h-14 border-2 flex-row px-2 border-secondaryDarkGreyHex ${
           isPressed ? "border-[#D17842]" : ""
         } rounded-xl  bg-secondaryDarkGreyHex items-center justify-center space-x-1`}
       >
