@@ -1,17 +1,18 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
+import { Category } from "@/types/types";
 
 const MainCategoryNavItem = ({
   category,
   isSelected,
 }: {
-  category: string;
+  category: Category;
   isSelected: boolean;
 }) => {
   return (
     <View className=" space-y-2">
       <Text className="text-white font-bold text-lg px-6 text-center">
-        {category}
+        {category.name}
       </Text>
       {isSelected && (
         <View className="w-auto h-2 flex rounded-xl border-2  content-center justify-center bg-primary" />

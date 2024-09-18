@@ -17,6 +17,7 @@ export const appwriteConfig = {
   userCollectionId: "66d1d931003d64508125",
   categoriesCollectionId: "66e6b67f003cf43f1fe0",
   productsCollectionId: "66e7bbb6003830f8ff6d",
+  shopScreenCategories: "66ead2c8002fdbdf4d8d",
 };
 
 const client = new Client();
@@ -142,6 +143,28 @@ export async function getAllCategories() {
         id: category.id,
         name: category.name,
         icon: category.icon,
+        products: category.products,
+      } as Category;
+    });
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}
+
+// Get all categories
+export async function getShopScreenCategories() {
+  try {
+    const categories = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.shopScreenCategories
+    );
+
+    console.log(categories.documents);
+    return categories.documents.map((category) => {
+      return {
+        id: category.id,
+        name: category.name,
+        icon: "",
         products: category.products,
       } as Category;
     });
