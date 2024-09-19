@@ -8,40 +8,45 @@ import AuthNavigator from "@/navigators/AuthNavigator";
 import CartScreen from "@/screens/CartScreen";
 import ProductDetails from "@/screens/ProductDetails";
 import WriteReviewScreen from "@/screens/WriteReviewScreen";
+import store from "@/store";
+import { Provider } from "react-redux";
+
 export default function Index() {
   const Stack = createStackNavigator();
 
   return (
     <GlobalProvider>
       <NavigationContainer independent={true}>
-        <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
-        <Stack.Navigator>
-          <Stack.Screen
-            component={OnboardingScreen}
-            name="Onboarding"
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            component={AuthNavigator}
-            name="auth"
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            component={TabsNavigator}
-            name="tabs"
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            component={ProductDetails}
-            name="productDetails"
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            component={WriteReviewScreen}
-            name="writeReview"
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
+        <Provider store={store}>
+          <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
+          <Stack.Navigator>
+            <Stack.Screen
+              component={OnboardingScreen}
+              name="Onboarding"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              component={AuthNavigator}
+              name="auth"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              component={TabsNavigator}
+              name="tabs"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              component={ProductDetails}
+              name="productDetails"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              component={WriteReviewScreen}
+              name="writeReview"
+              options={{ headerShown: false }}
+            />
+          </Stack.Navigator>
+        </Provider>
       </NavigationContainer>
     </GlobalProvider>
   );

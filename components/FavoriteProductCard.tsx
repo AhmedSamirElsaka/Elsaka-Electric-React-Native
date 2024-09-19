@@ -14,8 +14,13 @@ import { LinearGradient } from "expo-linear-gradient";
 import LoveIcon from "./LoveIcon";
 import { useNavigation } from "@react-navigation/native";
 
-const FavoriteProductCard = ({ product }: { product: Product }) => {
-  const navigation = useNavigation();
+const FavoriteProductCard = ({
+  product,
+  navigation,
+}: {
+  product: Product;
+  navigation: any;
+}) => {
   return (
     <TouchableOpacity
       className="flex-1 p-4"
