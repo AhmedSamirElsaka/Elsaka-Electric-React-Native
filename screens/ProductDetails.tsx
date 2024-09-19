@@ -24,7 +24,12 @@ import ProductReviewsSection from "@/components/ProductReviewsSection";
 import ProductRatingSection from "@/components/ProductRatingSection";
 import { useRoute } from "@react-navigation/native";
 import useAppwrite from "@/lib/useAppwrite";
-import { getAllProducts } from "@/lib/appwrite";
+import {
+  getAllProducts,
+  getUserLovedProducts,
+  saveProductToUser,
+  unSaveProductToUser,
+} from "@/lib/appwrite";
 import { shuffle } from "@/components/CategoriesList";
 
 const ProductDetails = ({
@@ -47,6 +52,28 @@ const ProductDetails = ({
 
   // Check if categories are loaded before accessing them
   const [productsToShow, setProductsToShow] = useState<Product[]>([]);
+
+  const {
+    data: lovedProducts,
+    refetch: refetchLovedProducts,
+  }: { data: Product[]; refetch: () => void } =
+    useAppwrite(getUserLovedProducts);
+
+  const [isLovedProduct, setisLovedProduct] = useState(false);
+  useEffect(() => {
+    // Check if categories and products exist before setting state
+    if (lovedProducts.length > 0 && lovedProducts) {
+      setisLovedProduct(
+        lovedProducts
+          .map((product) => {
+            return product.id;
+          })
+          .includes(product.id)
+      );
+    } else {
+      setisLovedProduct(false); // Provide an empty array if no products exist
+    }
+  }, [lovedProducts]);
 
   useEffect(() => {
     // Check if categories and products exist before setting state
@@ -454,7 +481,16 @@ const ProductDetails = ({
             navigation.goBack();
           }}
         />
-        <LoveIcon onPress={() => {}} IsPressed={true} />
+        <LoveIcon
+          onPress={() => {
+            if (isLovedProduct) {
+              unSaveProductToUser(product);
+            } else {
+              saveProductToUser(product);
+            }
+          }}
+          isPressed={isLovedProduct}
+        />
       </View>
 
       {/* Product Image */}
@@ -476,11 +512,6 @@ const ProductDetails = ({
           className="w-full h-[60vh] -mt-20"
           horizontal
         />
-
-        {/* <Image
-          source={{ uri: product.images[0] }}
-          className="w-full h-[60vh] -mt-20"
-        /> */}
 
         <View className="h-40 bg-mainBackground -mt-40 opacity-[0.7] rounded-tr-3xl rounded-tl-3xl flex-row">
           <View className="px-4 flex-1">
@@ -504,15 +535,6 @@ const ProductDetails = ({
             </View>
           </View>
           <View className=" flex-row justify-between pl-10 pr-4 pt-4">
-            {/* <CategoryIcon
-              category={product.category[0]}
-              key={product.category[0].id}
-            />
-            <CategoryIcon
-              category={product.category[1]}
-              key={product.category[1].id}
-            /> */}
-
             {product.category
               ?.filter((element) => element.name != "All")
               .map((element) => (
@@ -570,7 +592,12 @@ const ProductDetails = ({
         </View>
       </ScrollView>
 
-      <TouchableOpacity className="items-end bg-[#fff0] -mt-12">
+      <TouchableOpacity
+        className="items-end bg-[#fff0] -mt-12"
+        onPress={() => {
+          navigation.push("writeReview");
+        }}
+      >
         <View className="px-6 py-4 bg-primary rounded-full w-44 flex-row space-x-2 items-center content-center">
           <Icons.PencilIcon size={20} color={"#FFFFFF"} />
           <Text className="text-white font-bold text-center">

@@ -197,3 +197,113 @@ export async function getAllProducts() {
     throw new Error(error);
   }
 }
+
+export async function unSaveProductToUser(product: Product) {
+  try {
+    // Fetch the user document based on the userId
+    const user = await getCurrentUser();
+
+    const userLovedProducts = user?.lovedProducts || [];
+
+    // Fetch the loved product document based on the product id
+    const lovedProduct = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.productsCollectionId,
+      [Query.equal("id", product.id)]
+    );
+
+    if (lovedProduct.documents.length === 0) {
+      throw new Error("Product not found");
+    }
+
+    const productId = lovedProduct.documents[0].$id;
+
+    // Remove the product from the user's lovedProducts list
+    const updatedLovedProducts = userLovedProducts.filter(
+      (lovedProduct) => lovedProduct.$id !== productId
+      // (lovedProduct) => lovedProduct.$id !== productId
+    );
+
+    // console.log(updatedLovedProducts);
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    const updatedUser = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      user.$id,
+      {
+        lovedProducts: updatedLovedProducts,
+      }
+    );
+
+    // console.log(updatedUser, "Product removed successfully");
+    return updatedUser;
+  } catch (error: any) {
+    console.error("Failed to remove product from user", error);
+    throw new Error(error.message || "Failed to remove product");
+  }
+}
+
+export async function saveProductToUser(product: Product) {
+  try {
+    // Fetch the user document based on the userId
+    const user = await getCurrentUser();
+
+    const userLovedProducts = user?.lovedProducts || [];
+
+    const lovedproduct = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.productsCollectionId,
+      [Query.equal("id", product.id)]
+    );
+
+    const productId = lovedproduct.documents[0].$id;
+    // Update the user document with the new video
+    const updatedLovedProducts = [
+      ...userLovedProducts,
+      {
+        $id: productId,
+      },
+    ];
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    const updatedUser = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      user.$id,
+      {
+        lovedProducts: updatedLovedProducts,
+      }
+    );
+
+    console.log(updatedUser, "Video added successfully");
+    return updatedUser;
+  } catch (error: any) {
+    console.error("Failed to save video to user", error);
+    throw new Error(error.message || "Failed to save video");
+  }
+}
+
+export async function getUserLovedProducts() {
+  try {
+    // Fetch the user document based on the userId
+    const user = await getCurrentUser();
+
+    // if (userDocuments.total === 0) {
+    //   throw new Error("User not found");
+    // }
+
+    // const userDocument = userDocuments.documents[0];
+    const userLovedProducts = user?.lovedProducts || [];
+
+    return userLovedProducts;
+  } catch (error: any) {
+    console.error("Failed to get saved videos for user", error);
+    throw new Error(error.message || "Failed to get saved videos");
+  }
+}

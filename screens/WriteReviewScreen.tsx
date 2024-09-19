@@ -13,10 +13,20 @@ import { Rating, AirbnbRating } from "react-native-ratings";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Icons from "react-native-heroicons/solid";
 import CustomButton from "@/components/CustomButton";
+import { useNavigation } from "expo-router";
 
 const WriteReviewScreen = () => {
-  const ratingCompleted = (rating: number) => {};
-  const [reviewText, setReviewText] = useState("");
+  const navigation = useNavigation();
+  const ratingCompleted = (rating: number) => {
+    setForm({ ...form, rate: rating.toString() });
+  };
+
+  const [form, setForm] = useState({
+    rateText: "",
+    rate: "",
+  });
+
+  console.log(form);
   return (
     <SafeAreaView className="flex-1 bg-mainBackground pt-8">
       <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
@@ -48,7 +58,9 @@ const WriteReviewScreen = () => {
           placeholder="Write your review"
           multiline={true}
           placeholderTextColor={"gray"}
-          onChangeText={setReviewText}
+          onChangeText={(text) => {
+            setForm({ ...form, rateText: text });
+          }}
         />
       </LinearGradient>
 
@@ -65,7 +77,9 @@ const WriteReviewScreen = () => {
 
       <CustomButton
         title="Send Review"
-        handlePress={() => {}}
+        handlePress={() => {
+          navigation.goBack();
+        }}
         textStyles="text-white text-lg text-bold"
         containerStyles="bg-primary rounded-full mt-8 mx-6"
       />
