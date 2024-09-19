@@ -14,7 +14,7 @@ import { images } from "@/constants";
 import FormField from "@/components/FormField";
 import CustomButton from "@/components/CustomButton";
 import { Link, router } from "expo-router";
-import { createUser } from "@/lib/appwrite";
+import { createUser, signOut } from "@/lib/appwrite";
 import { useGlobalContext } from "@/context/GlobalProvider";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
@@ -37,6 +37,7 @@ const SignUp = () => {
 
     setSubmitting(true);
     try {
+      // signOut();
       const result = await createUser(form.email, form.password, form.username);
       setUser(result);
       setIsLogged(true);

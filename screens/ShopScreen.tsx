@@ -19,7 +19,6 @@ const ShopScreen = ({ navigation }: { navigation: any }) => {
   const [productsToShow, setProductsToShow] = useState<Product[]>([]);
 
   // Store the products that are currently visible in the shop screen
-  console.log(categories);
   useEffect(() => {
     // Log the categories to the console for debugging purposes
     // Check if categories and products exist before setting state

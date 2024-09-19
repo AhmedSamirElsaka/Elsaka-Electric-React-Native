@@ -25,7 +25,7 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error + "ahmed1");
       })
       .finally(() => {
         setIsLoading(false);

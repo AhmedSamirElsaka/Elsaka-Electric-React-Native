@@ -82,6 +82,7 @@ export async function signIn(email: string, password: string) {
 
     return session;
   } catch (error: any) {
+    console.log(error + "ahmed2");
     throw new Error(error);
   }
 }
@@ -111,10 +112,9 @@ export async function getCurrentUser() {
 
     if (!currentUser) throw Error;
 
-    // console.log(currentUser, "currentUser");
     return currentUser.documents[0];
   } catch (error) {
-    console.log(error);
+    console.log(error + "ahmed3");
     return null;
   }
 }
@@ -159,7 +159,6 @@ export async function getShopScreenCategories() {
       appwriteConfig.shopScreenCategories
     );
 
-    // console.log(categories.documents);
     return categories.documents.map((category) => {
       return {
         id: category.id,

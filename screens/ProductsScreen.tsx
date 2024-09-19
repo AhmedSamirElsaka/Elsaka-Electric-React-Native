@@ -22,9 +22,7 @@ const ProductsScreen = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   // callbacks
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log("handleSheetChanges", index);
-  }, []);
+  const handleSheetChanges = useCallback((index: number) => {}, []);
   return (
     <View className="flex-1 bg-mainBackground pt-4">
       <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />

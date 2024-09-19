@@ -12,7 +12,7 @@ import ShopScreen from "@/screens/ShopScreen";
 import ProductsScreen from "@/screens/ProductsScreen";
 import WriteReviewScreen from "@/screens/WriteReviewScreen";
 import HomeNavigator from "./HomeNavigator";
-import ShopNavigator from "./ShopNavigator copy";
+import ShopNavigator from "./ShopNavigator";
 const TabIcon = ({
   home = false,
   cart = false,

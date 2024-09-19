@@ -7,7 +7,7 @@ import {
   Text,
   TouchableWithoutFeedback,
 } from "react-native";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Animated, {
   useSharedValue,
   useAnimatedScrollHandler,
@@ -20,12 +20,19 @@ import OnBoardingScreenItem from "@/components/OnBoardingScreenItem";
 import OnBoardingButton from "@/components/OnBoardingButton";
 import Dot from "@/components/Dot";
 import { useNavigation } from "@react-navigation/native";
+import { useGlobalContext } from "@/context/GlobalProvider";
 
 const OnboardingScreen = () => {
   const flatListRef = useAnimatedRef<FlatList<OnboardingData>>();
   const x = useSharedValue(0);
   const flatListIndex = useSharedValue(0);
   const navigation = useNavigation();
+
+  const { isLoading, isLogged }: any = useGlobalContext();
+
+  useEffect(() => {
+    if (!isLoading && isLogged) navigation.navigate("tabs" as never);
+  }, [isLoading, isLogged]);
   const statusBarRef = useRef<StatusBar>(null);
   const onViewableItemsChanged = ({
     viewableItems,
@@ -68,6 +75,7 @@ const OnboardingScreen = () => {
       ],
     };
   });
+
   return (
     <View style={styles.container}>
       {/* {data.map((item, index) => {
@@ -102,7 +110,7 @@ const OnboardingScreen = () => {
       <View style={styles.bottomContainer}>
         <TouchableWithoutFeedback
           onPress={() => {
-            navigation.navigate("auth");
+            navigation.navigate("auth" as never);
           }}
         >
           <Animated.Text style={[styles.skipText, skipTextAnimation]}>

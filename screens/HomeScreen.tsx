@@ -28,7 +28,6 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
     refetch: refetchProducts,
   }: { data: Product[]; refetch: () => void } = useAppwrite(getAllProducts);
 
-  // console.log(categories[0]);
   // Check if categories are loaded before accessing them
   const [productsToShow, setProductsToShow] = useState<Product[]>([]);
 
@@ -57,7 +56,6 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
     }
   }, [products]);
 
-  // console.log(products);
   return (
     <View className="flex-1  bg-mainBackground pt-4 pb-4">
       <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />

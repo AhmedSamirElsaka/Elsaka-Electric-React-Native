@@ -18,7 +18,7 @@ const ElectricShopCategoriesNavList = ({
   selectedItem?: string;
   onChangeCategory: (selectedItem: string) => void;
 }) => {
-  console.log(mainCategories);
+  // console.log(mainCategories);
   const [selectedItemState, setSelectedItemState] = useState(selectedItem);
   const renderItem = (item: Category) => {
     return (

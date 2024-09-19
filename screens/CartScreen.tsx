@@ -108,7 +108,6 @@ const CartScreen = () => {
           placeholder="Enter promo code"
           multiline={false}
           onFocus={() => {
-            console.log("focus");
           }}
           placeholderTextColor={"gray"}
         />

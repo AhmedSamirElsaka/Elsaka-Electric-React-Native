@@ -40,13 +40,11 @@ const ProductDetails = ({
 
   const [isReviewsWithPhotoShown, setIsReviewsWithPhotoShown] = useState(true);
 
-  // console.log(product);
   const {
     data: products,
     refetch: refetchProducts,
   }: { data: Product[]; refetch: () => void } = useAppwrite(getAllProducts);
 
-  // console.log(categories[0]);
   // Check if categories are loaded before accessing them
   const [productsToShow, setProductsToShow] = useState<Product[]>([]);
 
