@@ -143,9 +143,7 @@ const CartScreen = () => {
         handleIndicatorStyle={{ backgroundColor: "white" }}
         handleStyle={{ borderRadius: 30 }}
         containerHeight={500}
-        // onClose={() => bottomSheetRef.current?.close()}
         enablePanDownToClose
-        // containerStyle={{ backgroundColor: "#00000059" }}
       >
         <BottomSheetView>
           <PromoCodeComponent

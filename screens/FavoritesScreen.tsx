@@ -5,21 +5,20 @@ import FavoriteProductCard from "@/components/FavoriteProductCard";
 import useAppwrite from "@/lib/useAppwrite";
 import { getUserLovedProducts } from "@/lib/appwrite";
 import { Product } from "@/types/types";
+import { useSelector } from "react-redux";
+import { selectLovedProducts } from "@/features/lovedProdcutsSlice";
 
 const FavoritesScreen = ({ navigation }: { navigation: any }) => {
-  const {
-    data: lovedProducts,
-    refetch: refetchLovedProducts,
-  }: { data: Product[]; refetch: () => void } =
-    useAppwrite(getUserLovedProducts);
-
   const [productsToShow, setProductsToShow] = useState<Product[]>([]);
 
+  const lovedProducts = useSelector(selectLovedProducts).lovedProducts;
+
+  console.log(lovedProducts);
   useEffect(() => {
     // Check if categories and products exist before setting state
     if (lovedProducts.length > 0 && lovedProducts) {
       setProductsToShow(
-        lovedProducts.map((product) => {
+        lovedProducts.map((product: Product) => {
           return {
             id: product.id,
             title: product.title,
@@ -40,7 +39,11 @@ const FavoritesScreen = ({ navigation }: { navigation: any }) => {
 
   return (
     <View className="flex-1  bg-mainBackground pt-4">
-      <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={"#0C0F14"}
+        hidden={false}
+      />
       <Header title="Favorites" />
       <FlatList
         data={productsToShow}

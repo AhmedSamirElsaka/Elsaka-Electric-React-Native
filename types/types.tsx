@@ -80,3 +80,9 @@ export type ProductSize = {
         }}
       /> */
 }
+
+export type ShopScreenNotification = {
+  title: string;
+  subTitle: string;
+  products: Product[];
+};

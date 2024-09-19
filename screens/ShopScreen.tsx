@@ -1,11 +1,18 @@
-import { FlatList, StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import ElectricShopCategoriesNavList from "@/components/ElectricShopCategoriesNavList";
 import ShopCategoryCard from "@/components/ShopCategoryCard";
-import { getShopScreenCategories } from "@/lib/appwrite";
+import { getShopNotifications, getShopScreenCategories } from "@/lib/appwrite";
 import useAppwrite from "@/lib/useAppwrite";
-import { Category, Product } from "@/types/types";
+import { Category, Product, ShopScreenNotification } from "@/types/types";
 import { shuffle } from "@/components/CategoriesList";
 
 const ShopScreen = ({ navigation }: { navigation: any }) => {
@@ -16,7 +23,30 @@ const ShopScreen = ({ navigation }: { navigation: any }) => {
     getShopScreenCategories
   );
 
+  const {
+    data: notification,
+    refetch: refetchNotification,
+  }: {
+    data: ShopScreenNotification;
+    refetch: () => void;
+  } = useAppwrite(getShopNotifications);
+
   const [productsToShow, setProductsToShow] = useState<Product[]>([]);
+  const [notificationToShow, setNotificationToShow] =
+    useState<ShopScreenNotification>({ title: "", subTitle: "", products: [] });
+
+  console.log(notification, "notification");
+  useEffect(() => {
+    if (notification.title) {
+      setNotificationToShow({
+        title: notification.title,
+        subTitle: notification.subTitle,
+        products: notification.products,
+      });
+    } else {
+      setNotificationToShow({ title: "", subTitle: "", products: [] });
+    }
+  }, [notification]);
 
   // Store the products that are currently visible in the shop screen
   useEffect(() => {
@@ -68,10 +98,19 @@ const ShopScreen = ({ navigation }: { navigation: any }) => {
           }}
         />
       </View>
-      <View className="rounded-lg bg-primary content-center items-center mx-4 mt-4 py-8">
-        <Text className="text-white font-semibold text-3xl ">SUMMER SALES</Text>
-        <Text className="text-white text-base"> Get 50% OFF</Text>
-      </View>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() => navigation.push("productsScreen")}
+      >
+        <View className="rounded-lg bg-primary content-center items-center mx-4 mt-4 py-8">
+          <Text className="text-white font-semibold text-3xl ">
+            {notificationToShow.title}
+          </Text>
+          <Text className="text-white text-base">
+            {notificationToShow.subTitle}
+          </Text>
+        </View>
+      </TouchableOpacity>
       <FlatList
         data={productsToShow}
         keyExtractor={(item) => item.id}

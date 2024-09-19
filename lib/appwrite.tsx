@@ -1,4 +1,4 @@
-import { Category, Product } from "@/types/types";
+import { Category, Product, ShopScreenNotification } from "@/types/types";
 import {
   Account,
   Avatars,
@@ -17,7 +17,8 @@ export const appwriteConfig = {
   userCollectionId: "66d1d931003d64508125",
   categoriesCollectionId: "66e6b67f003cf43f1fe0",
   productsCollectionId: "66e7bbb6003830f8ff6d",
-  shopScreenCategories: "66ead2c8002fdbdf4d8d",
+  shopScreenCategoriesId: "66ead2c8002fdbdf4d8d",
+  shopScreenNotificationsId: "66ec379d00279ee36ed9",
 };
 
 const client = new Client();
@@ -156,7 +157,7 @@ export async function getShopScreenCategories() {
   try {
     const categories = await databases.listDocuments(
       appwriteConfig.databaseId,
-      appwriteConfig.shopScreenCategories
+      appwriteConfig.shopScreenCategoriesId
     );
 
     return categories.documents.map((category) => {
@@ -317,5 +318,22 @@ export async function getUserLovedProducts() {
   } catch (error: any) {
     console.error("Failed to get saved videos for user", error);
     throw new Error(error.message || "Failed to get saved videos");
+  }
+}
+
+export async function getShopNotifications(): Promise<ShopScreenNotification> {
+  try {
+    const notification = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.shopScreenNotificationsId
+    );
+
+    return {
+      title: notification.documents[0].title,
+      subTitle: notification.documents[0].subTitle,
+      products: notification.documents[0].products,
+    } as ShopScreenNotification;
+  } catch (error: any) {
+    throw new Error(error);
   }
 }

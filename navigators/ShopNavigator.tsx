@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import ProductDetails from "@/screens/ProductDetails";
 import ShopScreen from "@/screens/ShopScreen";
 import WriteReviewScreen from "@/screens/WriteReviewScreen";
+import ProductsScreen from "@/screens/ProductsScreen";
 
 const ShopNavigator = () => {
   const Stack = createStackNavigator();
@@ -14,14 +15,9 @@ const ShopNavigator = () => {
         name="shop"
         options={{ headerShown: false }}
       />
-      {/* <Stack.Screen
-        component={ProductDetails}
-        name="productDetails"
-        options={{ headerShown: false }}
-      /> */}
       <Stack.Screen
-        component={WriteReviewScreen}
-        name="writeReview"
+        component={ProductsScreen}
+        name="productsScreen"
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

@@ -13,9 +13,16 @@ import CategoriesList, { shuffle } from "@/components/CategoriesList";
 
 import BackIcon from "@/components/BackIcon";
 import useAppwrite from "@/lib/useAppwrite";
-import { getAllCategories, getAllProducts } from "@/lib/appwrite";
+import {
+  getAllCategories,
+  getAllProducts,
+  getUserLovedProducts,
+} from "@/lib/appwrite";
 import { Category, Product } from "@/types/types";
 import HomeProductList from "@/components/HomeProductList";
+import { useDispatch, useSelector } from "react-redux";
+import { selectProducts, setProducts } from "@/features/productsSlice";
+import { setlovedProducts } from "@/features/lovedProdcutsSlice";
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
   const {
@@ -28,15 +35,33 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
     refetch: refetchProducts,
   }: { data: Product[]; refetch: () => void } = useAppwrite(getAllProducts);
 
+  const {
+    data: lovedProducts,
+    refetch: refetchLovedProducts,
+  }: { data: Product[]; refetch: () => void } =
+    useAppwrite(getUserLovedProducts);
+
+  const dispatch = useDispatch();
+
   // Check if categories are loaded before accessing them
   const [productsToShow, setProductsToShow] = useState<Product[]>([]);
 
   useEffect(() => {
+    dispatch(setProducts(products));
+  }, [dispatch, products]);
+
+  useEffect(() => {
+    dispatch(setlovedProducts(lovedProducts));
+  }, [dispatch, lovedProducts]);
+
+  const productsRedux = useSelector(selectProducts).products;
+
+  useEffect(() => {
     // Check if categories and products exist before setting state
-    if (products.length > 0 && products) {
+    if (productsRedux.length > 0 && productsRedux) {
       setProductsToShow(
         shuffle(
-          products.map((product) => {
+          productsRedux.map((product: Product) => {
             return {
               id: product.id,
               title: product.title,
@@ -54,7 +79,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
     } else {
       setProductsToShow([]); // Provide an empty array if no products exist
     }
-  }, [products]);
+  }, [productsRedux, dispatch]);
 
   return (
     <View className="flex-1  bg-mainBackground pt-4 pb-4">

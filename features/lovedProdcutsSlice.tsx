@@ -1,13 +1,14 @@
+import { Product } from "@/types/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export const lovedProductsSlice = createSlice({
   name: "lovedProducts",
   initialState: {
-    lovedProducts: [],
+    lovedProducts: [] as Product[],
   },
   reducers: {
     setlovedProducts: (state: any, action: PayloadAction<any>) => {
-      state.products = action.payload;
+      state.lovedProducts = action.payload;
     },
   },
 });

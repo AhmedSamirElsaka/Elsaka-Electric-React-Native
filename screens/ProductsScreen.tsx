@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Header from "@/components/Header";
 import * as Icons from "react-native-heroicons/solid";
 import { Icon } from "react-native-elements";
@@ -14,6 +14,10 @@ import HomeProductList from "@/components/HomeProductList";
 import ShopProductList from "@/components/ShopProductList";
 import SortScreen from "./SortScreen";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
+import { Product } from "@/types/types";
+import { useSelector } from "react-redux";
+import { selectProducts } from "@/features/productsSlice";
+import { shuffle } from "@/components/CategoriesList";
 
 const ProductsScreen = () => {
   const [isFilterScreenShown, setIsFilterScreenShown] = useState(true);
@@ -21,416 +25,105 @@ const ProductsScreen = () => {
   // ref
   const bottomSheetRef = useRef<BottomSheet>(null);
 
+  const [isHorizontalList, setIsHorizontalList] = useState(false);
+
+  const [productsToShow, setProductsToShow] = useState<Product[]>([]);
+  const productsRedux = useSelector(selectProducts).products;
+
+  // console.log(productsToShow, "productsToShow");
+  useEffect(() => {
+    // Check if categories and products exist before setting state
+    if (productsRedux.length > 0 && productsRedux) {
+      setProductsToShow(
+        shuffle(
+          productsRedux.map((product: Product) => {
+            return {
+              id: product.id,
+              title: product.title,
+              description: product.description,
+              images: product.images,
+              price: product.price,
+              rate: product.rate,
+              numberOfRates: product.numberOfRates,
+              category: product.category,
+              productSize: product.productSize,
+            };
+          })
+        )
+      );
+    } else {
+      setProductsToShow([]); // Provide an empty array if no products exist
+    }
+  }, [productsRedux]);
   // callbacks
   const handleSheetChanges = useCallback((index: number) => {}, []);
   return (
     <View className="flex-1 bg-mainBackground pt-4">
-      <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={"#0C0F14"}
+        hidden={false}
+      />
 
       <Header title="Lightning" />
 
       <View className="pt-4 flex-row justify-between px-4 pb-4">
-        <View className="flex-row space-x-2">
-          <Icon name="filter" type="ionicon" color="white" size={24} />
-          <Text className="text-white  text-base ">Filters</Text>
-        </View>
-        <View className="flex-row space-x-2">
-          <Icons.ArrowsUpDownIcon size={24} color="white" />
-          <Text className="text-white  text-base ">Popular</Text>
-        </View>
-        <Icon
-          name="view-module"
-          type="material-icons"
-          color="white"
-          size={24}
-        />
-        {/* <Icon
-          name="view-list"
-          type="material-icons"
-          color="white"
-          size={24}
-        /> */}
+        <TouchableOpacity activeOpacity={0.7} onPress={() => {}}>
+          <View className="flex-row space-x-2">
+            <Icon name="filter" type="ionicon" color="white" size={24} />
+            <Text className="text-white  text-base ">Filters</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            bottomSheetRef.current?.expand();
+          }}
+          activeOpacity={0.7}
+        >
+          <View className="flex-row space-x-2">
+            <Icons.ArrowsUpDownIcon size={24} color="white" />
+            <Text className="text-white  text-base ">Popular</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            setIsHorizontalList(!isHorizontalList);
+          }}
+          activeOpacity={0.7}
+        >
+          {isHorizontalList ? (
+            <Icon
+              name="view-module"
+              type="material-icons"
+              color="white"
+              size={24}
+            />
+          ) : (
+            <Icon
+              name="view-list"
+              type="material-icons"
+              color="white"
+              size={24}
+            />
+          )}
+        </TouchableOpacity>
       </View>
 
       <ShopProductList
-        items={[
-          {
-            id: "1",
-            title: "Electrical Product",
-            price: "10000",
-            images:
-              "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-            description: "Electrical Product Description",
-            rate: "4.5",
-            numberOfRates: "6534",
-            category: [],
-            productSize: [
-              {
-                size: "250",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "500",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "750",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "1",
-                unit: "kg",
-                price: "10000",
-              },
-            ],
-          },
-          {
-            id: "12",
-            title: "Electrical Product",
-            price: "10000",
-            images:
-              "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-            description: "Electrical Product Description",
-            rate: "4.5",
-            numberOfRates: "6534",
-            category: [],
-            productSize: [
-              {
-                size: "250",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "500",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "750",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "1",
-                unit: "kg",
-                price: "10000",
-              },
-            ],
-          },
-          {
-            id: "14",
-            title: "Electrical Product",
-            price: "10000",
-            images:
-              "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-            description: "Electrical Product Description",
-            rate: "4.5",
-            numberOfRates: "6534",
-            category: [],
-            productSize: [
-              {
-                size: "250",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "500",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "750",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "1",
-                unit: "kg",
-                price: "10000",
-              },
-            ],
-          },
-          {
-            id: "16",
-            title: "Electrical Product",
-            price: "10000",
-            images:
-              "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-            description: "Electrical Product Description",
-            rate: "4.5",
-            numberOfRates: "6534",
-            category: [],
-            productSize: [
-              {
-                size: "250",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "500",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "750",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "1",
-                unit: "kg",
-                price: "10000",
-              },
-            ],
-          },
-          {
-            id: "17",
-            title: "Electrical Product",
-            price: "10000",
-            images:
-              "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-            description: "Electrical Product Description",
-            rate: "4.5",
-            numberOfRates: "6534",
-            category: [],
-            productSize: [
-              {
-                size: "250",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "500",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "750",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "1",
-                unit: "kg",
-                price: "10000",
-              },
-            ],
-          },
-          {
-            id: "18",
-            title: "Electrical Product",
-            price: "10000",
-            images:
-              "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-            description: "Electrical Product Description",
-            rate: "4.5",
-            numberOfRates: "6534",
-            category: [],
-            productSize: [
-              {
-                size: "250",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "500",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "750",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "1",
-                unit: "kg",
-                price: "10000",
-              },
-            ],
-          },
-          {
-            id: "19",
-            title: "Electrical Product",
-            price: "10000",
-            images:
-              "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-            description: "Electrical Product Description",
-            rate: "4.5",
-            numberOfRates: "6534",
-            category: [],
-            productSize: [
-              {
-                size: "250",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "500",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "750",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "1",
-                unit: "kg",
-                price: "10000",
-              },
-            ],
-          },
-          {
-            id: "10",
-            title: "Electrical Product",
-            price: "10000",
-            images:
-              "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-            description: "Electrical Product Description",
-            rate: "4.5",
-            numberOfRates: "6534",
-            category: [],
-            productSize: [
-              {
-                size: "250",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "500",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "750",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "1",
-                unit: "kg",
-                price: "10000",
-              },
-            ],
-          },
-          {
-            id: "100",
-            title: "Electrical Product",
-            price: "10000",
-            images:
-              "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-            description: "Electrical Product Description",
-            rate: "4.5",
-            numberOfRates: "6534",
-            category: [],
-            productSize: [
-              {
-                size: "250",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "500",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "750",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "1",
-                unit: "kg",
-                price: "10000",
-              },
-            ],
-          },
-          {
-            id: "146",
-            title: "Electrical Product",
-            price: "10000",
-            images:
-              "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-            description: "Electrical Product Description",
-            rate: "4.5",
-            numberOfRates: "6534",
-            category: [],
-            productSize: [
-              {
-                size: "250",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "500",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "750",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "1",
-                unit: "kg",
-                price: "10000",
-              },
-            ],
-          },
-          {
-            id: "1345",
-            title: "Electrical Product",
-            price: "10000",
-            images:
-              "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-            description: "Electrical Product Description",
-            rate: "4.5",
-            numberOfRates: "6534",
-            category: [],
-            productSize: [
-              {
-                size: "250",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "500",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "750",
-                unit: "gm",
-                price: "10000",
-              },
-              {
-                size: "1",
-                unit: "kg",
-                price: "10000",
-              },
-            ],
-          },
-        ]}
-        isHorizontal={true}
+        products={productsToShow}
+        isHorizontal={isHorizontalList}
       />
       {/* <View className="flex-1 bg-gray-400"> */}
       <BottomSheet
         ref={bottomSheetRef}
         onChange={handleSheetChanges}
         snapPoints={[380]}
-        index={0}
+        index={-1}
+        enablePanDownToClose
         backgroundStyle={{ backgroundColor: "#2B2D31" }}
         handleIndicatorStyle={{ backgroundColor: "white" }}
         handleStyle={{ borderRadius: 30 }}
         containerHeight={500}
-        containerStyle={{ backgroundColor: "#00000059" }}
       >
         <BottomSheetView className="bg-red flex-1 opacity-100">
           <Text className="text-white text-center text-xl font-semibold">

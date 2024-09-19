@@ -4,22 +4,29 @@ import { Product } from "@/types/types";
 import { FlatList } from "react-native";
 import ShopProductCard from "./ShopProductCard";
 import HomeProductCard from "./HomeProductCard";
+import { useNavigation } from "@react-navigation/native";
 
 const ShopProductList = ({
-  items,
+  products,
   isHorizontal,
 }: {
-  items: Product[];
+  products: Product[];
   isHorizontal?: boolean;
 }) => {
   const [Horizontal, setHorizontal] = useState(isHorizontal);
+
+  const navigation = useNavigation();
+
+  // console.log(products, "products");
   return (
     <View>
       {!isHorizontal ? (
         <FlatList
-          data={items}
+          data={products}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <HomeProductCard product={item} />}
+          renderItem={({ item }) => (
+            <HomeProductCard product={item} navigation={navigation} />
+          )}
           ItemSeparatorComponent={() => <View className="h-6" />}
           className="pt-4"
           numColumns={2}
@@ -28,7 +35,7 @@ const ShopProductList = ({
         />
       ) : (
         <FlatList
-          data={items}
+          data={products}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => <ShopProductCard product={item} />}
           ItemSeparatorComponent={() => <View className="h-6" />}
