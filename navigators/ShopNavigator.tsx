@@ -14,11 +14,11 @@ const ShopNavigator = () => {
         name="shop"
         options={{ headerShown: false }}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         component={ProductDetails}
         name="productDetails"
         options={{ headerShown: false }}
-      />
+      /> */}
       <Stack.Screen
         component={WriteReviewScreen}
         name="writeReview"

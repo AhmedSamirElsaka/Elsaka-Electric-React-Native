@@ -1,14 +1,66 @@
-import { StatusBar, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { FlatList, StatusBar, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import FavoriteProductCard from "@/components/FavoriteProductCard";
+import useAppwrite from "@/lib/useAppwrite";
+import { getUserLovedProducts } from "@/lib/appwrite";
+import { Product } from "@/types/types";
 
 const FavoritesScreen = () => {
+  const {
+    data: lovedProducts,
+    refetch: refetchLovedProducts,
+  }: { data: Product[]; refetch: () => void } =
+    useAppwrite(getUserLovedProducts);
+
+  const [productsToShow, setProductsToShow] = useState<Product[]>([]);
+
+  useEffect(() => {
+    // Check if categories and products exist before setting state
+    if (lovedProducts.length > 0 && lovedProducts) {
+      setProductsToShow(
+        lovedProducts.map((product) => {
+          return {
+            id: product.id,
+            title: product.title,
+            description: product.description,
+            images: product.images,
+            price: product.price,
+            rate: product.rate,
+            numberOfRates: product.numberOfRates,
+            category: product.category,
+            productSize: product.productSize,
+          };
+        })
+      );
+    } else {
+      setProductsToShow([]); // Provide an empty array if no products exist
+    }
+  }, [lovedProducts]);
+
+  // const [isLovedProduct, setisLovedProduct] = useState(false);
+  // useEffect(() => {
+  //   // Check if categories and products exist before setting state
+  //   if (lovedProducts.length > 0 && lovedProducts) {
+  //     setisLovedProduct(
+  //       lovedProducts
+  //         .map((product) => {
+  //           return product.id;
+  //         })
+  //         .includes(product.id)
+  //     );
+  //   } else {
+  //     setisLovedProduct(false); // Provide an empty array if no products exist
+  //   }
+  // }, [lovedProducts]);
+
+  console.log(productsToShow);
   return (
     <View className="flex-1  bg-mainBackground pt-4">
       <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
       <Header title="Favorites" />
-      <FavoriteProductCard
+
+      {/* <FavoriteProductCard
         product={{
           id: "1",
           title: "Electrical Product",
@@ -64,6 +116,12 @@ const FavoritesScreen = () => {
             },
           ],
         }}
+      /> */}
+      <FlatList
+        data={productsToShow}
+        keyExtractor={(product) => product.id}
+        // renderItem={(product) => <FavoriteProductCard product={product} />}
+        renderItem={({ item }) => <FavoriteProductCard product={item} />}
       />
     </View>
   );

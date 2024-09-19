@@ -6,6 +6,8 @@ import GlobalProvider, { useGlobalContext } from "@/context/GlobalProvider";
 import TabsNavigator from "@/navigators/TabsNavigator";
 import AuthNavigator from "@/navigators/AuthNavigator";
 import CartScreen from "@/screens/CartScreen";
+import ProductDetails from "@/screens/ProductDetails";
+import WriteReviewScreen from "@/screens/WriteReviewScreen";
 export default function Index() {
   const Stack = createStackNavigator();
 
@@ -29,13 +31,16 @@ export default function Index() {
             name="tabs"
             options={{ headerShown: false }}
           />
-          {/* <Stack.Screen
-            component={CartScreen}
-            name="tabs"
+          <Stack.Screen
+            component={ProductDetails}
+            name="productDetails"
             options={{ headerShown: false }}
-          /> */}
-          {/* <Stack.Screen component={AuthScreen} name="auth"/>
-        <Stack.Screen component={TabsScreen} name="tabs"/> */}
+          />
+          <Stack.Screen
+            component={WriteReviewScreen}
+            name="writeReview"
+            options={{ headerShown: false }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </GlobalProvider>

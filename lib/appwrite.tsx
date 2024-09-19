@@ -220,7 +220,7 @@ export async function unSaveProductToUser(product: Product) {
 
     // Remove the product from the user's lovedProducts list
     const updatedLovedProducts = userLovedProducts.filter(
-      (lovedProduct) => lovedProduct.$id !== productId
+      (lovedProduct: any) => lovedProduct.$id !== productId
       // (lovedProduct) => lovedProduct.$id !== productId
     );
 
@@ -238,7 +238,6 @@ export async function unSaveProductToUser(product: Product) {
       }
     );
 
-    // console.log(updatedUser, "Product removed successfully");
     return updatedUser;
   } catch (error: any) {
     console.error("Failed to remove product from user", error);
@@ -301,7 +300,20 @@ export async function getUserLovedProducts() {
     // const userDocument = userDocuments.documents[0];
     const userLovedProducts = user?.lovedProducts || [];
 
-    return userLovedProducts;
+    return userLovedProducts.map((product: any) => {
+      return {
+        id: product.id,
+        title: product.title,
+        description: product.description,
+        images: product.images,
+        price: product.price,
+        rate: product.rate,
+        numberOfRates: product.numberOfRates,
+        category: product.categories,
+        productSize: product.productSize,
+      } as Product;
+    }) as Product[];
+    // return userLovedProducts;
   } catch (error: any) {
     console.error("Failed to get saved videos for user", error);
     throw new Error(error.message || "Failed to get saved videos");
