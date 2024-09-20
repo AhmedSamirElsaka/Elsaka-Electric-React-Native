@@ -14,8 +14,12 @@ import { getShopNotifications, getShopScreenCategories } from "@/lib/appwrite";
 import useAppwrite from "@/lib/useAppwrite";
 import { Category, Product, ShopScreenNotification } from "@/types/types";
 import { shuffle } from "@/components/CategoriesList";
+import { useDispatch } from "react-redux";
+import { setShopScreenNotification } from "@/features/shopScreenNotificationSlice";
 
 const ShopScreen = ({ navigation }: { navigation: any }) => {
+  const dispatch = useDispatch();
+
   const {
     data: categories,
     refetch: refetchCategories,
@@ -38,6 +42,7 @@ const ShopScreen = ({ navigation }: { navigation: any }) => {
   console.log(notification, "notification");
   useEffect(() => {
     if (notification.length > 0 && notification) {
+      dispatch(setShopScreenNotification(notification));
       setNotificationToShow({
         title: notification[0].title,
         subTitle: notification[0].subTitle,

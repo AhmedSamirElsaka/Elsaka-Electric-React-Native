@@ -18,6 +18,7 @@ import { Product } from "@/types/types";
 import { useSelector } from "react-redux";
 import { selectProducts } from "@/features/productsSlice";
 import { shuffle } from "@/components/CategoriesList";
+import { selectShopScreenNotification } from "@/features/shopScreenNotificationSlice";
 
 const ProductsScreen = () => {
   const [isFilterScreenShown, setIsFilterScreenShown] = useState(true);
@@ -30,6 +31,9 @@ const ProductsScreen = () => {
   const [productsToShow, setProductsToShow] = useState<Product[]>([]);
   const productsRedux = useSelector(selectProducts).products;
 
+  const notification = useSelector(selectShopScreenNotification).notification;
+
+  console.log(notification, "notification");
   // console.log(productsToShow, "productsToShow");
   useEffect(() => {
     // Check if categories and products exist before setting state
@@ -65,7 +69,7 @@ const ProductsScreen = () => {
         hidden={false}
       />
 
-      <Header title="Lightning" />
+      <Header title={notification[0].title} />
 
       <View className="pt-4 flex-row justify-between px-4 pb-4">
         <TouchableOpacity activeOpacity={0.7} onPress={() => {}}>
