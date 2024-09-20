@@ -31,10 +31,11 @@ import {
   unSaveProductToUser,
 } from "@/lib/appwrite";
 import { shuffle } from "@/components/CategoriesList";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addLovedProduct,
   removeLovedProduct,
+  selectLovedProducts,
 } from "@/features/lovedProdcutsSlice";
 
 const ProductDetailsScreen = ({
@@ -59,11 +60,7 @@ const ProductDetailsScreen = ({
   // Check if categories are loaded before accessing them
   const [productsToShow, setProductsToShow] = useState<Product[]>([]);
 
-  const {
-    data: lovedProducts,
-    refetch: refetchLovedProducts,
-  }: { data: Product[]; refetch: () => void } =
-    useAppwrite(getUserLovedProducts);
+  const lovedProducts = useSelector(selectLovedProducts);
 
   const [isLovedProduct, setisLovedProduct] = useState(false);
   useEffect(() => {

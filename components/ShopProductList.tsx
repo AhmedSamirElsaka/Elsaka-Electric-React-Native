@@ -9,13 +9,13 @@ import { useNavigation } from "@react-navigation/native";
 const ShopProductList = ({
   products,
   isHorizontal,
+  navigation,
 }: {
   products: Product[];
   isHorizontal?: boolean;
+  navigation: any;
 }) => {
   const [Horizontal, setHorizontal] = useState(isHorizontal);
-
-  const navigation = useNavigation();
 
   // console.log(products, "products");
   return (
@@ -37,7 +37,9 @@ const ShopProductList = ({
         <FlatList
           data={products}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <ShopProductCard product={item} />}
+          renderItem={({ item }) => (
+            <ShopProductCard product={item} navigation={navigation} />
+          )}
           ItemSeparatorComponent={() => <View className="h-6" />}
           className="pt-4"
           key={2}

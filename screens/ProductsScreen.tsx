@@ -20,7 +20,7 @@ import { selectProducts } from "@/features/productsSlice";
 import { shuffle } from "@/components/CategoriesList";
 import { selectShopScreenNotification } from "@/features/shopScreenNotificationSlice";
 
-const ProductsScreen = () => {
+const ProductsScreen = ({ navigation }: { navigation: any }) => {
   const [filerSelectedItem, setFilterSelectedItem] = useState("Popular");
   // ref
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -118,8 +118,8 @@ const ProductsScreen = () => {
       <ShopProductList
         products={productsToShow}
         isHorizontal={isHorizontalList}
+        navigation={navigation}
       />
-      {/* <View className="flex-1 bg-gray-400"> */}
       <BottomSheet
         ref={bottomSheetRef}
         onChange={handleSheetChanges}
@@ -163,20 +163,8 @@ const ProductsScreen = () => {
             )}
             className=" pt-4"
           />
-          {/* <View className=" pt-4">
-            <Text className="text-white text-lg bg-primary p-4 ">Popular</Text>
-            <Text className="text-white text-lg p-4 ">Newest</Text>
-            <Text className="text-white text-lg p-4 ">Customer review</Text>
-            <Text className="text-white text-lg p-4 ">
-              Price: lowest to high
-            </Text>
-            <Text className="text-white text-lg p-4 ">
-              Price: highest to low
-            </Text>
-          </View> */}
         </BottomSheetView>
       </BottomSheet>
-      {/* </View> */}
     </View>
   );
 };

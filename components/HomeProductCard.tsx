@@ -4,7 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import * as Icons from "react-native-heroicons/solid";
 import * as OutlineIcons from "react-native-heroicons/outline";
 import { Product } from "@/types/types";
-import ProductDetails from "@/screens/ProductDetails";
+import ProductDetailsScreen from "@/screens/ProductDetailsScreen";
 
 const HomeProductCard = ({
   product,
