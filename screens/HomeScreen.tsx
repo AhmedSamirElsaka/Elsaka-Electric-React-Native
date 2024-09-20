@@ -22,7 +22,7 @@ import { Category, Product } from "@/types/types";
 import HomeProductList from "@/components/HomeProductList";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProducts, setProducts } from "@/features/productsSlice";
-import { setlovedProducts } from "@/features/lovedProdcutsSlice";
+import { setLovedProducts } from "@/features/lovedProdcutsSlice";
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
   const {
@@ -51,7 +51,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
   }, [dispatch, products]);
 
   useEffect(() => {
-    dispatch(setlovedProducts(lovedProducts));
+    dispatch(setLovedProducts(lovedProducts));
   }, [dispatch, lovedProducts]);
 
   const productsRedux = useSelector(selectProducts).products;

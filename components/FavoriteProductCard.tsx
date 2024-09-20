@@ -6,21 +6,33 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { PureComponent } from "react";
 import { Product } from "@/types/types";
 import CategoryIcon from "./CategoryIcon";
 import * as Icons from "react-native-heroicons/solid";
 import { LinearGradient } from "expo-linear-gradient";
 import LoveIcon from "./LoveIcon";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { removeLovedProduct } from "@/features/lovedProdcutsSlice";
+import { unSaveProductToUser } from "@/lib/appwrite";
 
 const FavoriteProductCard = ({
   product,
   navigation,
+  itemkey,
 }: {
   product: Product;
   navigation: any;
+  itemkey: string;
 }) => {
+  const dispatch = useDispatch();
+
+  const unSaveProductToUserHandler = async () => {
+    dispatch(removeLovedProduct(product));
+    await unSaveProductToUser(product);
+  };
+
   return (
     <TouchableOpacity
       className="flex-1 p-4"
@@ -28,6 +40,7 @@ const FavoriteProductCard = ({
         navigation.push("productDetails", { productDetails: product });
       }}
       activeOpacity={0.7}
+      key={itemkey}
     >
       <View className="flex-row">
         <Image
@@ -35,19 +48,24 @@ const FavoriteProductCard = ({
           className="w-full h-[50vh] rounded-tr-3xl rounded-tl-3xl"
         />
         <View className="w-11 h-auto z-50 -ml-16 mt-6">
-          <LoveIcon onPress={() => {}} isPressed={true} />
+          <LoveIcon
+            onPress={() => {
+              unSaveProductToUserHandler();
+            }}
+            isPressed={true}
+          />
         </View>
       </View>
 
       <View className="h-40 bg-mainBackground -mt-40 opacity-[0.7] rounded-tr-3xl rounded-tl-3xl flex-row">
         <View className="px-6">
           <Text
-            className="text-white font-bold text-2xl pt-4 max-w-[250px]"
+            className="text-white font-bold text-2xl pt-4 max-w-[240px]"
             numberOfLines={2}
           >
             {product.title}
           </Text>
-          <Text className="text-gray-300 max-w-[250px]" numberOfLines={1}>
+          <Text className="text-gray-300 max-w-[240px]" numberOfLines={1}>
             {product.description}
           </Text>
           <View className="flex-row items-center pt-6 space-x-2">
@@ -64,8 +82,8 @@ const FavoriteProductCard = ({
           {product.category
             ?.filter((element) => element.name != "All")
             .map((element) => (
-              <View className="mr-2">
-                <CategoryIcon category={element} key={element.id} />
+              <View className="mr-2" key={element.id}>
+                <CategoryIcon category={element} />
               </View>
             ))}
         </View>

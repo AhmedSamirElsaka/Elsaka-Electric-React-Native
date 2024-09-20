@@ -6,7 +6,7 @@ import GlobalProvider, { useGlobalContext } from "@/context/GlobalProvider";
 import TabsNavigator from "@/navigators/TabsNavigator";
 import AuthNavigator from "@/navigators/AuthNavigator";
 import CartScreen from "@/screens/CartScreen";
-import ProductDetails from "@/screens/ProductDetails";
+import ProductDetails from "@/screens/ProductDetailsScreen";
 import WriteReviewScreen from "@/screens/WriteReviewScreen";
 import store from "@/store";
 import { Provider } from "react-redux";

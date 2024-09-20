@@ -31,8 +31,13 @@ import {
   unSaveProductToUser,
 } from "@/lib/appwrite";
 import { shuffle } from "@/components/CategoriesList";
+import { useDispatch } from "react-redux";
+import {
+  addLovedProduct,
+  removeLovedProduct,
+} from "@/features/lovedProdcutsSlice";
 
-const ProductDetails = ({
+const ProductDetailsScreen = ({
   route,
   navigation,
 }: {
@@ -42,6 +47,7 @@ const ProductDetails = ({
   const routed = useRoute();
   const product: Product = (routed?.params as { productDetails: Product })
     .productDetails;
+  const dispatch = useDispatch();
 
   const [isReviewsWithPhotoShown, setIsReviewsWithPhotoShown] = useState(true);
 
@@ -100,6 +106,15 @@ const ProductDetails = ({
     }
   }, [products]);
 
+  const saveProductToUserHandler = async () => {
+    dispatch(addLovedProduct(product));
+    await saveProductToUser(product);
+  };
+
+  const unSaveProductToUserHandler = async () => {
+    dispatch(removeLovedProduct(product));
+    await unSaveProductToUser(product);
+  };
   // const data = [
   //   {
   //     id: "1",
@@ -484,9 +499,9 @@ const ProductDetails = ({
         <LoveIcon
           onPress={() => {
             if (isLovedProduct) {
-              unSaveProductToUser(product);
+              unSaveProductToUserHandler();
             } else {
-              saveProductToUser(product);
+              saveProductToUserHandler();
             }
           }}
           isPressed={isLovedProduct}
@@ -538,7 +553,7 @@ const ProductDetails = ({
             {product.category
               ?.filter((element) => element.name != "All")
               .map((element) => (
-                <View className="mr-2">
+                <View className="mr-2" key={element.id}>
                   <CategoryIcon category={element} key={element.id} />
                 </View>
               ))}
@@ -624,6 +639,6 @@ const ProductDetails = ({
   );
 };
 
-export default ProductDetails;
+export default ProductDetailsScreen;
 
 const styles = StyleSheet.create({});

@@ -12,7 +12,7 @@ import React, { useCallback, useRef, useState } from "react";
 import Header from "@/components/Header";
 import CustomButton from "@/components/CustomButton";
 import CartProductCard from "@/components/CartProductCard";
-import ProductDetails from "./ProductDetails";
+import ProductDetailsScreen from "./ProductDetailsScreen";
 import * as Icons from "react-native-heroicons/solid";
 import { LinearGradient } from "expo-linear-gradient";
 import BottomSheet, {
