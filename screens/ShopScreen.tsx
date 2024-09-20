@@ -86,7 +86,7 @@ const ShopScreen = ({ navigation }: { navigation: any }) => {
   return (
     <View className="flex-1 bg-mainBackground pt-4 ">
       <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
-      <Header title="Categories" />
+      <Header title="Shop" />
       <View className="pt-4">
         <ElectricShopCategoriesNavList
           mainCategories={categories}

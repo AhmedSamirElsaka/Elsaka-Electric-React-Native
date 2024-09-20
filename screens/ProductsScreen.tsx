@@ -21,7 +21,6 @@ import { shuffle } from "@/components/CategoriesList";
 import { selectShopScreenNotification } from "@/features/shopScreenNotificationSlice";
 
 const ProductsScreen = () => {
-  const [isFilterScreenShown, setIsFilterScreenShown] = useState(true);
   const [filerSelectedItem, setFilterSelectedItem] = useState("Popular");
   // ref
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -33,8 +32,11 @@ const ProductsScreen = () => {
 
   const notification = useSelector(selectShopScreenNotification).notification;
 
-  console.log(notification, "notification");
-  // console.log(productsToShow, "productsToShow");
+  const filterItemSelectedHandler = (selectedItem: string) => {
+    setProductsToShow(shuffle(productsToShow));
+    bottomSheetRef.current?.close();
+    console.log(selectedItem);
+  };
   useEffect(() => {
     // Check if categories and products exist before setting state
     if (productsRedux.length > 0 && productsRedux) {
@@ -144,7 +146,10 @@ const ProductsScreen = () => {
             keyExtractor={(item) => item}
             renderItem={({ item }) => (
               <TouchableOpacity
-                onPress={() => setFilterSelectedItem(item)}
+                onPress={() => {
+                  setFilterSelectedItem(item);
+                  filterItemSelectedHandler(item);
+                }}
                 activeOpacity={0.5}
               >
                 <Text
