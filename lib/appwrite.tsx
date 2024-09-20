@@ -321,18 +321,20 @@ export async function getUserLovedProducts() {
   }
 }
 
-export async function getShopNotifications(): Promise<ShopScreenNotification> {
+export async function getShopNotifications() {
   try {
-    const notification = await databases.listDocuments(
+    const notifications = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.shopScreenNotificationsId
     );
 
-    return {
-      title: notification.documents[0].title,
-      subTitle: notification.documents[0].subTitle,
-      products: notification.documents[0].products,
-    } as ShopScreenNotification;
+    return notifications.documents.map((notification) => {
+      return {
+        title: notification.title,
+        subTitle: notification.subTitle,
+        products: notification.products,
+      } as ShopScreenNotification;
+    }) as ShopScreenNotification[];
   } catch (error: any) {
     throw new Error(error);
   }

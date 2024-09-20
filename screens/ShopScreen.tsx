@@ -27,7 +27,7 @@ const ShopScreen = ({ navigation }: { navigation: any }) => {
     data: notification,
     refetch: refetchNotification,
   }: {
-    data: ShopScreenNotification;
+    data: ShopScreenNotification[];
     refetch: () => void;
   } = useAppwrite(getShopNotifications);
 
@@ -37,11 +37,11 @@ const ShopScreen = ({ navigation }: { navigation: any }) => {
 
   console.log(notification, "notification");
   useEffect(() => {
-    if (notification.title) {
+    if (notification.length > 0 && notification) {
       setNotificationToShow({
-        title: notification.title,
-        subTitle: notification.subTitle,
-        products: notification.products,
+        title: notification[0].title,
+        subTitle: notification[0].subTitle,
+        products: notification[0].products,
       });
     } else {
       setNotificationToShow({ title: "", subTitle: "", products: [] });
