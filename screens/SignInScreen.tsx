@@ -35,7 +35,7 @@ const SignIn = () => {
 
     setSubmitting(true);
 
-    // signOut();
+    signOut();
     try {
       await signIn(form.email, form.password);
       const result = await getCurrentUser();
@@ -53,7 +53,11 @@ const SignIn = () => {
   };
   return (
     <SafeAreaView className="bg-mainBackground h-full">
-      <StatusBar barStyle="light-content" backgroundColor={"#000"} />
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={"#0C0F14"}
+        hidden={false}
+      />
       <ScrollView>
         <View
           className="w-full flex justify-center h-full px-4 "
@@ -61,13 +65,9 @@ const SignIn = () => {
             minHeight: Dimensions.get("window").height - 100,
           }}
         >
-          <Image
-            source={images.logo}
-            resizeMode="contain"
-            className="w-[200px] h-[100px]"
-          />
+          <Image source={images.logo} className="w-[200px] h-[100px] " />
 
-          <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">
+          <Text className="text-2xl font-semibold text-white mt-6 font-psemibold">
             Log in to Elsaka Electric
           </Text>
 

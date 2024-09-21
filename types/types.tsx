@@ -86,3 +86,9 @@ export type ShopScreenNotification = {
   subTitle: string;
   products: Product[];
 };
+
+export type cart = {
+  product: Product;
+  count: String;
+  size?: String;
+};

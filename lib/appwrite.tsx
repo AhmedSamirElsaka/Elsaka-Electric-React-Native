@@ -1,4 +1,4 @@
-import { Category, Product, ShopScreenNotification } from "@/types/types";
+import { cart, Category, Product, ShopScreenNotification } from "@/types/types";
 import {
   Account,
   Avatars,
@@ -19,6 +19,7 @@ export const appwriteConfig = {
   productsCollectionId: "66e7bbb6003830f8ff6d",
   shopScreenCategoriesId: "66ead2c8002fdbdf4d8d",
   shopScreenNotificationsId: "66ec379d00279ee36ed9",
+  cartId: "66ed3c88002c98e8b650",
 };
 
 const client = new Client();
@@ -294,11 +295,6 @@ export async function getUserLovedProducts() {
     // Fetch the user document based on the userId
     const user = await getCurrentUser();
 
-    // if (userDocuments.total === 0) {
-    //   throw new Error("User not found");
-    // }
-
-    // const userDocument = userDocuments.documents[0];
     const userLovedProducts = user?.lovedProducts || [];
 
     return userLovedProducts.map((product: any) => {
@@ -337,5 +333,68 @@ export async function getShopNotifications() {
     }) as ShopScreenNotification[];
   } catch (error: any) {
     throw new Error(error);
+  }
+}
+
+export async function saveProductToUserCart(product: Product) {
+  try {
+    // Fetch the user document based on the userId
+    const user = await getCurrentUser();
+
+    const userCarts = user?.cart || [];
+
+    const lovedproduct = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.productsCollectionId,
+      [Query.equal("id", product.id)]
+    );
+
+    const productId = lovedproduct.documents[0].$id;
+    // Update the user document with the new video
+    const updatedLovedProducts = [
+      ...userCarts,
+      {
+        $id: productId,
+      },
+    ];
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    const updatedUser = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      user.$id,
+      {
+        lovedProducts: updatedLovedProducts,
+      }
+    );
+
+    console.log(updatedUser, "Video added successfully");
+    return updatedUser;
+  } catch (error: any) {
+    console.error("Failed to save video to user", error);
+    throw new Error(error.message || "Failed to save video");
+  }
+}
+
+export async function getUserCarts() {
+  try {
+    // Fetch the user document based on the userId
+    const user = await getCurrentUser();
+
+    const userCarts = user?.cart || [];
+
+    return userCarts.map((cart: any) => {
+      return {
+        product: cart.product,
+        count: cart.count,
+        size: cart.size,
+      } as cart;
+    }) as cart[];
+    // return userLovedProducts;
+  } catch (error: any) {
+    throw new Error(error.message || "Failed to get saved videos");
   }
 }
