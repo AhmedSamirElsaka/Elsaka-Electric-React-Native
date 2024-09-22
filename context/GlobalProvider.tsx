@@ -17,7 +17,7 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
           setIsLogged(true);
           setUser(res);
 
-          console.log(res, "res");
+          // console.log(res, "res");
           setIsLoading(false);
         } else {
           setIsLogged(false);

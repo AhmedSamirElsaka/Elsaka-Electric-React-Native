@@ -5,6 +5,9 @@ import * as Icons from "react-native-heroicons/solid";
 import * as OutlineIcons from "react-native-heroicons/outline";
 import { Product } from "@/types/types";
 import ProductDetailsScreen from "@/screens/ProductDetailsScreen";
+import { saveProductToUserCart } from "@/lib/appwrite";
+import { useDispatch } from "react-redux";
+import { addCart } from "@/features/cartSlice";
 
 const HomeProductCard = ({
   product,
@@ -13,13 +16,12 @@ const HomeProductCard = ({
   product: Product;
   navigation: any;
 }) => {
+  const dispatch = useDispatch();
   return (
     <TouchableOpacity
       className="w-44 h-72 bg-green-800 rounded-3xl"
       activeOpacity={0.7}
       onPress={() => {
-        // console.log(product);
-        // console.log(navigation);
         navigation.push("productDetails", { productDetails: product });
       }}
     >
@@ -27,8 +29,6 @@ const HomeProductCard = ({
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         colors={["#252A32", "#0C0F14"]}
-        //   colors={["#fff", "#fff"]}
-        // style={styles.CartItemLinearGradient}
         className=" flex-1 rounded-3xl items-center pt-4"
       >
         <View className="flex-row w-36 h-40">
@@ -53,11 +53,19 @@ const HomeProductCard = ({
           <Text className="text-white font-semibold text-lg">
             <Text className="text-primary">EGP </Text> {product.price}
           </Text>
-          <Icons.PlusIcon
-            size={4}
-            color={"white"}
-            className="bg-primary p-4 rounded-lg "
-          />
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => {
+              saveProductToUserCart(product);
+              // dispatch(addCart(product));
+            }}
+          >
+            <Icons.PlusIcon
+              size={4}
+              color={"white"}
+              className="bg-primary p-4 rounded-lg "
+            />
+          </TouchableOpacity>
         </View>
       </LinearGradient>
     </TouchableOpacity>

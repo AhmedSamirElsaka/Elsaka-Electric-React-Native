@@ -2,14 +2,21 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import * as Icons from "react-native-heroicons/solid";
 
-const ProductCardCount = ({ productQuantity }: { productQuantity: number }) => {
+const ProductCardCount = ({
+  productQuantity,
+  onPress,
+}: {
+  productQuantity: number;
+  onPress: (count: number) => void;
+}) => {
   const [quantity, setQuantity] = useState(productQuantity);
   return (
-    <View className="flex-row  justify-between items-center">
+    <View className="flex-row  items-center  justify-between">
       <TouchableOpacity
-        onPress={() =>
-          quantity > 0 ? setQuantity(quantity - 1) : setQuantity(0)
-        }
+        onPress={() => {
+          quantity > 0 ? setQuantity(quantity - 1) : setQuantity(0);
+          onPress(quantity > 0 ? quantity - 1 : 0);
+        }}
         activeOpacity={0.7}
       >
         <Icons.MinusIcon
@@ -27,7 +34,10 @@ const ProductCardCount = ({ productQuantity }: { productQuantity: number }) => {
         </Text>
       </View>
       <TouchableOpacity
-        onPress={() => setQuantity(quantity + 1)}
+        onPress={() => {
+          setQuantity(quantity + 1);
+          onPress(quantity + 1);
+        }}
         activeOpacity={0.7}
       >
         <Icons.PlusIcon

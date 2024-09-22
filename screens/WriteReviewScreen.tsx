@@ -26,7 +26,7 @@ const WriteReviewScreen = () => {
     rate: "",
   });
 
-  console.log(form);
+  // console.log(form);
   return (
     <SafeAreaView className="flex-1 bg-mainBackground pt-8">
       <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />

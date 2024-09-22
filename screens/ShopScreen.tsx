@@ -39,7 +39,7 @@ const ShopScreen = ({ navigation }: { navigation: any }) => {
   const [notificationToShow, setNotificationToShow] =
     useState<ShopScreenNotification>({ title: "", subTitle: "", products: [] });
 
-  console.log(notification, "notification");
+  // console.log(notification, "notification");
   useEffect(() => {
     if (notification.length > 0 && notification) {
       dispatch(setShopScreenNotification(notification));

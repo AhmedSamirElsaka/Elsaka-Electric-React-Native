@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Header from "@/components/Header";
 import CustomButton from "@/components/CustomButton";
 import CartProductCard from "@/components/CartProductCard";
@@ -21,68 +21,40 @@ import BottomSheet, {
 } from "@gorhom/bottom-sheet";
 import PromoCodeComponent from "@/components/PromoCodeComponent";
 import PersonalPromoCodeCard from "@/components/PersonalPromoCodeCard";
+import { selectCarts } from "@/features/cartSlice";
+import { useSelector } from "react-redux";
 
-const CartScreen = () => {
+const CartScreen = ({ navigation }: { navigation: any }) => {
   const [isPromoCodeBottomSheetShown, setIsPromoCodeBottomSheetShown] =
     useState(false);
   const bottomSheetRef = useRef<BottomSheet>(null);
   const [promoCode, setPromoCode] = useState("");
 
-  // render
-  // const renderItem = useCallback(
-  //   ({ item }: any) => (
-  //     <View className="h-4 w-44 bg-white">
-  //       <Text className="text-white text-xl">hello ahmed samir</Text>
-  //     </View>
-  //   ),
-  //   []
-  // );
+  const carts = useSelector(selectCarts).carts;
+
+  console.log(carts, "carts");
+  const [price, setPrice] = useState(0);
+
+  useEffect(() => {
+    // Calculate the total price in one pass
+    let totalPrice = 0;
+    carts.forEach((cart: any) => {
+      totalPrice += cart.product.price * cart.count;
+    });
+
+    // Update the price once
+    setPrice(totalPrice);
+  }, [carts]); // The effect depends on changes to `carts`
+  console.log(price, "carts");
   return (
-    // <View className="flex-1 bg-mainBackground">
-    //   <ProductDetails
-    //     product={{
-    //       id: "1",
-    //       title: "Electrical Product",
-    //       price: "10000",
-    //       image:
-    //         "https://cdn.britannica.com/88/212888-050-6795342C/study-lamp-electrical-cord.jpg",
-    //       description: "Electrical Product Description",
-    //       rate: "4.5",
-    //       numberOfRates: "6534",
-    //       category: [],
-    //       productSize: [
-    //         {
-    //           size: "250",
-    //           unit: "gm",
-    //           price: "10000",
-    //         },
-    //         {
-    //           size: "500",
-    //           unit: "gm",
-    //           price: "10000",
-    //         },
-    //         {
-    //           size: "750",
-    //           unit: "gm",
-    //           price: "10000",
-    //         },
-    //         {
-    //           size: "1",
-    //           unit: "kg",
-    //           price: "10000",
-    //         },
-    //       ],
-    //     }}
-    //   />
-    // </View>
-    <View className="flex-1 bg-mainBackground">
+    <View className="flex-1  bg-mainBackground pt-4 ">
       <Header title="Cart" />
       <View className="flex-1 ">
         <FlatList
-          data={[1, 2, 3, 4, 5]}
+          data={carts}
           renderItem={({ item }) => (
             <View className="px-4 pt-4">
-              <CartProductCard />
+              <CartProductCard cart={item} navigation={navigation} />
             </View>
           )}
         />
@@ -123,12 +95,12 @@ const CartScreen = () => {
         <View className="justify-center items-center pr-10  pl-6">
           <Text className="text-white font-bold text-lg">Price</Text>
           <Text className="text-white font-bold text-xl">
-            <Text className="text-primary text-2xl">$ </Text>
-            {10.5}
+            <Text className="text-primary text-2xl">EGP </Text>
+            {price}
           </Text>
         </View>
         <CustomButton
-          title="Pay"
+          title="Ceck Out"
           handlePress={() => {}}
           textStyles="text-white text-lg text-bold"
           containerStyles="bg-primary flex-1 mr-6"

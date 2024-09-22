@@ -28,6 +28,7 @@ import {
   getAllProducts,
   getUserLovedProducts,
   saveProductToUser,
+  saveProductToUserCart,
   unSaveProductToUser,
 } from "@/lib/appwrite";
 import { shuffle } from "@/components/CategoriesList";
@@ -37,6 +38,7 @@ import {
   removeLovedProduct,
   selectLovedProducts,
 } from "@/features/lovedProdcutsSlice";
+import { addCart } from "@/features/cartSlice";
 
 const ProductDetailsScreen = ({
   route,
@@ -564,7 +566,7 @@ const ProductDetailsScreen = ({
             {product.description}
           </Text>
 
-          {product.productSize.length > 0 && (
+          {product.productSize && product.productSize.length > 0 && (
             <View>
               <Text className="text-white font-bold text-xl px-6 pt-6">
                 Size
@@ -627,7 +629,10 @@ const ProductDetailsScreen = ({
         </View>
         <CustomButton
           title="Add To Cart"
-          handlePress={() => {}}
+          handlePress={() => {
+            saveProductToUserCart(product);
+            dispatch(addCart(product));
+          }}
           textStyles="text-white text-lg text-bold"
           containerStyles="bg-primary flex-1 mr-6"
         />

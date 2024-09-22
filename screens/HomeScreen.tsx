@@ -50,6 +50,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
 
   const dispatch = useDispatch();
 
+  // console.log(userCarts, "userCarts");
   // Check if categories are loaded before accessing them
   const [productsToShow, setProductsToShow] = useState<Product[]>([]);
 

@@ -337,14 +337,14 @@ export async function getShopNotifications() {
   }
 }
 
-export async function createCart(cart: Cart) {
+export async function createCart(cart: Cart, productId: string) {
   try {
     const newCart = await databases.createDocument(
       appwriteConfig.databaseId,
       appwriteConfig.cartId,
       ID.unique(),
       {
-        product: cart.product,
+        product: productId,
         count: cart.count,
         size: cart.size,
       }
@@ -374,18 +374,22 @@ export async function saveProductToUserCart(product: Product, size?: string) {
     );
 
     const productId = productData.documents[0].$id;
-    userCarts.array.forEach((cart: any) => {
+    userCarts.forEach((cart: any) => {
       if (cart.product.$id === productId) {
         Alert.alert("Error", "Product already in cart");
         return;
       }
     });
 
-    const cart = await createCart({
-      product: product,
-      count: "1",
-      size: size || "",
-    });
+    console.log(userCarts);
+    const cart = await createCart(
+      {
+        product: product,
+        count: "1",
+        size: size || "",
+      },
+      productId
+    );
 
     // Update the user document with the new video
     const updatedUserCart = [
@@ -414,20 +418,75 @@ export async function saveProductToUserCart(product: Product, size?: string) {
 
 export async function getUserCarts() {
   try {
-    // Fetch the user document based on the userId
+    // Fetch the current user
     const user = await getCurrentUser();
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    const carts: any[] = [];
 
     const userCarts = user?.cart || [];
 
-    return userCarts.map((cart: any) => {
-      return {
-        product: cart.product,
-        count: cart.count,
-        size: cart.size,
-      } as Cart;
-    }) as Cart[];
-    // return userLovedProducts;
+    console.log(userCarts, "userCarts");
+    // console.log(userCarts);
+    // Fetch detailed product and category data for each product in the cart
+    const cartWithProductsAndCategories = await Promise.all(
+      userCarts.map(async (cartItem: any) => {
+        // Fetch the product data
+        const productData = await databases.getDocument(
+          appwriteConfig.databaseId,
+          appwriteConfig.productsCollectionId,
+          cartItem.product.$id // Product ID from the cart
+        );
+
+        // Fetch the category for the product
+        let categories: any[] = [];
+
+        const categoriesPromises = productData.categories.map(
+          (category: any) => {
+            return databases.getDocument(
+              appwriteConfig.databaseId,
+              appwriteConfig.categoriesCollectionId,
+              category.$id
+            );
+          }
+        );
+
+        const categoriesData = await Promise.all(categoriesPromises);
+
+        categoriesData.forEach((categoryData) => {
+          categories.push(categoryData);
+        });
+
+        carts.push({
+          count: cartItem.count,
+          size: cartItem.size,
+          product: {
+            id: productData.$id,
+            title: productData.title,
+            description: productData.description,
+            images: productData.images,
+            price: productData.price,
+            rate: productData.rate,
+            numberOfRates: productData.numberOfRates,
+            productSize: productData.productSize,
+            category: categories.map((category) => {
+              return {
+                name: category.name,
+                icon: category.icon,
+              };
+            }),
+          },
+        });
+      })
+    );
+
+    return carts;
   } catch (error: any) {
-    throw new Error(error.message || "Failed to get saved videos");
+    throw new Error(
+      error.message || "Failed to fetch cart with products and categories"
+    );
   }
 }

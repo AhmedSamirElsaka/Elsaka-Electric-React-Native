@@ -35,7 +35,7 @@ const ProductsScreen = ({ navigation }: { navigation: any }) => {
   const filterItemSelectedHandler = (selectedItem: string) => {
     setProductsToShow(shuffle(productsToShow));
     bottomSheetRef.current?.close();
-    console.log(selectedItem);
+    // console.log(selectedItem);
   };
   useEffect(() => {
     // Check if categories and products exist before setting state
