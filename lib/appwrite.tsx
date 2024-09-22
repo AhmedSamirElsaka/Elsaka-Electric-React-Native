@@ -1,4 +1,5 @@
 import { cart, Category, Product, ShopScreenNotification } from "@/types/types";
+import { Alert } from "react-native";
 import {
   Account,
   Avatars,
@@ -336,42 +337,74 @@ export async function getShopNotifications() {
   }
 }
 
-export async function saveProductToUserCart(product: Product) {
+export async function createCart(cart: cart) {
+  try {
+    const newCart = await databases.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.cartId,
+      ID.unique(),
+      {
+        product: cart.product,
+        count: cart.count,
+        size: cart.size,
+      }
+    );
+
+    return newCart;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}
+
+export async function saveProductToUserCart(product: Product, size?: string) {
   try {
     // Fetch the user document based on the userId
+
     const user = await getCurrentUser();
 
+    if (!user) {
+      throw new Error("User not found");
+    }
     const userCarts = user?.cart || [];
 
-    const lovedproduct = await databases.listDocuments(
+    const productData = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.productsCollectionId,
       [Query.equal("id", product.id)]
     );
 
-    const productId = lovedproduct.documents[0].$id;
+    const productId = productData.documents[0].$id;
+    userCarts.array.forEach((cart: any) => {
+      if (cart.product.$id === productId) {
+        Alert.alert("Error", "Product already in cart");
+        return;
+      }
+    });
+
+    const cart = await createCart({
+      product: product,
+      count: "1",
+      size: size || "",
+    });
+
     // Update the user document with the new video
-    const updatedLovedProducts = [
+    const updatedUserCart = [
       ...userCarts,
       {
-        $id: productId,
+        $id: cart.$id,
       },
     ];
-
-    if (!user) {
-      throw new Error("User not found");
-    }
 
     const updatedUser = await databases.updateDocument(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
       user.$id,
       {
-        lovedProducts: updatedLovedProducts,
+        cart: updatedUserCart,
       }
     );
 
-    console.log(updatedUser, "Video added successfully");
+    // console.log(updatedUser, "Video added successfully");
     return updatedUser;
   } catch (error: any) {
     console.error("Failed to save video to user", error);
