@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "@/screens/HomeScreen";
-import ProductDetails from "@/screens/ProductDetails";
+import ProductDetails from "@/screens/ProductDetailsScreen";
 import WriteReviewScreen from "@/screens/WriteReviewScreen";
 
 const HomeNavigator = () => {

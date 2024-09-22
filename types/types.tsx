@@ -87,7 +87,7 @@ export type ShopScreenNotification = {
   products: Product[];
 };
 
-export type cart = {
+export type Cart = {
   product: Product;
   count: String;
   size?: String;

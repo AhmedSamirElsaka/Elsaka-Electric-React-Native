@@ -1,4 +1,4 @@
-import { cart, Category, Product, ShopScreenNotification } from "@/types/types";
+import { Cart, Category, Product, ShopScreenNotification } from "@/types/types";
 import { Alert } from "react-native";
 import {
   Account,
@@ -337,7 +337,7 @@ export async function getShopNotifications() {
   }
 }
 
-export async function createCart(cart: cart) {
+export async function createCart(cart: Cart) {
   try {
     const newCart = await databases.createDocument(
       appwriteConfig.databaseId,
@@ -424,8 +424,8 @@ export async function getUserCarts() {
         product: cart.product,
         count: cart.count,
         size: cart.size,
-      } as cart;
-    }) as cart[];
+      } as Cart;
+    }) as Cart[];
     // return userLovedProducts;
   } catch (error: any) {
     throw new Error(error.message || "Failed to get saved videos");

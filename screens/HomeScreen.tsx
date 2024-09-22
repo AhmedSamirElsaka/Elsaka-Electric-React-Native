@@ -16,13 +16,15 @@ import useAppwrite from "@/lib/useAppwrite";
 import {
   getAllCategories,
   getAllProducts,
+  getUserCarts,
   getUserLovedProducts,
 } from "@/lib/appwrite";
-import { Category, Product } from "@/types/types";
+import { Cart, Category, Product } from "@/types/types";
 import HomeProductList from "@/components/HomeProductList";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProducts, setProducts } from "@/features/productsSlice";
 import { setLovedProducts } from "@/features/lovedProdcutsSlice";
+import { setCarts } from "@/features/cartSlice";
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
   const {
@@ -41,6 +43,11 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
   }: { data: Product[]; refetch: () => void } =
     useAppwrite(getUserLovedProducts);
 
+  const {
+    data: userCarts,
+    refetch: refetchCarts,
+  }: { data: Cart[]; refetch: () => void } = useAppwrite(getUserCarts);
+
   const dispatch = useDispatch();
 
   // Check if categories are loaded before accessing them
@@ -53,6 +60,10 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
   useEffect(() => {
     dispatch(setLovedProducts(lovedProducts));
   }, [dispatch, lovedProducts]);
+
+  useEffect(() => {
+    dispatch(setCarts(userCarts));
+  }, [dispatch, userCarts]);
 
   const productsRedux = useSelector(selectProducts).products;
 
