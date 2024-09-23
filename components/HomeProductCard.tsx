@@ -57,7 +57,7 @@ const HomeProductCard = ({
             activeOpacity={0.7}
             onPress={() => {
               saveProductToUserCart(product);
-              // dispatch(addCart(product));
+              dispatch(addCart(product));
             }}
           >
             <Icons.PlusIcon

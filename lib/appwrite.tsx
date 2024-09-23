@@ -381,7 +381,6 @@ export async function saveProductToUserCart(product: Product, size?: string) {
       }
     });
 
-    console.log(userCarts);
     const cart = await createCart(
       {
         product: product,
@@ -429,7 +428,7 @@ export async function getUserCarts() {
 
     const userCarts = user?.cart || [];
 
-    console.log(userCarts, "userCarts");
+    // console.log(userCarts, "userCarts");
     // console.log(userCarts);
     // Fetch detailed product and category data for each product in the cart
     const cartWithProductsAndCategories = await Promise.all(
@@ -464,7 +463,7 @@ export async function getUserCarts() {
           count: cartItem.count,
           size: cartItem.size,
           product: {
-            id: productData.$id,
+            id: productData.id,
             title: productData.title,
             description: productData.description,
             images: productData.images,
@@ -488,5 +487,62 @@ export async function getUserCarts() {
     throw new Error(
       error.message || "Failed to fetch cart with products and categories"
     );
+  }
+}
+
+export async function removeCartFromUser(product: Product) {
+  try {
+    // Fetch the current user
+    const user = await getCurrentUser();
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    const userCarts = user?.cart || [];
+
+    // console.log(userCarts, "userCarts");
+    // Find the cart item with the given product ID
+
+    console.log(product.id, "product");
+    const cartItemToRemove = userCarts.find((cartItem: any) => {
+      console.log(cartItem.product.id, "cartItem");
+      if (cartItem.product.id === product.id) {
+        return cartItem;
+      }
+    });
+
+    console.log(cartItemToRemove, "cartItemToRemove");
+    if (!cartItemToRemove) {
+      throw new Error("Cart item not found");
+    }
+
+    // Remove the cart from the user's cart list
+    const updatedUserCarts = userCarts.filter(
+      (cartItem: any) => cartItem.product.id !== product.id
+    );
+
+    // Update the user's cart in the database
+    const updatedUser = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      user.$id,
+      {
+        cart: updatedUserCarts,
+      }
+    );
+
+    // Optionally, delete the cart from the database
+    await databases.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.cartId,
+      cartItemToRemove.$id
+    );
+
+    console.log(updatedUser, "Cart removed successfully");
+    return updatedUser;
+  } catch (error: any) {
+    console.error("Failed to remove cart from user", error);
+    throw new Error(error.message || "Failed to remove cart");
   }
 }

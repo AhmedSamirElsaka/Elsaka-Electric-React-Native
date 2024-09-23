@@ -32,7 +32,7 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
 
   const carts = useSelector(selectCarts).carts;
 
-  console.log(carts, "carts");
+  // console.log(carts, "carts");
   const [price, setPrice] = useState(0);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
     // Update the price once
     setPrice(totalPrice);
   }, [carts]); // The effect depends on changes to `carts`
-  console.log(price, "carts");
+  // console.log(price, "carts");
   return (
     <View className="flex-1  bg-mainBackground pt-4 ">
       <Header title="Cart" />
@@ -92,12 +92,16 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
       </LinearGradient> */}
 
       <View className="flex-row  pt-4 justify-between mb-2">
-        <View className="justify-center items-center pr-10  pl-6">
-          <Text className="text-white font-bold text-lg">Price</Text>
-          <Text className="text-white font-bold text-xl">
-            <Text className="text-primary text-2xl">EGP </Text>
-            {price}
-          </Text>
+        <View className="justify-center items-center pr-10  pl-8 ">
+          <View className="flex-1">
+            <Text className="text-white font-bold text-lg text-center ">
+              Price
+            </Text>
+            <Text className="text-white font-bold text-xl text-center">
+              <Text className="text-primary text-xl">EGP </Text>
+              {price}
+            </Text>
+          </View>
         </View>
         <CustomButton
           title="Ceck Out"
@@ -108,7 +112,6 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
       </View>
       <BottomSheet
         ref={bottomSheetRef}
-        // onChange={handleSheetChanges}
         snapPoints={[450, 700]}
         index={-1}
         backgroundStyle={{ backgroundColor: "#2B2D31" }}
