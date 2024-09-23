@@ -10,6 +10,7 @@ import ProductDetails from "@/screens/ProductDetailsScreen";
 import WriteReviewScreen from "@/screens/WriteReviewScreen";
 import store from "@/store";
 import { Provider } from "react-redux";
+import PaymentScreen from "@/screens/PaymentScreen";
 
 export default function Index() {
   const Stack = createStackNavigator();
@@ -18,7 +19,11 @@ export default function Index() {
     <GlobalProvider>
       <NavigationContainer independent={true}>
         <Provider store={store}>
-          <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
+          <StatusBar
+            barStyle="light-content"
+            backgroundColor={"#0C0F14"}
+            hidden={false}
+          />
           <Stack.Navigator>
             <Stack.Screen
               component={OnboardingScreen}
@@ -43,6 +48,11 @@ export default function Index() {
             <Stack.Screen
               component={WriteReviewScreen}
               name="writeReview"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              component={PaymentScreen}
+              name="payment"
               options={{ headerShown: false }}
             />
           </Stack.Navigator>

@@ -2,7 +2,7 @@ import { Button, StatusBar, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { signOut } from "@/lib/appwrite";
 import { useGlobalContext } from "@/context/GlobalProvider";
-import { useNavigation } from "expo-router";
+import { useNavigation } from "@react-navigation/native";
 
 const ProfileScreen = () => {
   const navigation = useNavigation();

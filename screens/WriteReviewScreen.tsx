@@ -13,7 +13,7 @@ import { Rating, AirbnbRating } from "react-native-ratings";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Icons from "react-native-heroicons/solid";
 import CustomButton from "@/components/CustomButton";
-import { useNavigation } from "expo-router";
+import { useNavigation } from "@react-navigation/native";
 
 const WriteReviewScreen = () => {
   const navigation = useNavigation();
