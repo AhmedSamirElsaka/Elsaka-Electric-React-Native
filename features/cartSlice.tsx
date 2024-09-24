@@ -34,11 +34,14 @@ export const cartsSlice = createSlice({
         cart.count = action.payload.count; // Set count to the provided value
       }
     },
+    clearCarts: (state) => {
+      state.carts = []; // Clear all carts
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setCarts, addCart, removeCart, setCartCount } =
+export const { setCarts, addCart, removeCart, setCartCount, clearCarts } =
   cartsSlice.actions;
 export const selectCarts = (state: any) => state.carts;
 export default cartsSlice.reducer;

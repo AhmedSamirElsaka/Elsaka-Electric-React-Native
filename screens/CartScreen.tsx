@@ -1,4 +1,5 @@
 import {
+  Alert,
   FlatList,
   ScrollView,
   StatusBar,
@@ -24,6 +25,7 @@ import PersonalPromoCodeCard from "@/components/PersonalPromoCodeCard";
 import { selectCarts } from "@/features/cartSlice";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import Loading from "@/components/Loading";
 
 const CartScreen = ({ navigation }: { navigation: any }) => {
   const [isPromoCodeBottomSheetShown, setIsPromoCodeBottomSheetShown] =
@@ -33,21 +35,28 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
 
   const carts = useSelector(selectCarts).carts;
 
-  // console.log(carts, "carts");
   const [price, setPrice] = useState(0);
 
+  const [isLoading, setIsLoading] = useState(carts.length === 0);
+
   useEffect(() => {
-    // Calculate the total price in one pass
     let totalPrice = 0;
     carts.forEach((cart: any) => {
       totalPrice += cart.product.price * cart.count;
     });
-
-    // Update the price once
     setPrice(totalPrice);
-  }, [carts]); // The effect depends on changes to `carts`
-  // console.log(price, "carts");
+    if (carts.length > 0) {
+      setIsLoading(false);
+    }
+  }, [carts]);
 
+  if (isLoading) {
+    return (
+      <View className="flex-1  bg-mainBackground">
+        <Loading />
+      </View>
+    );
+  }
   return (
     <View className="flex-1  bg-mainBackground pt-4 ">
       <Header title="Cart" />
@@ -66,7 +75,11 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
           bottomSheetRef.current?.expand();
         }}
         onPress={() => {
-          navigation.navigate("payment", { amount: price });
+          if (price === 0) {
+            Alert.alert("Cart is empty", "Please add items to cart");
+          } else {
+            navigation.navigate("payment", { amount: price });
+          }
         }}
         onTextChange={(text) => {
           setPromoCode(text);
@@ -88,7 +101,11 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
         <CustomButton
           title="Ceck Out"
           handlePress={() => {
-            navigation.navigate("payment", { amount: price });
+            if (price === 0) {
+              Alert.alert("Cart is empty", "Please add items to cart");
+            } else {
+              navigation.navigate("payment", { amount: price });
+            }
           }}
           textStyles="text-white text-lg text-bold"
           containerStyles="bg-primary flex-1 mr-6"

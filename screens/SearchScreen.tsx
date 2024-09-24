@@ -18,6 +18,7 @@ import * as Icons from "react-native-heroicons/solid";
 import ShopProductList from "@/components/ShopProductList";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { shuffle } from "@/components/CategoriesList";
+import Loading from "@/components/Loading";
 
 const SearchScreen = ({ navigation }: any) => {
   const routed = useRoute();
@@ -32,6 +33,8 @@ const SearchScreen = ({ navigation }: any) => {
   const [isHorizontalList, setIsHorizontalList] = useState(false);
 
   const [productsToShow, setProductsToShow] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(productsToShow.length === 0);
+
   const productsRedux =
     useSelector(selectProducts).products || ([] as Product[]);
   const handleSheetChanges = useCallback((index: number) => {}, []);
@@ -48,8 +51,16 @@ const SearchScreen = ({ navigation }: any) => {
         product.title.includes(searchText)
       )
     );
+    setIsLoading(false);
   }, [productsRedux, searchText]);
 
+  if (isLoading) {
+    return (
+      <View className="flex-1  bg-mainBackground">
+        <Loading />
+      </View>
+    );
+  }
   return (
     <View className="bg-mainBackground - flex-1">
       <StatusBar

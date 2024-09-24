@@ -17,17 +17,22 @@ import { StripeProvider } from "@stripe/stripe-react-native";
 import { fetchAPI } from "@/lib/fetch";
 import { useGlobalContext } from "@/context/GlobalProvider";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { clearUserCart } from "@/lib/appwrite";
+import { useDispatch } from "react-redux";
+import { clearCarts } from "@/features/cartSlice";
+import Header from "@/components/Header";
 
 const PaymentScreen = () => {
   const navigation = useNavigation();
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [success, setSuccess] = useState(false);
   const { user }: any = useGlobalContext();
-
   const routed = useRoute();
   const amount: number = (routed?.params as { amount: number }).amount;
   const [delivery, setDelivery] = useState(50);
   const total = delivery + amount;
+
+  const dispatch = useDispatch();
   const confirmHandler = async (
     paymentMethod: any,
     _: any,
@@ -71,6 +76,7 @@ const PaymentScreen = () => {
   const initializePaymentSheet = async () => {
     const { error } = await initPaymentSheet({
       merchantDisplayName: "Example, Inc.",
+
       intentConfiguration: {
         mode: {
           amount: total * 100,
@@ -110,18 +116,14 @@ const PaymentScreen = () => {
           backgroundColor={"#0C0F14"}
           hidden={false}
         />
-        <View className="flex-row p-4 items-center justify-around">
-          <BackIcon
-            onPress={() => {
-              navigation.goBack();
-            }}
-          />
-          <Text className="text-white font-bold text-2xl flex-1 text-center -ml-8">
-            Checkout
-          </Text>
-        </View>
+        {/* <BackIcon onPress={() => navigation.goBack()} /> */}
+        <Header
+          title="Payment"
+          onBackIconPress={() => navigation.goBack()}
+          isBackIconRequired={true}
+        />
 
-        <Text className="text-white text-xl italic mt-10 p-4">
+        <Text className="text-white text-xl italic mt-10 p-4 ">
           Shipping address
         </Text>
         <LinearGradient
@@ -141,7 +143,7 @@ const PaymentScreen = () => {
           </Text>
         </LinearGradient>
 
-        <Text className="text-white text-xl italic mt-10 p-4">
+        <Text className="text-white text-xl italic mt-10 ml-4">
           Delivery method
         </Text>
         <View>
@@ -154,19 +156,20 @@ const PaymentScreen = () => {
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 1 }}
                   colors={["#252A32", "#0C0F14"]}
-                  className="border-2 border-secondaryDarkGreyHex rounded-xl  items-center bg-secondaryDarkGreyHex px-4 py-2 mx-2"
+                  className="border-2 border-secondaryDarkGreyHex rounded-xl  items-center bg-secondaryDarkGreyHex px-4 py-2"
                 >
                   <Image
                     source={require(`../assets/images/shipping1.png`)}
                     className="w-20 h-12"
                     resizeMode="contain"
                   />
-                  <Text className="text-white mt-2">2-3 days</Text>
+                  <Text className="text-white mt-2">2 - 3 days</Text>
                 </LinearGradient>
               );
             }}
+            ItemSeparatorComponent={() => <View className="w-4" />}
             horizontal
-            className="mx-2 "
+            className="mx-4 mt-4"
           />
         </View>
 
@@ -193,7 +196,11 @@ const PaymentScreen = () => {
 
         <CustomButton
           title={"Submit Order"}
-          handlePress={openPaymentSheet}
+          handlePress={() => {
+            openPaymentSheet();
+            clearUserCart();
+            dispatch(clearCarts());
+          }}
           containerStyles="mx-6 bg-primary rounded-full mb-6"
           textStyles="text-white text-lg text-bold"
         />

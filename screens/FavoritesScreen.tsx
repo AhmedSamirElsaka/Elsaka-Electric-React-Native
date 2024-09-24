@@ -5,6 +5,7 @@ import FavoriteProductCard from "@/components/FavoriteProductCard";
 import { useSelector } from "react-redux";
 import { selectLovedProducts } from "@/features/lovedProdcutsSlice"; // Corrected import
 import { Product } from "@/types/types";
+import Loading from "@/components/Loading";
 
 const FavoritesScreen = ({ navigation }: { navigation: any }) => {
   const [productsToShow, setProductsToShow] = useState<Product[]>([]);
@@ -26,9 +27,17 @@ const FavoritesScreen = ({ navigation }: { navigation: any }) => {
         productSize: product.productSize,
       }));
       setProductsToShow([...updatedProducts]); // Create a new array reference
+      setIsLoading(false);
     }
   }, [lovedProducts]);
 
+  if (isLoading) {
+    return (
+      <View className="flex-1  bg-mainBackground">
+        <Loading />
+      </View>
+    );
+  }
   return (
     <View className="flex-1 bg-mainBackground pt-4">
       <StatusBar

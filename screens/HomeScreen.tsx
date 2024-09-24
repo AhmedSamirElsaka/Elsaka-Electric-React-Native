@@ -27,6 +27,7 @@ import { selectProducts, setProducts } from "@/features/productsSlice";
 import { setLovedProducts } from "@/features/lovedProdcutsSlice";
 import { setCarts } from "@/features/cartSlice";
 import LottieView from "lottie-react-native";
+import Loading from "@/components/Loading";
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
   const [productsToShow, setProductsToShow] = useState<Product[]>([]);
@@ -115,20 +116,8 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
     userCartsLoading
   ) {
     return (
-      <View className="flex-1  bg-mainBackground pt-4 pb-4">
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor={"#0C0F14"}
-          hidden={false}
-        />
-        <View className="flex-1 justify-center items-center">
-          <LottieView
-            source={require("../assets/animations/loading.json")}
-            style={{ width: 200, height: 200, flex: 1 }}
-            autoPlay
-            loop
-          />
-        </View>
+      <View className="flex-1  bg-mainBackground">
+        <Loading />
       </View>
     );
   }

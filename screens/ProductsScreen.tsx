@@ -19,26 +19,26 @@ import { useSelector } from "react-redux";
 import { selectProducts } from "@/features/productsSlice";
 import { shuffle } from "@/components/CategoriesList";
 import { selectShopScreenNotification } from "@/features/shopScreenNotificationSlice";
+import Loading from "@/components/Loading";
 
 const ProductsScreen = ({ navigation }: { navigation: any }) => {
   const [filerSelectedItem, setFilterSelectedItem] = useState("Popular");
-  // ref
-  const bottomSheetRef = useRef<BottomSheet>(null);
 
   const [isHorizontalList, setIsHorizontalList] = useState(false);
-
   const [productsToShow, setProductsToShow] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(productsToShow.length === 0);
+
   const productsRedux = useSelector(selectProducts).products;
+  const bottomSheetRef = useRef<BottomSheet>(null);
 
   const notification = useSelector(selectShopScreenNotification).notification;
 
   const filterItemSelectedHandler = (selectedItem: string) => {
     setProductsToShow(shuffle(productsToShow));
     bottomSheetRef.current?.close();
-    // console.log(selectedItem);
   };
+
   useEffect(() => {
-    // Check if categories and products exist before setting state
     if (productsRedux.length > 0 && productsRedux) {
       setProductsToShow(
         shuffle(
@@ -57,12 +57,20 @@ const ProductsScreen = ({ navigation }: { navigation: any }) => {
           })
         )
       );
+      setIsLoading(false);
     } else {
       setProductsToShow([]); // Provide an empty array if no products exist
     }
   }, [productsRedux]);
-  // callbacks
   const handleSheetChanges = useCallback((index: number) => {}, []);
+
+  if (isLoading) {
+    return (
+      <View className="flex-1  bg-mainBackground">
+        <Loading />
+      </View>
+    );
+  }
   return (
     <View className="flex-1 bg-mainBackground pt-4">
       <StatusBar

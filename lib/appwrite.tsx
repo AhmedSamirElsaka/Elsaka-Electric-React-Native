@@ -546,3 +546,48 @@ export async function removeCartFromUser(product: Product) {
     throw new Error(error.message || "Failed to remove cart");
   }
 }
+
+export async function clearUserCart() {
+  try {
+    // Fetch the current user
+    const user = await getCurrentUser();
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    const userCarts = user?.cart || [];
+
+    if (userCarts.length === 0) {
+      throw new Error("No items in the cart");
+    }
+
+    // Iterate through all cart items and delete them
+    await Promise.all(
+      userCarts.map(async (cartItem: any) => {
+        // Delete the cart item from the database
+        await databases.deleteDocument(
+          appwriteConfig.databaseId,
+          appwriteConfig.cartId,
+          cartItem.$id // Cart document ID
+        );
+      })
+    );
+
+    // Update the user's cart to be empty
+    const updatedUser = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      user.$id,
+      {
+        cart: [],
+      }
+    );
+
+    console.log("All cart items cleared successfully");
+    return updatedUser;
+  } catch (error: any) {
+    console.error("Failed to clear user cart", error);
+    throw new Error(error.message || "Failed to clear cart");
+  }
+}

@@ -16,30 +16,35 @@ import { Category, Product, ShopScreenNotification } from "@/types/types";
 import { shuffle } from "@/components/CategoriesList";
 import { useDispatch } from "react-redux";
 import { setShopScreenNotification } from "@/features/shopScreenNotificationSlice";
+import Loading from "@/components/Loading";
 
 const ShopScreen = ({ navigation }: { navigation: any }) => {
   const dispatch = useDispatch();
 
   const {
     data: categories,
+    loading: categoriesLoading,
     refetch: refetchCategories,
-  }: { data: Category[]; refetch: () => void } = useAppwrite(
+  }: { data: Category[]; refetch: () => void; loading: boolean } = useAppwrite(
     getShopScreenCategories
   );
 
   const {
     data: notification,
+    loading: notificationLoading,
     refetch: refetchNotification,
   }: {
     data: ShopScreenNotification[];
     refetch: () => void;
+    loading: boolean;
   } = useAppwrite(getShopNotifications);
 
   const [productsToShow, setProductsToShow] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(productsToShow.length === 0);
+
   const [notificationToShow, setNotificationToShow] =
     useState<ShopScreenNotification>({ title: "", subTitle: "", products: [] });
 
-  // console.log(notification, "notification");
   useEffect(() => {
     if (notification.length > 0 && notification) {
       dispatch(setShopScreenNotification(notification));
@@ -53,20 +58,13 @@ const ShopScreen = ({ navigation }: { navigation: any }) => {
     }
   }, [notification]);
 
-  // Store the products that are currently visible in the shop screen
   useEffect(() => {
-    // Log the categories to the console for debugging purposes
-    // Check if categories and products exist before setting state
-
-    // When the categories change, update the products that are visible in the shop screen
     if (categories.length > 0 && categories) {
       setProductsToShow(
         shuffle(
-          // Shuffle the products of the first category and save them to state
           categories[0].products.map((product) => {
             return {
               id: product.id,
-              // Convert the product to the format that the shop screen expects
               title: product.title,
               description: product.description,
               images: product.images,
@@ -79,10 +77,19 @@ const ShopScreen = ({ navigation }: { navigation: any }) => {
           })
         )
       );
+      setIsLoading(false);
     } else {
-      setProductsToShow([]); // Provide an empty array if no products exist
+      setProductsToShow([]);
     }
   }, [categories]);
+
+  if (categoriesLoading || notificationLoading || isLoading) {
+    return (
+      <View className="flex-1  bg-mainBackground">
+        <Loading />
+      </View>
+    );
+  }
   return (
     <View className="flex-1 bg-mainBackground pt-4 ">
       <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
