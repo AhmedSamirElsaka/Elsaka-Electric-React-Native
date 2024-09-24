@@ -92,3 +92,12 @@ export type Cart = {
   count: string;
   size?: String;
 };
+
+export type Order = {
+  orderNumber: string;
+  quantity: string;
+  amount: string;
+  date?: string;
+  products?: Product[];
+  status?: string;
+};

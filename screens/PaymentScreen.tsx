@@ -17,9 +17,9 @@ import { StripeProvider } from "@stripe/stripe-react-native";
 import { fetchAPI } from "@/lib/fetch";
 import { useGlobalContext } from "@/context/GlobalProvider";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { clearUserCart } from "@/lib/appwrite";
-import { useDispatch } from "react-redux";
-import { clearCarts } from "@/features/cartSlice";
+import { addOrderToUser, clearUserCart } from "@/lib/appwrite";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCarts, selectCarts } from "@/features/cartSlice";
 import Header from "@/components/Header";
 
 const PaymentScreen = () => {
@@ -31,6 +31,7 @@ const PaymentScreen = () => {
   const amount: number = (routed?.params as { amount: number }).amount;
   const [delivery, setDelivery] = useState(50);
   const total = delivery + amount;
+  const carts = useSelector(selectCarts).carts;
 
   const dispatch = useDispatch();
   const confirmHandler = async (
@@ -199,6 +200,7 @@ const PaymentScreen = () => {
           handlePress={() => {
             openPaymentSheet();
             clearUserCart();
+            addOrderToUser(carts, total.toString(), "68756281");
             dispatch(clearCarts());
           }}
           containerStyles="mx-6 bg-primary rounded-full mb-6"

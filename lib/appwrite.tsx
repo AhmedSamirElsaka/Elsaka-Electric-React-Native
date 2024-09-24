@@ -1,4 +1,10 @@
-import { Cart, Category, Product, ShopScreenNotification } from "@/types/types";
+import {
+  Cart,
+  Category,
+  Order,
+  Product,
+  ShopScreenNotification,
+} from "@/types/types";
 import { Alert } from "react-native";
 import {
   Account,
@@ -22,6 +28,7 @@ export const appwriteConfig = {
   shopScreenCategoriesId: "66ead2c8002fdbdf4d8d",
   shopScreenNotificationsId: "66ec379d00279ee36ed9",
   cartId: "66ed3c88002c98e8b650",
+  orderId: "66f2c4fd00023c2bbf47",
 };
 
 const client = new Client();
@@ -429,19 +436,14 @@ export async function getUserCarts() {
 
     const userCarts = user?.cart || [];
 
-    // console.log(userCarts, "userCarts");
-    // console.log(userCarts);
-    // Fetch detailed product and category data for each product in the cart
     const cartWithProductsAndCategories = await Promise.all(
       userCarts.map(async (cartItem: any) => {
-        // Fetch the product data
         const productData = await databases.getDocument(
           appwriteConfig.databaseId,
           appwriteConfig.productsCollectionId,
-          cartItem.product.$id // Product ID from the cart
+          cartItem.product.$id
         );
 
-        // Fetch the category for the product
         let categories: any[] = [];
 
         const categoriesPromises = productData.categories.map(
@@ -662,5 +664,88 @@ export async function addPhotoToUser(fileUri: any) {
   } catch (error: any) {
     console.error("Failed to upload photo", error);
     throw new Error(error.message || "Failed to upload photo");
+  }
+}
+
+export async function createOrder(order: Order) {
+  try {
+    const newOrder = await databases.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.orderId,
+      ID.unique(),
+      {
+        orderNumber: order.orderNumber,
+        quantity: order.quantity,
+        amount: order.amount,
+      }
+    );
+
+    return newOrder;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}
+
+export async function addOrderToUser(
+  carts: Cart[],
+  amount: string,
+  orderNumber: string
+) {
+  try {
+    const user = await getCurrentUser();
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+    const userOrders = user?.orders || [];
+
+    const order = await createOrder({
+      orderNumber: "68756281",
+      quantity: carts.length.toString(),
+      amount: amount,
+    });
+
+    // Update the user document with the new video
+    const updatedUserOrders = [
+      ...userOrders,
+      {
+        $id: order.$id,
+      },
+    ];
+
+    const updatedUser = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      user.$id,
+      {
+        orders: updatedUserOrders,
+      }
+    );
+
+    return updatedUser;
+  } catch (error: any) {
+    console.error("Failed to save video to user", error);
+    throw new Error(error.message || "Failed to save video");
+  }
+}
+
+export async function getUserOrders() {
+  try {
+    // Fetch the user document based on the userId
+    const user = await getCurrentUser();
+
+    const UserOrders = user?.orders || [];
+
+    return UserOrders.map((order: any) => {
+      return {
+        orderNumber: order.orderNumber,
+        quantity: order.quantity,
+        amount: order.amount,
+      } as Order;
+    }) as Order[];
+    // return userLovedProducts;
+  } catch (error: any) {
+    console.error("Failed to get saved videos for user", error);
+    throw new Error(error.message || "Failed to get saved videos");
   }
 }

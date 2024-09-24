@@ -13,6 +13,7 @@ import ProductsScreen from "@/screens/ProductsScreen";
 import WriteReviewScreen from "@/screens/WriteReviewScreen";
 import HomeNavigator from "./HomeNavigator";
 import ShopNavigator from "./ShopNavigator";
+import ProfileNavigator from "./ProfileNavigator";
 const TabIcon = ({
   home = false,
   cart = false,
@@ -78,7 +79,6 @@ const TabsNavigator = () => {
               focused={focused}
               home={true}
             />
-            // <HomeIcon size={30} color={color} className="w-6 h-6" />
           ),
         }}
       />
@@ -95,7 +95,6 @@ const TabsNavigator = () => {
               focused={focused}
               shop={true}
             />
-            // <HomeIcon size={30} color={color} className="w-6 h-6" />
           ),
         }}
       />
@@ -112,7 +111,6 @@ const TabsNavigator = () => {
               focused={focused}
               cart={true}
             />
-            // <HomeIcon size={30} color={color} className="w-6 h-6" />
           ),
         }}
       />
@@ -129,13 +127,12 @@ const TabsNavigator = () => {
               focused={focused}
               favorites={true}
             />
-            // <HomeIcon size={30} color={color} className="w-6 h-6" />
           ),
         }}
       />
       <Tab.Screen
         name="profile"
-        component={ProfileScreen}
+        component={ProfileNavigator}
         options={{
           headerShown: false,
           title: "Profile",
@@ -146,7 +143,6 @@ const TabsNavigator = () => {
               focused={focused}
               profile={true}
             />
-            // <HomeIcon size={30} color={color} className="w-6 h-6" />
           ),
         }}
       />
