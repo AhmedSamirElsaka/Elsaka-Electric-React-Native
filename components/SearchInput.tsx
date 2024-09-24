@@ -4,7 +4,13 @@ import { View, TouchableOpacity, Image, TextInput, Alert } from "react-native";
 import * as Icons from "react-native-heroicons/solid";
 // import { icons } from "../constants";
 
-const SearchInput = ({ initialQuery }: { initialQuery: string }) => {
+const SearchInput = ({
+  initialQuery,
+  onFocus,
+}: {
+  initialQuery: string;
+  onFocus: () => void;
+}) => {
   //   const pathname = usePathname();
   const [query, setQuery] = useState(initialQuery || "");
 
@@ -16,6 +22,7 @@ const SearchInput = ({ initialQuery }: { initialQuery: string }) => {
         placeholder="Search an electrical product"
         placeholderTextColor="#CDCDE0"
         onChangeText={(e) => setQuery(e)}
+        onFocus={onFocus}
       />
 
       <TouchableOpacity

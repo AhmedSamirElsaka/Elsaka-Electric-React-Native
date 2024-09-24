@@ -106,7 +106,12 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
           </Text>
 
           <View className="pt-8 px-6 mb-8">
-            <SearchInput initialQuery={""} />
+            <SearchInput
+              initialQuery={""}
+              onFocus={() => {
+                navigation.navigate("search" as never);
+              }}
+            />
           </View>
 
           <View className="px-6">
