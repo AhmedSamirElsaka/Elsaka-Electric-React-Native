@@ -10,6 +10,8 @@ const FavoritesScreen = ({ navigation }: { navigation: any }) => {
   const [productsToShow, setProductsToShow] = useState<Product[]>([]);
   const lovedProducts = useSelector(selectLovedProducts);
 
+  const [isLoading, setIsLoading] = useState(productsToShow.length === 0);
+
   useEffect(() => {
     if (lovedProducts && lovedProducts.length > 0) {
       const updatedProducts = lovedProducts.map((product: Product) => ({

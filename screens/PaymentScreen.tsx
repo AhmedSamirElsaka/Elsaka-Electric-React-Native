@@ -192,9 +192,10 @@ const PaymentScreen = () => {
         </View>
 
         <CustomButton
-          title={"SUBMIT ORDER"}
+          title={"Submit Order"}
           handlePress={openPaymentSheet}
-          containerStyles="mx-6 rounded-full mb-6"
+          containerStyles="mx-6 bg-primary rounded-full mb-6"
+          textStyles="text-white text-lg text-bold"
         />
       </View>
     </StripeProvider>

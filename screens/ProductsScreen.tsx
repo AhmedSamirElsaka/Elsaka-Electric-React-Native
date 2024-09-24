@@ -71,7 +71,13 @@ const ProductsScreen = ({ navigation }: { navigation: any }) => {
         hidden={false}
       />
 
-      <Header title={notification[0].title} />
+      <Header
+        title={notification[0].title}
+        isBackIconRequired={true}
+        onBackIconPress={() => {
+          navigation.goBack();
+        }}
+      />
 
       <View className="pt-4 flex-row justify-between px-4 pb-4">
         <TouchableOpacity activeOpacity={0.7} onPress={() => {}}>

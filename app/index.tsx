@@ -11,6 +11,7 @@ import WriteReviewScreen from "@/screens/WriteReviewScreen";
 import store from "@/store";
 import { Provider } from "react-redux";
 import PaymentScreen from "@/screens/PaymentScreen";
+import SearchScreen from "@/screens/SearchScreen";
 
 export default function Index() {
   const Stack = createStackNavigator();
@@ -53,6 +54,11 @@ export default function Index() {
             <Stack.Screen
               component={PaymentScreen}
               name="payment"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              component={SearchScreen}
+              name="search"
               options={{ headerShown: false }}
             />
           </Stack.Navigator>

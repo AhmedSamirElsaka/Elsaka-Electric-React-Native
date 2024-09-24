@@ -65,34 +65,14 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
         onFocus={() => {
           bottomSheetRef.current?.expand();
         }}
-        onPress={() => {}}
+        onPress={() => {
+          navigation.navigate("payment", { amount: price });
+        }}
         onTextChange={(text) => {
           setPromoCode(text);
         }}
         textValue={promoCode}
       />
-      {/* <LinearGradient
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        colors={["#252A32", "#0C0F14"]}
-        className="  flex-row justify-between px-4 bg-secondaryDarkGreyHex mx-4 rounded-xl mt-4"
-      >
-        <TextInput
-          className="bg-[#fff0] flex-1 -mr-6 rounded-xl px-4 text-white"
-          placeholder="Enter promo code"
-          multiline={false}
-          onFocus={() => {
-          }}
-          placeholderTextColor={"gray"}
-        />
-        <TouchableOpacity
-          className="bg-white rounded-full p-2"
-          activeOpacity={0.7}
-        >
-          <Icons.ArrowRightIcon color="black" size={30} />
-        </TouchableOpacity>
-      </LinearGradient> */}
-
       <View className="flex-row  pt-4 justify-between mb-2">
         <View className="justify-center items-center pr-10  pl-8 ">
           <View className="flex-1">
@@ -151,7 +131,6 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
               />
             )}
           />
-          {/* <PersonalPromoCodeCard /> */}
         </BottomSheetView>
       </BottomSheet>
     </View>

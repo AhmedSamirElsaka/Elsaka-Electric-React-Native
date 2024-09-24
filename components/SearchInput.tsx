@@ -6,10 +6,14 @@ import * as Icons from "react-native-heroicons/solid";
 
 const SearchInput = ({
   initialQuery,
-  onFocus,
+  onTextChange = () => {},
+  isFocused = false,
+  onSearchPress = () => {},
 }: {
   initialQuery: string;
-  onFocus: () => void;
+  onTextChange?: (text: string) => void;
+  isFocused?: boolean;
+  onSearchPress?: (text: string) => void;
 }) => {
   //   const pathname = usePathname();
   const [query, setQuery] = useState(initialQuery || "");
@@ -21,29 +25,26 @@ const SearchInput = ({
         value={query}
         placeholder="Search an electrical product"
         placeholderTextColor="#CDCDE0"
-        onChangeText={(e) => setQuery(e)}
-        onFocus={onFocus}
+        onChangeText={(e) => {
+          onTextChange(e);
+          setQuery(e);
+        }}
+        autoFocus={isFocused}
       />
 
       <TouchableOpacity
         onPress={() => {
-          if (query === "")
+          if (query === "") {
             return Alert.alert(
               "Missing Query",
               "Please input something to search results across database"
             );
-
-          //   if (pathname.startsWith("/search")) router.setParams({ query });
-          //   else router.push(`/search/${query}`);
+          } else {
+            onSearchPress(query);
+          }
         }}
       >
-        <Icons.MagnifyingGlassIcon
-          //   source={icons.search}
-          //   className="w-5 h-5"
-          //   resizeMode="contain"
-          color={"#CDCDE0"}
-          size={24}
-        />
+        <Icons.MagnifyingGlassIcon color={"#CDCDE0"} size={24} />
       </TouchableOpacity>
     </View>
   );

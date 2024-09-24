@@ -3,12 +3,27 @@ import React from "react";
 import * as Icons from "react-native-heroicons/solid";
 import GradientHeaderIcon from "./GradientHeaderIcon";
 import { useNavigation } from "@react-navigation/native";
+import BackIcon from "./BackIcon";
 
-const Header = ({ title = "" }) => {
+const Header = ({
+  title = "",
+  isBackIconRequired = false,
+  onBackIconPress = () => {},
+  onOptionsIconPress = () => {},
+}: {
+  title: string;
+  isBackIconRequired?: boolean;
+  onBackIconPress?: () => void;
+  onOptionsIconPress?: () => void;
+}) => {
   const navigation = useNavigation();
   return (
     <View className="h-auto  w-full  flex-row justify-between content-center  px-6 py-4">
-      <GradientHeaderIcon onPress={() => {}} />
+      {isBackIconRequired ? (
+        <BackIcon onPress={onBackIconPress} />
+      ) : (
+        <GradientHeaderIcon onPress={onOptionsIconPress} />
+      )}
       <Text className="text-white font-bold text-2xl">{title}</Text>
       <TouchableOpacity
         activeOpacity={0.7}

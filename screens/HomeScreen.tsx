@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   FlatList,
   ScrollView,
   StatusBar,
@@ -25,34 +26,45 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectProducts, setProducts } from "@/features/productsSlice";
 import { setLovedProducts } from "@/features/lovedProdcutsSlice";
 import { setCarts } from "@/features/cartSlice";
+import LottieView from "lottie-react-native";
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
+  const [productsToShow, setProductsToShow] = useState<Product[]>([]);
+  const productsRedux = useSelector(selectProducts).products;
+
   const {
     data: categories,
+    loading: categoriesLoading,
     refetch: refetchCategories,
-  }: { data: Category[]; refetch: () => void } = useAppwrite(getAllCategories);
+  }: { data: Category[]; refetch: () => void; loading: boolean } = useAppwrite(
+    getAllCategories
+  );
 
   const {
     data: products,
+    loading: productsLoading,
     refetch: refetchProducts,
-  }: { data: Product[]; refetch: () => void } = useAppwrite(getAllProducts);
+  }: { data: Product[]; refetch: () => void; loading: boolean } = useAppwrite(
+    getAllProducts
+  );
 
   const {
     data: lovedProducts,
+    loading: lovedProductsLoading,
     refetch: refetchLovedProducts,
-  }: { data: Product[]; refetch: () => void } =
-    useAppwrite(getUserLovedProducts);
+  }: { data: Product[]; refetch: () => void; loading: boolean } = useAppwrite(
+    getUserLovedProducts
+  );
 
   const {
     data: userCarts,
+    loading: userCartsLoading,
     refetch: refetchCarts,
-  }: { data: Cart[]; refetch: () => void } = useAppwrite(getUserCarts);
+  }: { data: Cart[]; refetch: () => void; loading: boolean } = useAppwrite(
+    getUserCarts
+  );
 
   const dispatch = useDispatch();
-
-  // console.log(userCarts, "userCarts");
-  // Check if categories are loaded before accessing them
-  const [productsToShow, setProductsToShow] = useState<Product[]>([]);
 
   useEffect(() => {
     dispatch(setProducts(products));
@@ -66,10 +78,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
     dispatch(setCarts(userCarts));
   }, [dispatch, userCarts]);
 
-  const productsRedux = useSelector(selectProducts).products;
-
   useEffect(() => {
-    // Check if categories and products exist before setting state
     if (productsRedux.length > 0 && productsRedux) {
       setProductsToShow(
         shuffle(
@@ -93,9 +102,43 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
     }
   }, [productsRedux, dispatch]);
 
+  // useEffect(() => {
+  //   if (categories && products && lovedProducts && userCarts) {
+  //     setIsLoading(false);
+  //   }
+  // }, [categories, products, lovedProducts, userCarts]);
+
+  if (
+    lovedProductsLoading ||
+    productsLoading ||
+    categoriesLoading ||
+    userCartsLoading
+  ) {
+    return (
+      <View className="flex-1  bg-mainBackground pt-4 pb-4">
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={"#0C0F14"}
+          hidden={false}
+        />
+        <View className="flex-1 justify-center items-center">
+          <LottieView
+            source={require("../assets/animations/loading.json")}
+            style={{ width: 200, height: 200, flex: 1 }}
+            autoPlay
+            loop
+          />
+        </View>
+      </View>
+    );
+  }
   return (
     <View className="flex-1  bg-mainBackground pt-4 pb-4">
-      <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={"#0C0F14"}
+        hidden={false}
+      />
       <Header title="Home" />
       <ScrollView>
         <View className="flex-1  bg-mainBackground">
@@ -108,8 +151,8 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
           <View className="pt-8 px-6 mb-8">
             <SearchInput
               initialQuery={""}
-              onFocus={() => {
-                navigation.navigate("search" as never);
+              onSearchPress={(text) => {
+                navigation.navigate("search" as never, { searchText: text });
               }}
             />
           </View>
