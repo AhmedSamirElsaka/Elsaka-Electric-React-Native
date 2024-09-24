@@ -21,6 +21,7 @@ import { addOrderToUser, clearUserCart } from "@/lib/appwrite";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCarts, selectCarts } from "@/features/cartSlice";
 import Header from "@/components/Header";
+import { addOrder } from "@/features/orderSlice";
 
 const PaymentScreen = () => {
   const navigation = useNavigation();
@@ -198,10 +199,20 @@ const PaymentScreen = () => {
         <CustomButton
           title={"Submit Order"}
           handlePress={() => {
+            const orderNumber = (
+              Math.floor(Math.random() * (682756283687 - 4235423 + 1)) + 4235423
+            ).toString();
             openPaymentSheet();
             clearUserCart();
-            addOrderToUser(carts, total.toString(), "68756281");
+            addOrderToUser(carts, total.toString(), orderNumber);
             dispatch(clearCarts());
+            dispatch(
+              addOrder({
+                carts: carts,
+                total: total.toString(),
+                orderNumber: orderNumber,
+              })
+            );
           }}
           containerStyles="mx-6 bg-primary rounded-full mb-6"
           textStyles="text-white text-lg text-bold"

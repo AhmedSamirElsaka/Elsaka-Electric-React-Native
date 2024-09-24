@@ -5,24 +5,38 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import { FlatList } from "react-native-gesture-handler";
 import useAppwrite from "@/lib/useAppwrite";
 import { Order } from "@/types/types";
 import { getUserOrders } from "@/lib/appwrite";
+import OrderCard from "@/components/OrderCard";
+import { useSelector } from "react-redux";
+import { selectCarts } from "@/features/cartSlice";
+import { selectOrders } from "@/features/orderSlice";
+import Loading from "@/components/Loading";
+import Empty from "@/components/Empty";
 
 const OrdersScreen = ({ navigation }: { navigation: any }) => {
   const [selectedItem, setSelectedItem] = useState("Delivered");
 
-  const {
-    data: userOrders,
-    loading: userOrdersLoading,
-    refetch: refetchOrders,
-  }: { data: Order[]; refetch: () => void; loading: boolean } = useAppwrite(
-    getUserOrders
-  );
+  const orders = useSelector(selectOrders).orders;
 
+  const [isLoading, setIsLoading] = useState(orders.length === 0);
+
+  useEffect(() => {
+    if (orders.length > 0) {
+      setIsLoading(false);
+    }
+  }, [orders]);
+  if (isLoading) {
+    return (
+      <View className="flex-1  bg-mainBackground">
+        <Loading />
+      </View>
+    );
+  }
   return (
     <View className="flex-1  bg-mainBackground">
       <StatusBar
@@ -42,43 +56,49 @@ const OrdersScreen = ({ navigation }: { navigation: any }) => {
         My Orders
       </Text>
 
-      <FlatList
-        data={["Delivered", "Processing", "Cancelled"]}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => setSelectedItem(item)}
-            activeOpacity={0.7}
-          >
-            <Text
-              className={`text-white px-4 py-1 text-xl ${
-                item === selectedItem && "text-black bg-white rounded-full"
-              }`}
+      <View>
+        <FlatList
+          data={["Delivered", "Processing", "Cancelled"]}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => setSelectedItem(item)}
+              activeOpacity={0.7}
             >
-              {item}
-            </Text>
-          </TouchableOpacity>
-        )}
-        keyExtractor={(item) => item}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        ItemSeparatorComponent={() => <View className="w-2" />}
-        className="ml-4  mt-6"
-      />
+              <Text
+                className={`text-white px-4 py-1 text-xl ${
+                  item === selectedItem && "text-black bg-white rounded-full"
+                }`}
+              >
+                {item}
+              </Text>
+            </TouchableOpacity>
+          )}
+          keyExtractor={(item) => item}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          ItemSeparatorComponent={() => <View className="w-2" />}
+          className="ml-4  mt-6"
+        />
+      </View>
 
-      <FlatList
-        data={userOrders}
-        renderItem={({ item }) => (
-          <OrderCard
-            order={item}
-            navigation={navigation}
-            refetchOrders={refetchOrders}
+      {selectedItem === "Delivered" ? (
+        <View className="mt-6 mb-48">
+          <FlatList
+            data={orders}
+            renderItem={({ item }) => (
+              <View className="m-4">
+                <OrderCard order={item} navigation={navigation} />
+              </View>
+            )}
+            keyExtractor={(item) => item.orderNumber.toString()}
+            showsVerticalScrollIndicator={false}
           />
-        )}
-        keyExtractor={(item) => item.id}
-        showsVerticalScrollIndicator={false}
-        ListEmptyComponent={() => (
-            
-        )} />
+        </View>
+      ) : (
+        <View className="flex-1 justify-center items-center">
+          <Empty />
+        </View>
+      )}
     </View>
   );
 };

@@ -700,7 +700,7 @@ export async function addOrderToUser(
     const userOrders = user?.orders || [];
 
     const order = await createOrder({
-      orderNumber: "68756281",
+      orderNumber: orderNumber,
       quantity: carts.length.toString(),
       amount: amount,
     });

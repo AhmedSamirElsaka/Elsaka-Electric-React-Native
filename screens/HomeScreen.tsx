@@ -19,9 +19,10 @@ import {
   getAllProducts,
   getUserCarts,
   getUserLovedProducts,
+  getUserOrders,
   uploadFile,
 } from "@/lib/appwrite";
-import { Cart, Category, Product } from "@/types/types";
+import { Cart, Category, Order, Product } from "@/types/types";
 import HomeProductList from "@/components/HomeProductList";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProducts, setProducts } from "@/features/productsSlice";
@@ -29,6 +30,7 @@ import { setLovedProducts } from "@/features/lovedProdcutsSlice";
 import { setCarts } from "@/features/cartSlice";
 import LottieView from "lottie-react-native";
 import Loading from "@/components/Loading";
+import { setOrders } from "@/features/orderSlice";
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
   const [productsToShow, setProductsToShow] = useState<Product[]>([]);
@@ -66,6 +68,14 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
     getUserCarts
   );
 
+  const {
+    data: userOrders,
+    loading: userOrdersLoading,
+    refetch: refetchOrders,
+  }: { data: Order[]; refetch: () => void; loading: boolean } = useAppwrite(
+    getUserOrders
+  );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -79,6 +89,10 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
   useEffect(() => {
     dispatch(setCarts(userCarts));
   }, [dispatch, userCarts]);
+
+  useEffect(() => {
+    dispatch(setOrders(userOrders));
+  }, [dispatch, userOrders]);
 
   useEffect(() => {
     if (productsRedux.length > 0 && productsRedux) {
@@ -114,7 +128,8 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
     lovedProductsLoading ||
     productsLoading ||
     categoriesLoading ||
-    userCartsLoading
+    userCartsLoading ||
+    userOrdersLoading
   ) {
     return (
       <View className="flex-1  bg-mainBackground">
