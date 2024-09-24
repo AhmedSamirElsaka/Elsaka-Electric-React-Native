@@ -1,19 +1,38 @@
-import { Button, StatusBar, StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { signOut } from "@/lib/appwrite";
+import { Alert, Button, StatusBar, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { addPhotoToUser, signOut } from "@/lib/appwrite";
 import { useGlobalContext } from "@/context/GlobalProvider";
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
+import { TouchableOpacity } from "react-native";
+import * as Icons from "react-native-heroicons/outline";
+import { Image } from "react-native";
+import * as DocumentPicker from "expo-document-picker";
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
   const { user, setUser, setIsLogged }: any = useGlobalContext();
+  const [userName, setUserName] = useState(user?.username);
+  const [email, setEmail] = useState(user?.email);
 
   const logout = async () => {
+    navigation.navigate("auth" as never);
     await signOut();
     setUser(null);
     setIsLogged(false);
+  };
 
-    navigation.navigate("auth" as never);
+  const openPicker = async () => {
+    const result = await DocumentPicker.getDocumentAsync({
+      type: ["image/png", "image/jpeg"],
+    });
+
+    if (!result.canceled) {
+      const updatedUser = await addPhotoToUser(result.assets[0]);
+      setUser(updatedUser);
+    } else {
+      console.log("User canceled the picker");
+    }
   };
 
   return (
@@ -23,6 +42,125 @@ const ProfileScreen = () => {
         backgroundColor={"#0C0F14"}
         hidden={false}
       />
+      <View className="items-end p-4 mt-2">
+        <TouchableOpacity
+          onPress={() => {
+            logout();
+          }}
+          activeOpacity={0.7}
+        >
+          <Icons.ArrowRightStartOnRectangleIcon size={26} color={"white"} />
+        </TouchableOpacity>
+      </View>
+
+      <Text className="text-white font-bold text-4xl italic ml-4">
+        My profile
+      </Text>
+      <View className="flex-row pl-4">
+        <View className="relative">
+          {user?.photo ? (
+            <Image
+              source={{ uri: user?.photo }}
+              className="w-24 h-24 rounded-full mt-8"
+              resizeMode="contain"
+            />
+          ) : (
+            <Image
+              source={require("../assets/images/person.png")}
+              className="w-24 h-24 rounded-full mt-8 "
+              resizeMode="contain"
+            />
+          )}
+
+          <TouchableOpacity
+            className="bg-white rounded-full h-10 w-10 items-center justify-center self-end -mt-9 -mr-2"
+            activeOpacity={0.7}
+            onPress={() => {
+              openPicker();
+            }}
+          >
+            <Icons.CameraIcon size={24} color={"black"} />
+          </TouchableOpacity>
+        </View>
+        <View className="mt-8 ">
+          <Text className="text-white font-bold text-2xl italic ml-6">
+            {userName}
+          </Text>
+          <Text className="text-gray-400 font-bold text-xl italic ml-6 ">
+            {email}
+          </Text>
+        </View>
+      </View>
+      <TouchableOpacity
+        className="ml-4 flex-row mt-10 justify-between pr-2 items-center"
+        activeOpacity={0.7}
+      >
+        <View>
+          <Text className="text-white font-semibold text-xl italic ">
+            My orders
+          </Text>
+          <Text className="text-gray-400 font-semibold text-lg italic mt-1">
+            Already have 12 orders
+          </Text>
+        </View>
+        <Icons.ChevronRightIcon size={24} color={"white"} />
+      </TouchableOpacity>
+      <TouchableOpacity
+        className="ml-4 flex-row mt-10 justify-between pr-2 items-center"
+        activeOpacity={0.7}
+      >
+        <View>
+          <Text className="text-white font-semibold text-xl italic ">
+            Shipping addresses
+          </Text>
+          <Text className="text-gray-400 font-semibold text-lg italic mt-1">
+            3 ddresses
+          </Text>
+        </View>
+        <Icons.ChevronRightIcon size={24} color={"white"} />
+      </TouchableOpacity>
+      <TouchableOpacity
+        className="ml-4 flex-row mt-10 justify-between pr-2 items-center"
+        activeOpacity={0.7}
+      >
+        <View>
+          <Text className="text-white font-semibold text-xl italic ">
+            Promocodes
+          </Text>
+          <Text className="text-gray-400 font-semibold text-lg italic mt-1">
+            You have special promocodes
+          </Text>
+        </View>
+        <Icons.ChevronRightIcon size={24} color={"white"} />
+      </TouchableOpacity>
+      <TouchableOpacity
+        className="ml-4 flex-row mt-10 justify-between pr-2 items-center"
+        activeOpacity={0.7}
+      >
+        <View>
+          <Text className="text-white font-semibold text-xl italic ">
+            My reviews
+          </Text>
+          <Text className="text-gray-400 font-semibold text-lg italic mt-1">
+            Reviews for 4 items
+          </Text>
+        </View>
+        <Icons.ChevronRightIcon size={24} color={"white"} />
+      </TouchableOpacity>
+      <TouchableOpacity
+        className="ml-4 flex-row mt-10 justify-between pr-2 items-center"
+        activeOpacity={0.7}
+      >
+        <View>
+          <Text className="text-white font-semibold text-xl italic ">
+            Settings
+          </Text>
+          <Text className="text-gray-400 font-semibold text-lg italic mt-1">
+            Notifications, password
+          </Text>
+        </View>
+        <Icons.ChevronRightIcon size={24} color={"white"} />
+      </TouchableOpacity>
     </View>
   );
 };

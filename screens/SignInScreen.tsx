@@ -33,16 +33,11 @@ const SignIn = () => {
     }
 
     setSubmitting(true);
-
-    signOut();
     try {
       await signIn(form.email, form.password);
       const result = await getCurrentUser();
       setUser(result);
       setIsLogged(true);
-
-      Alert.alert("Success", "User signed in successfully");
-
       navigation.navigate("tabs" as never);
     } catch (error: any) {
       Alert.alert("Error", error.message);

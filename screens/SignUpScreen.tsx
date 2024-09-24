@@ -36,7 +36,6 @@ const SignUp = () => {
 
     setSubmitting(true);
     try {
-      signOut();
       const result = await createUser(form.email, form.password, form.username);
       setUser(result);
       setIsLogged(true);

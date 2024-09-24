@@ -36,7 +36,7 @@ const Header = ({
         <View className=" border-secondaryDarkGreyHex w-10 h-10 flex rounded-full border-2  content-center justify-center">
           {user?.photo ? (
             <Image
-              source={{ uri: user?.image }}
+              source={{ uri: user?.photo }}
               className="w-10 h-10 rounded-full"
               resizeMode="stretch"
             />

@@ -597,11 +597,14 @@ export async function clearUserCart() {
 export async function uploadFile(image: any) {
   if (!image) return;
 
+  const { mimeType, ...rest } = image;
+  const asset = { type: mimeType, ...rest };
+
   try {
     const uploadedFile = await storage.createFile(
       appwriteConfig.storageId,
       ID.unique(),
-      image
+      asset
     );
 
     const fileUrl = await getFilePreview(uploadedFile.$id);
@@ -629,5 +632,35 @@ export async function getFilePreview(fileId: string) {
     return fileUrl;
   } catch (error: any) {
     throw new Error(error);
+  }
+}
+
+export async function addPhotoToUser(fileUri: any) {
+  try {
+    const user = await getCurrentUser();
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    const photoUrl = await uploadFile(fileUri);
+
+    if (!photoUrl) {
+      throw new Error("Failed to upload photo");
+    }
+
+    const updatedUser = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      user.$id,
+      {
+        photo: photoUrl,
+      }
+    );
+
+    return updatedUser;
+  } catch (error: any) {
+    console.error("Failed to upload photo", error);
+    throw new Error(error.message || "Failed to upload photo");
   }
 }
