@@ -13,20 +13,16 @@ const ProfileScreen = () => {
     setUser(null);
     setIsLogged(false);
 
-    navigation.navigate("Onboarding" as never);
+    navigation.navigate("auth" as never);
   };
 
   return (
     <View className="flex-1  bg-mainBackground">
-      <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
-      <View className="pt-36">
-        <Button
-          title="Logout"
-          onPress={() => {
-            signOut();
-          }}
-        />
-      </View>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={"#0C0F14"}
+        hidden={false}
+      />
     </View>
   );
 };
