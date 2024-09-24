@@ -102,6 +102,7 @@ const PaymentScreen = () => {
 
     if (error) {
       Alert.alert(`error code :${error.code} `, error.message);
+      navigation.goBack();
     } else {
       setSuccess(true);
     }
@@ -135,13 +136,13 @@ const PaymentScreen = () => {
           className="border-2 border-secondaryDarkGreyHex rounded-xl bg-secondaryDarkGreyHex p-2 mx-2"
         >
           <View className="flex-row justify-between mt-2">
-            <Text className="text-gray-200 text-2xl ml-4">Jane Doe</Text>
+            <Text className="text-gray-200 text-2xl ml-4">Ahmed Samir</Text>
             <TouchableOpacity activeOpacity={0.7} onPress={() => {}}>
               <Text className="text-red-500 text-xl italic">Change</Text>
             </TouchableOpacity>
           </View>
           <Text className="text-white text-lg max-w-[300px]  ml-4 mt-4 mb-4">
-            3 Newbridge Court Chino Hills, CA 91709, United States
+            Egypt, Cairo Nasr City, Abbas El-Aqad St. 11
           </Text>
         </LinearGradient>
 

@@ -25,9 +25,13 @@ export const lovedProductsSlice = createSlice({
       }
     },
     removeLovedProduct: (state, action: PayloadAction<{ id: string }>) => {
-      state.lovedProducts = state.lovedProducts.filter(
-        (product) => product.id !== action.payload.id
-      );
+      if (state.lovedProducts.length === 1) {
+        state.lovedProducts = [];
+      } else {
+        state.lovedProducts = state.lovedProducts.filter(
+          (product) => product.id !== action.payload.id
+        );
+      }
     },
   },
 });

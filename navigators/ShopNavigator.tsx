@@ -15,11 +15,6 @@ const ShopNavigator = () => {
         name="shop"
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        component={ProductsScreen}
-        name="productsScreen"
-        options={{ headerShown: false }}
-      />
     </Stack.Navigator>
   );
 };

@@ -8,12 +8,13 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
-import { Header } from "react-native-elements";
 import { Rating, AirbnbRating } from "react-native-ratings";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Icons from "react-native-heroicons/solid";
 import CustomButton from "@/components/CustomButton";
 import { useNavigation } from "@react-navigation/native";
+import * as DocumentPicker from "expo-document-picker";
+import BackIcon from "@/components/BackIcon";
 
 const WriteReviewScreen = () => {
   const navigation = useNavigation();
@@ -26,11 +27,24 @@ const WriteReviewScreen = () => {
     rate: "",
   });
 
+  const openPicker = async () => {
+    const result = await DocumentPicker.getDocumentAsync({
+      type: ["image/png", "image/jpeg"],
+    });
+
+    if (!result.canceled) {
+    } else {
+      console.log("User canceled the picker");
+    }
+  };
   // console.log(form);
   return (
     <SafeAreaView className="flex-1 bg-mainBackground pt-8">
       <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
-      <Text className="text-white text-center text-2xl font-bold mb-6">
+      <View className="h-12 w-12 items-center justify-center ml-6">
+        <BackIcon onPress={() => navigation.goBack()} />
+      </View>
+      <Text className="text-white text-center text-2xl font-bold mb-4 mt-4">
         What is your rate ?
       </Text>
       <AirbnbRating
@@ -64,7 +78,12 @@ const WriteReviewScreen = () => {
         />
       </LinearGradient>
 
-      <TouchableOpacity onPress={() => {}} activeOpacity={0.7}>
+      <TouchableOpacity
+        onPress={() => {
+          openPicker();
+        }}
+        activeOpacity={0.7}
+      >
         <View className="justify-center items-center pt-8">
           <View className="rounded-full bg-primary w-14 h-14 items-center justify-center">
             <Icons.CameraIcon size={30} color={"white"} />

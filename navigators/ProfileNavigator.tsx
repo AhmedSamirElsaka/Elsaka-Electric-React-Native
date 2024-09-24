@@ -13,13 +13,13 @@ const ProfileNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        component={OrdersScreen}
-        name="orders"
+        component={ProfileScreen}
+        name="profileScreen"
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        component={ProfileScreen}
-        name="profileScreen"
+        component={OrdersScreen}
+        name="orders"
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

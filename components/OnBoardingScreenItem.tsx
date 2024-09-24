@@ -93,7 +93,7 @@ const OnBoardingScreenItem = ({ index, x, item }: Props) => {
             color: "white",
             fontSize: 18,
             textAlign: "center",
-            marginHorizontal: 24,
+            marginHorizontal: 44,
           },
         ]}
       >
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 24,
     marginTop: 24,
-    marginHorizontal: 16,
+    marginHorizontal: 24,
   },
   circleContainer: {
     ...StyleSheet.absoluteFillObject,

@@ -5,6 +5,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  ToastAndroid,
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
@@ -31,11 +32,12 @@ import { setCarts } from "@/features/cartSlice";
 import LottieView from "lottie-react-native";
 import Loading from "@/components/Loading";
 import { setOrders } from "@/features/orderSlice";
+import { useGlobalContext } from "@/context/GlobalProvider";
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
   const [productsToShow, setProductsToShow] = useState<Product[]>([]);
   const productsRedux = useSelector(selectProducts).products;
-
+  const { user }: any = useGlobalContext();
   const {
     data: categories,
     loading: categoriesLoading,
@@ -118,11 +120,13 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
     }
   }, [productsRedux, dispatch]);
 
-  // useEffect(() => {
-  //   if (categories && products && lovedProducts && userCarts) {
-  //     setIsLoading(false);
-  //   }
-  // }, [categories, products, lovedProducts, userCarts]);
+  useEffect(() => {
+    refetchCategories();
+    refetchProducts();
+    refetchLovedProducts();
+    refetchCarts();
+    refetchOrders();
+  }, [user]);
 
   if (
     lovedProductsLoading ||
@@ -183,36 +187,53 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
             items={shuffle(productsToShow)}
             navigation={navigation}
           />
-          <HomeProductList
-            title="New"
-            items={shuffle(products)}
-            navigation={navigation}
-          />
-          <HomeProductList
-            title="Sale"
-            items={shuffle(products)}
-            navigation={navigation}
-          />
-          <HomeProductList
-            title="Featured"
-            items={shuffle(products)}
-            navigation={navigation}
-          />
-          <HomeProductList
-            title="Trending"
-            items={shuffle(products)}
-            navigation={navigation}
-          />
-          <HomeProductList
-            title="Best Selling"
-            items={shuffle(products)}
-            navigation={navigation}
-          />
-          <HomeProductList
-            title="Top Rated"
-            items={shuffle(products)}
-            navigation={navigation}
-          />
+          <View className="mt-6">
+            <HomeProductList
+              title="New"
+              items={shuffle(products)}
+              navigation={navigation}
+              isSeeAll={true}
+            />
+          </View>
+          <View className="mt-6">
+            <HomeProductList
+              title="Sale"
+              items={shuffle(products)}
+              navigation={navigation}
+            />
+          </View>
+
+          <View className="mt-6">
+            <HomeProductList
+              title="Featured"
+              items={shuffle(products)}
+              navigation={navigation}
+            />
+          </View>
+
+          <View className="mt-6">
+            <HomeProductList
+              title="Trending"
+              items={shuffle(products)}
+              navigation={navigation}
+            />
+          </View>
+
+          <View className="mt-6">
+            <HomeProductList
+              title="Best Selling"
+              items={shuffle(products)}
+              navigation={navigation}
+            />
+          </View>
+
+          <View className="mt-6">
+            <HomeProductList
+              title="Top Rated"
+              items={shuffle(products)}
+              navigation={navigation}
+            />
+          </View>
         </View>
       </ScrollView>
     </View>

@@ -5,6 +5,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  ToastAndroid,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -106,14 +107,20 @@ const ProductDetailsScreen = ({
     }
   }, [products]);
 
+  const showToast = (message: string) => {
+    ToastAndroid.show(message, ToastAndroid.SHORT);
+  };
+
   const saveProductToUserHandler = async () => {
     dispatch(addLovedProduct(product));
     await saveProductToUser(product);
+    showToast("Product saved to favorites");
   };
 
   const unSaveProductToUserHandler = async () => {
     dispatch(removeLovedProduct(product));
     await unSaveProductToUser(product);
+    showToast("Product removed from favorites");
   };
   if (productsLoading) {
     return (

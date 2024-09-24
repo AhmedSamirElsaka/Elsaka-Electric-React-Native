@@ -29,6 +29,7 @@ const FavoriteProductCard = ({
   const dispatch = useDispatch();
 
   const unSaveProductToUserHandler = async () => {
+    console.log(product);
     dispatch(removeLovedProduct(product));
     await unSaveProductToUser(product);
   };
@@ -60,7 +61,7 @@ const FavoriteProductCard = ({
       <View className="h-40 bg-mainBackground -mt-40 opacity-[0.7] rounded-tr-3xl rounded-tl-3xl flex-row">
         <View className="px-6">
           <Text
-            className="text-white font-bold text-2xl pt-4 max-w-[240px]"
+            className="text-white font-bold text-2xl pt-4 max-w-[240px] "
             numberOfLines={2}
           >
             {product.title}

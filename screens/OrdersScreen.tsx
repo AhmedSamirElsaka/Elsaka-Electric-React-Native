@@ -24,16 +24,25 @@ const OrdersScreen = ({ navigation }: { navigation: any }) => {
   const orders = useSelector(selectOrders).orders;
 
   const [isLoading, setIsLoading] = useState(orders.length === 0);
-
+  const [isEmpty, setIsEmpty] = useState(true);
   useEffect(() => {
     if (orders.length > 0) {
       setIsLoading(false);
+      setIsEmpty(false);
     }
   }, [orders]);
-  if (isLoading) {
+  //   if (isLoading) {
+  //     return (
+  //       <View className="flex-1  bg-mainBackground">
+  //         <Loading />
+  //       </View>
+  //     );
+  //   }
+
+  if (isEmpty) {
     return (
       <View className="flex-1  bg-mainBackground">
-        <Loading />
+        <Empty />
       </View>
     );
   }

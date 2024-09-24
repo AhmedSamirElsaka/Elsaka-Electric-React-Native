@@ -104,15 +104,13 @@ const ShopScreen = ({ navigation }: { navigation: any }) => {
             setProductsToShow(
               categories.filter((category) => category.name === selectedItem)[0]
                 .products
-
-              // Render the shop screen
             );
           }}
         />
       </View>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => navigation.push("productsScreen")}
+        onPress={() => navigation.navigate("productsScreen")}
       >
         <View className="rounded-lg bg-primary content-center items-center mx-4 mt-4 py-8">
           <Text className="text-white font-semibold text-3xl ">

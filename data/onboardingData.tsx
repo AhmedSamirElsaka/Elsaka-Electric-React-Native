@@ -26,7 +26,7 @@ const data: OnboardingData[] = [
     description:
       "Discover a wide range of lighting solutions to create the perfect ambiance in any room",
     textColor: "#FFD700",
-    backgroundColor: "#0a0a0a",
+    backgroundColor: "#000",
   },
 
   {
@@ -36,7 +36,7 @@ const data: OnboardingData[] = [
     description:
       "Find high-quality electrical equipment and accessories, designed for safety and durability",
     textColor: "#00FF7F",
-    backgroundColor: "#111111",
+    backgroundColor: "#000",
   },
   {
     id: 4,
@@ -45,7 +45,7 @@ const data: OnboardingData[] = [
     description:
       "Enjoy a seamless shopping experience with our intuitive interface and secure checkout",
     textColor: "#FF69B4",
-    backgroundColor: "#1b1b1b",
+    backgroundColor: "#000",
   },
   {
     id: 5,
@@ -54,7 +54,7 @@ const data: OnboardingData[] = [
     description:
       "Sign up now and explore the latest in electrical technology for your home",
     textColor: "#1E90FF",
-    backgroundColor: "#292929",
+    backgroundColor: "#000",
   },
 ];
 

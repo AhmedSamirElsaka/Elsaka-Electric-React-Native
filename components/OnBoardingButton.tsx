@@ -1,6 +1,7 @@
 import {
   FlatList,
   StyleSheet,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   useWindowDimensions,
 } from "react-native";
@@ -54,8 +55,8 @@ const OnBoardingButton = ({
 
       height:
         flatListIndex.value === dataLength - 1
-          ? withTiming(40)
-          : withTiming(30),
+          ? withTiming(50)
+          : withTiming(50),
     };
   });
   const nextAnimationStyle = useAnimatedStyle(() => {
@@ -91,16 +92,17 @@ const OnBoardingButton = ({
   });
 
   return (
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       onPress={() => {
         if (flatListIndex.value < dataLength - 1) {
           flatListRef.current?.scrollToIndex({
             index: flatListIndex.value + 1,
           });
         } else {
-          navigation.navigate("auth");
+          navigation.navigate("auth" as never);
         }
       }}
+      activeOpacity={0.7}
     >
       <Animated.View
         style={[
@@ -119,7 +121,7 @@ const OnBoardingButton = ({
           Next
         </Animated.Text>
       </Animated.View>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
 };
 

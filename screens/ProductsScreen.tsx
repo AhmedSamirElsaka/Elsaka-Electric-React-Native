@@ -80,7 +80,7 @@ const ProductsScreen = ({ navigation }: { navigation: any }) => {
       />
 
       <Header
-        title={notification[0].title}
+        title={"products"}
         isBackIconRequired={true}
         onBackIconPress={() => {
           navigation.goBack();

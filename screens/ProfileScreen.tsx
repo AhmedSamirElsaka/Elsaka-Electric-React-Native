@@ -1,5 +1,5 @@
 import { Alert, Button, StatusBar, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { addPhotoToUser, signOut } from "@/lib/appwrite";
 import { useGlobalContext } from "@/context/GlobalProvider";
 import { useNavigation } from "@react-navigation/native";
@@ -8,20 +8,27 @@ import { TouchableOpacity } from "react-native";
 import * as Icons from "react-native-heroicons/outline";
 import { Image } from "react-native";
 import * as DocumentPicker from "expo-document-picker";
+import { useSelector } from "react-redux";
+import { selectOrders } from "@/features/orderSlice";
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
   const { user, setUser, setIsLogged }: any = useGlobalContext();
   const [userName, setUserName] = useState(user?.username);
   const [email, setEmail] = useState(user?.email);
+  const orders = useSelector(selectOrders).orders;
 
   const logout = async () => {
     navigation.navigate("auth" as never);
-    await signOut();
     setUser(null);
     setIsLogged(false);
+    await signOut();
   };
 
+  useEffect(() => {
+    setEmail(user?.email);
+    setUserName(user?.username);
+  }, [user]);
   const openPicker = async () => {
     const result = await DocumentPicker.getDocumentAsync({
       type: ["image/png", "image/jpeg"],
@@ -94,13 +101,16 @@ const ProfileScreen = () => {
       <TouchableOpacity
         className="ml-4 flex-row mt-10 justify-between pr-2 items-center"
         activeOpacity={0.7}
+        onPress={() => {
+          navigation.navigate("orders" as never);
+        }}
       >
         <View>
           <Text className="text-white font-semibold text-xl italic ">
             My orders
           </Text>
           <Text className="text-gray-400 font-semibold text-lg italic mt-1">
-            Already have 12 orders
+            Already have {orders.length} orders
           </Text>
         </View>
         <Icons.ChevronRightIcon size={24} color={"white"} />
@@ -114,7 +124,7 @@ const ProfileScreen = () => {
             Shipping addresses
           </Text>
           <Text className="text-gray-400 font-semibold text-lg italic mt-1">
-            3 ddresses
+            3 addresses
           </Text>
         </View>
         <Icons.ChevronRightIcon size={24} color={"white"} />
@@ -142,7 +152,7 @@ const ProfileScreen = () => {
             My reviews
           </Text>
           <Text className="text-gray-400 font-semibold text-lg italic mt-1">
-            Reviews for 4 items
+            Reviews for 0 items
           </Text>
         </View>
         <Icons.ChevronRightIcon size={24} color={"white"} />

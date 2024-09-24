@@ -6,12 +6,14 @@ import { useSelector } from "react-redux";
 import { selectLovedProducts } from "@/features/lovedProdcutsSlice"; // Corrected import
 import { Product } from "@/types/types";
 import Loading from "@/components/Loading";
+import Empty from "@/components/Empty";
 
 const FavoritesScreen = ({ navigation }: { navigation: any }) => {
   const [productsToShow, setProductsToShow] = useState<Product[]>([]);
   const lovedProducts = useSelector(selectLovedProducts);
 
   const [isLoading, setIsLoading] = useState(productsToShow.length === 0);
+  const [isEmpty, setIsEmpty] = useState(true);
 
   useEffect(() => {
     if (lovedProducts && lovedProducts.length > 0) {
@@ -28,13 +30,24 @@ const FavoritesScreen = ({ navigation }: { navigation: any }) => {
       }));
       setProductsToShow([...updatedProducts]); // Create a new array reference
       setIsLoading(false);
+      setIsEmpty(false);
+    } else if (lovedProducts && lovedProducts.length === 0) {
+      setIsEmpty(true);
     }
   }, [lovedProducts]);
 
-  if (isLoading) {
+  // if (isLoading) {
+  //   return (
+  //     <View className="flex-1  bg-mainBackground">
+  //       <Loading />
+  //     </View>
+  //   );
+  // }
+
+  if (isEmpty) {
     return (
       <View className="flex-1  bg-mainBackground">
-        <Loading />
+        <Empty />
       </View>
     );
   }

@@ -33,7 +33,6 @@ const OnboardingScreen = () => {
   useEffect(() => {
     if (!isLoading && isLogged) navigation.navigate("tabs" as never);
   }, [isLoading, isLogged]);
-  const statusBarRef = useRef<StatusBar>(null);
   const onViewableItemsChanged = ({
     viewableItems,
   }: {
@@ -78,15 +77,6 @@ const OnboardingScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* {data.map((item, index) => {
-        return (
-          <StatusBar
-            barStyle="light-content"
-            backgroundColor={item.backgroundColor}
-          />
-        );
-      })} */}
-
       <StatusBar hidden={true} />
       <Animated.FlatList
         ref={flatListRef}

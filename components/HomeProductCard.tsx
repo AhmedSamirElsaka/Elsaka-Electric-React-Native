@@ -8,6 +8,7 @@ import ProductDetailsScreen from "@/screens/ProductDetailsScreen";
 import { saveProductToUserCart } from "@/lib/appwrite";
 import { useDispatch } from "react-redux";
 import { addCart } from "@/features/cartSlice";
+import { ToastAndroid } from "react-native";
 
 const HomeProductCard = ({
   product,
@@ -17,6 +18,11 @@ const HomeProductCard = ({
   navigation: any;
 }) => {
   const dispatch = useDispatch();
+
+  const showToast = () => {
+    ToastAndroid.show("Item added to cart", ToastAndroid.SHORT);
+  };
+
   return (
     <TouchableOpacity
       className="w-44 h-72 bg-green-800 rounded-3xl"
@@ -58,6 +64,7 @@ const HomeProductCard = ({
             onPress={() => {
               saveProductToUserCart(product);
               dispatch(addCart(product));
+              showToast();
             }}
           >
             <Icons.PlusIcon

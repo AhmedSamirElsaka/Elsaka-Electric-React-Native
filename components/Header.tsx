@@ -20,7 +20,7 @@ const Header = ({
   const navigation = useNavigation();
   const { user }: any = useGlobalContext();
   return (
-    <View className="h-auto  w-full  flex-row justify-between content-center  px-6 py-4">
+    <View className="h-auto  w-full  flex-row justify-between items-center  px-6 py-4">
       {isBackIconRequired ? (
         <BackIcon onPress={onBackIconPress} />
       ) : (

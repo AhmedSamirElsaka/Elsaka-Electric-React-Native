@@ -26,6 +26,7 @@ import { selectCarts } from "@/features/cartSlice";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import Loading from "@/components/Loading";
+import Empty from "@/components/Empty";
 
 const CartScreen = ({ navigation }: { navigation: any }) => {
   const [isPromoCodeBottomSheetShown, setIsPromoCodeBottomSheetShown] =
@@ -38,6 +39,7 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
   const [price, setPrice] = useState(0);
 
   const [isLoading, setIsLoading] = useState(carts.length === 0);
+  const [isEmpty, setIsEmpty] = useState(carts.length === 0);
 
   useEffect(() => {
     let totalPrice = 0;
@@ -47,16 +49,18 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
     setPrice(totalPrice);
     if (carts.length > 0) {
       setIsLoading(false);
+      setIsEmpty(false);
     }
   }, [carts]);
 
   if (isLoading) {
     return (
       <View className="flex-1  bg-mainBackground">
-        <Loading />
+        <Empty />
       </View>
     );
   }
+
   return (
     <View className="flex-1  bg-mainBackground pt-4 ">
       <Header title="Cart" />
