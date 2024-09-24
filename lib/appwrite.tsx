@@ -14,6 +14,7 @@ export const appwriteConfig = {
   endpoint: "https://cloud.appwrite.io/v1",
   platform: "com.ahmedsamir.elsakaelectric",
   projectId: "66d1d66d002baaf15d33",
+  storageId: "66e6bba3001c4421e241",
   databaseId: "66d1d90e003cb70104ce",
   userCollectionId: "66d1d931003d64508125",
   categoriesCollectionId: "66e6b67f003cf43f1fe0",
@@ -589,5 +590,44 @@ export async function clearUserCart() {
   } catch (error: any) {
     console.error("Failed to clear user cart", error);
     throw new Error(error.message || "Failed to clear cart");
+  }
+}
+
+// Upload File
+export async function uploadFile(image: any) {
+  if (!image) return;
+
+  try {
+    const uploadedFile = await storage.createFile(
+      appwriteConfig.storageId,
+      ID.unique(),
+      image
+    );
+
+    const fileUrl = await getFilePreview(uploadedFile.$id);
+    return fileUrl;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}
+// Get File Preview
+export async function getFilePreview(fileId: string) {
+  let fileUrl;
+
+  try {
+    fileUrl = storage.getFilePreview(
+      appwriteConfig.storageId,
+      fileId,
+      2000,
+      2000,
+      ImageGravity.Top,
+      100
+    );
+
+    if (!fileUrl) throw Error;
+
+    return fileUrl;
+  } catch (error: any) {
+    throw new Error(error);
   }
 }

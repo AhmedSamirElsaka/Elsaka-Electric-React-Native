@@ -245,7 +245,7 @@ const ProductDetailsScreen = ({
             className="mx-4 pt-4"
             horizontal
           />
-          {/* <ProductReviewsSection data={productsToShow} /> */}
+          <ProductReviewsSection data={productsToShow} />
         </View>
       </ScrollView>
 

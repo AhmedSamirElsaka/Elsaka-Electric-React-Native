@@ -19,6 +19,7 @@ import {
   getAllProducts,
   getUserCarts,
   getUserLovedProducts,
+  uploadFile,
 } from "@/lib/appwrite";
 import { Cart, Category, Product } from "@/types/types";
 import HomeProductList from "@/components/HomeProductList";
