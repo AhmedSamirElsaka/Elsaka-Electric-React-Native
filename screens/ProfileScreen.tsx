@@ -1,4 +1,12 @@
-import { Alert, Button, StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  Alert,
+  Button,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { addPhotoToUser, signOut } from "@/lib/appwrite";
 import { useGlobalContext } from "@/context/GlobalProvider";
@@ -56,14 +64,14 @@ const ProfileScreen = () => {
           }}
           activeOpacity={0.7}
         >
-          <Icons.ArrowRightStartOnRectangleIcon size={26} color={"white"} />
+          <Icons.ArrowRightStartOnRectangleIcon size={20} color={"white"} />
         </TouchableOpacity>
       </View>
 
-      <Text className="text-white font-bold text-4xl italic ml-4">
+      <Text className="text-white font-bold text-3xl italic ml-4">
         My profile
       </Text>
-      <View className="flex-row pl-4">
+      <View className="flex-row ml-4">
         <View className="relative">
           {user?.photo ? (
             <Image
@@ -80,97 +88,99 @@ const ProfileScreen = () => {
           )}
 
           <TouchableOpacity
-            className="bg-white rounded-full h-10 w-10 items-center justify-center self-end -mt-9 -mr-2"
+            className="bg-white rounded-full h-8 w-8 items-center justify-center self-end -mt-9 -mr-2"
             activeOpacity={0.7}
             onPress={() => {
               openPicker();
             }}
           >
-            <Icons.CameraIcon size={24} color={"black"} />
+            <Icons.CameraIcon size={20} color={"black"} />
           </TouchableOpacity>
         </View>
         <View className="mt-8 ">
-          <Text className="text-white font-bold text-2xl italic ml-6">
+          <Text className="text-white font-bold text-xl italic ml-4">
             {userName}
           </Text>
-          <Text className="text-gray-400 font-bold text-xl italic ml-6 ">
+          <Text className="text-gray-400 font-bold text-lg italic ml-4 ">
             {email}
           </Text>
         </View>
       </View>
-      <TouchableOpacity
-        className="ml-4 flex-row mt-10 justify-between pr-2 items-center"
-        activeOpacity={0.7}
-        onPress={() => {
-          navigation.navigate("orders" as never);
-        }}
-      >
-        <View>
-          <Text className="text-white font-semibold text-xl italic ">
-            My orders
-          </Text>
-          <Text className="text-gray-400 font-semibold text-lg italic mt-1">
-            Already have {orders.length} orders
-          </Text>
-        </View>
-        <Icons.ChevronRightIcon size={24} color={"white"} />
-      </TouchableOpacity>
-      <TouchableOpacity
-        className="ml-4 flex-row mt-10 justify-between pr-2 items-center"
-        activeOpacity={0.7}
-      >
-        <View>
-          <Text className="text-white font-semibold text-xl italic ">
-            Shipping addresses
-          </Text>
-          <Text className="text-gray-400 font-semibold text-lg italic mt-1">
-            3 addresses
-          </Text>
-        </View>
-        <Icons.ChevronRightIcon size={24} color={"white"} />
-      </TouchableOpacity>
-      <TouchableOpacity
-        className="ml-4 flex-row mt-10 justify-between pr-2 items-center"
-        activeOpacity={0.7}
-      >
-        <View>
-          <Text className="text-white font-semibold text-xl italic ">
-            Promocodes
-          </Text>
-          <Text className="text-gray-400 font-semibold text-lg italic mt-1">
-            You have special promocodes
-          </Text>
-        </View>
-        <Icons.ChevronRightIcon size={24} color={"white"} />
-      </TouchableOpacity>
-      <TouchableOpacity
-        className="ml-4 flex-row mt-10 justify-between pr-2 items-center"
-        activeOpacity={0.7}
-      >
-        <View>
-          <Text className="text-white font-semibold text-xl italic ">
-            My reviews
-          </Text>
-          <Text className="text-gray-400 font-semibold text-lg italic mt-1">
-            Reviews for 0 items
-          </Text>
-        </View>
-        <Icons.ChevronRightIcon size={24} color={"white"} />
-      </TouchableOpacity>
-      <TouchableOpacity
-        className="ml-4 flex-row mt-10 justify-between pr-2 items-center"
-        activeOpacity={0.7}
-      >
-        <View>
-          <Text className="text-white font-semibold text-xl italic ">
-            Settings
-          </Text>
-          <Text className="text-gray-400 font-semibold text-lg italic mt-1">
-            Notifications, password
-          </Text>
-        </View>
-        <Icons.ChevronRightIcon size={24} color={"white"} />
-      </TouchableOpacity>
+      <ScrollView className="">
+        <TouchableOpacity
+          className="ml-4 flex-row mt-6 justify-between pr-2 items-center"
+          activeOpacity={0.7}
+          onPress={() => {
+            navigation.navigate("orders" as never);
+          }}
+        >
+          <View>
+            <Text className="text-white font-semibold text-lg italic ">
+              My orders
+            </Text>
+            <Text className="text-gray-400 font-semibold text-base italic mt-1">
+              Already have {orders.length} orders
+            </Text>
+          </View>
+          <Icons.ChevronRightIcon size={20} color={"white"} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          className="ml-4 flex-row mt-10 justify-between pr-2 items-center"
+          activeOpacity={0.7}
+        >
+          <View>
+            <Text className="text-white font-semibold text-lg italic ">
+              Shipping addresses
+            </Text>
+            <Text className="text-gray-400 font-semibold text-base italic mt-1">
+              3 addresses
+            </Text>
+          </View>
+          <Icons.ChevronRightIcon size={20} color={"white"} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          className="ml-4 flex-row mt-10 justify-between pr-2 items-center"
+          activeOpacity={0.7}
+        >
+          <View>
+            <Text className="text-white font-semibold text-lg italic ">
+              Promocodes
+            </Text>
+            <Text className="text-gray-400 font-semibold text-base italic mt-1">
+              You have special promocodes
+            </Text>
+          </View>
+          <Icons.ChevronRightIcon size={20} color={"white"} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          className="ml-4 flex-row mt-10 justify-between pr-2 items-center"
+          activeOpacity={0.7}
+        >
+          <View>
+            <Text className="text-white font-semibold text-lg italic ">
+              My reviews
+            </Text>
+            <Text className="text-gray-400 font-semibold text-base italic mt-1">
+              Reviews for 0 items
+            </Text>
+          </View>
+          <Icons.ChevronRightIcon size={20} color={"white"} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          className="ml-4 flex-row mt-10 justify-between pr-2 items-center"
+          activeOpacity={0.7}
+        >
+          <View className="mb-4">
+            <Text className="text-white font-semibold text-lg italic ">
+              Settings
+            </Text>
+            <Text className="text-gray-400 font-semibold text-base italic mt-1">
+              Notifications, password
+            </Text>
+          </View>
+          <Icons.ChevronRightIcon size={20} color={"white"} />
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 };

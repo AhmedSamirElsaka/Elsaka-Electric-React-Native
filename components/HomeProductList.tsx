@@ -16,10 +16,10 @@ const HomeProductList = ({
   isSeeAll?: boolean;
 }) => {
   return (
-    <View className="px-6 space-y-4">
-      <View className="flex-row items-center justify-between ">
+    <View className="space-y-4">
+      <View className="flex-row items-center justify-between px-4">
         {title && (
-          <Text className="text-2xl font-semibold text-white">{title}</Text>
+          <Text className="text-xl font-bold text-white ml-4">{title}</Text>
         )}
 
         {isSeeAll && (
@@ -28,22 +28,24 @@ const HomeProductList = ({
             onPress={() => navigation.navigate("productsScreen")}
             activeOpacity={0.7}
           >
-            <Text className="text-primary text-lg ">See All</Text>
+            <Text className="text-primary text-base ">See All</Text>
           </TouchableOpacity>
         )}
       </View>
 
-      <FlatList
-        data={items}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          // console.log(item),
-          <HomeProductCard product={item} navigation={navigation} />
-        )}
-        showsVerticalScrollIndicator={false}
-        horizontal
-        ItemSeparatorComponent={() => <View className="w-4" />}
-      />
+      <View className="pl-4 ">
+        <FlatList
+          data={items}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            // console.log(item),
+            <HomeProductCard product={item} navigation={navigation} />
+          )}
+          showsVerticalScrollIndicator={false}
+          horizontal
+          ItemSeparatorComponent={() => <View className="w-4" />}
+        />
+      </View>
     </View>
   );
 };

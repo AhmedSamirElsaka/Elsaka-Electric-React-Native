@@ -63,7 +63,7 @@ const ShopProductCard = ({
       >
         <Image
           source={{ uri: product.images[0] }}
-          className="w-32 h-36 rounded-l-xl bg-red-800"
+          className="w-24 h-30 rounded-l-xl "
         />
         <View className="pt-2 ml-4 flex-1 ">
           <Text
@@ -73,26 +73,26 @@ const ShopProductCard = ({
             {product.title}
           </Text>
           <Text
-            className="text-gray-400 font-semibold text-xm max-w-[200px]"
+            className="text-gray-400 font-semibold text-sm max-w-[200px]"
             numberOfLines={1}
           >
             {product.description}
           </Text>
           <View className="flex-row items-center pt-2 space-x-2">
-            <Icons.StarIcon size={24} color={"#D17842"} />
-            <Text className=" text-white text-lg font-bold">
+            <Icons.StarIcon size={20} color={"#D17842"} />
+            <Text className=" text-white text-base font-bold">
               {product.rate}
             </Text>
-            <Text className=" text-gray-400 text-base">
+            <Text className=" text-gray-400 text-sm">
               ({product.numberOfRates})
             </Text>
           </View>
-          <Text className="text-white font-bold text-xl pt-4">
-            <Text className="text-primary text-lg">EGP </Text>
+          <Text className="text-white font-bold text-lg pt-2">
+            <Text className="text-primary text-base">EGP </Text>
             {product.price}
           </Text>
         </View>
-        <View className="mt-auto -mb-4 mr-4  h-auto w-auto">
+        <View className="mt-auto -mb-4 mr-2  h-auto w-auto">
           <LoveIcon
             onPress={() => {
               if (isLovedProduct) {

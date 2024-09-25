@@ -62,7 +62,7 @@ const SearchScreen = ({ navigation }: any) => {
     );
   }
   return (
-    <View className="bg-mainBackground - flex-1">
+    <View className="bg-mainBackground  flex-1">
       <StatusBar
         barStyle="light-content"
         backgroundColor={"#0C0F14"}
@@ -75,7 +75,7 @@ const SearchScreen = ({ navigation }: any) => {
         onBackIconPress={() => navigation.goBack()}
       />
 
-      <View className="pt-4 px-6 mb-8">
+      <View className="pt-8 px-4 mb-8">
         <SearchInput
           initialQuery={searchText}
           onTextChange={(text) => {
@@ -85,11 +85,11 @@ const SearchScreen = ({ navigation }: any) => {
         />
       </View>
 
-      <View className="pt-4 flex-row justify-between px-4 pb-4">
+      <View className="flex-row justify-between px-4 pb-4">
         <TouchableOpacity activeOpacity={0.7} onPress={() => {}}>
           <View className="flex-row space-x-2">
-            <Icon name="filter" type="ionicon" color="white" size={24} />
-            <Text className="text-white  text-base ">Filters</Text>
+            <Icon name="filter" type="ionicon" color="white" size={20} />
+            <Text className="text-white  text-base">Filters</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity
@@ -99,7 +99,7 @@ const SearchScreen = ({ navigation }: any) => {
           activeOpacity={0.7}
         >
           <View className="flex-row space-x-2">
-            <Icons.ArrowsUpDownIcon size={24} color="white" />
+            <Icons.ArrowsUpDownIcon size={20} color="white" />
             <Text className="text-white  text-base ">Popular</Text>
           </View>
         </TouchableOpacity>
@@ -114,14 +114,14 @@ const SearchScreen = ({ navigation }: any) => {
               name="view-module"
               type="material-icons"
               color="white"
-              size={24}
+              size={20}
             />
           ) : (
             <Icon
               name="view-list"
               type="material-icons"
               color="white"
-              size={24}
+              size={20}
             />
           )}
         </TouchableOpacity>
@@ -135,7 +135,7 @@ const SearchScreen = ({ navigation }: any) => {
       <BottomSheet
         ref={bottomSheetRef}
         onChange={handleSheetChanges}
-        snapPoints={[380]}
+        snapPoints={[350]}
         index={-1}
         enablePanDownToClose
         backgroundStyle={{ backgroundColor: "#2B2D31" }}
@@ -165,7 +165,7 @@ const SearchScreen = ({ navigation }: any) => {
                 activeOpacity={0.5}
               >
                 <Text
-                  className={`text-white text-lg p-4 ${
+                  className={`text-white text-base p-4 ${
                     item === filerSelectedItem ? "bg-primary" : ""
                   } `}
                 >

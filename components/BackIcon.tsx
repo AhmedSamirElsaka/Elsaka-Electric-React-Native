@@ -10,10 +10,10 @@ const BackIcon = ({ onPress }: { onPress: () => void }) => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         colors={["#252A32", "#0C0F14"]}
-        className="border-2 border-secondaryDarkGreyHex rounded-xl bg-secondaryDarkGreyHex p-2"
+        className="border-2 border-secondaryDarkGreyHex rounded-xl bg-secondaryDarkGreyHex p-1.5"
       >
         <Icons.ChevronLeftIcon
-          size={24}
+          size={20}
           color="white"
           className="opacity-[0.5]"
         />

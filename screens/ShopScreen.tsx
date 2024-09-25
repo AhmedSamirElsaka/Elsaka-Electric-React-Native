@@ -94,7 +94,7 @@ const ShopScreen = ({ navigation }: { navigation: any }) => {
     <View className="flex-1 bg-mainBackground pt-4 ">
       <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
       <Header title="Shop" />
-      <View className="pt-4">
+      <View className="pt-6">
         <ElectricShopCategoriesNavList
           mainCategories={categories}
           selectedItem="Best Sellers"
@@ -112,8 +112,8 @@ const ShopScreen = ({ navigation }: { navigation: any }) => {
         activeOpacity={0.7}
         onPress={() => navigation.navigate("productsScreen")}
       >
-        <View className="rounded-lg bg-primary content-center items-center mx-4 mt-4 py-8">
-          <Text className="text-white font-semibold text-3xl ">
+        <View className="rounded-lg bg-primary content-center items-center mx-4 mt-2 py-6">
+          <Text className="text-white font-semibold text-xl ">
             {notificationToShow.title}
           </Text>
           <Text className="text-white text-base">

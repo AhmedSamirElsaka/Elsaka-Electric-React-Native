@@ -56,14 +56,14 @@ const SignUp = () => {
       />
       <ScrollView>
         <View
-          className="w-full flex justify-center h-full px-4 "
+          className="w-full flex justify-center h-full px-4 mt-8 flex-1"
           style={{
             minHeight: Dimensions.get("window").height - 100,
           }}
         >
           <Image source={images.logo} className="w-[200px] h-[100px] " />
 
-          <Text className="text-2xl font-semibold text-white mt-6 font-psemibold">
+          <Text className="text-xl font-bold text-white mt-4 font-psemibold">
             Sign Up to Elsaka Electric
           </Text>
 
@@ -80,7 +80,7 @@ const SignUp = () => {
             title="Email"
             value={form.email}
             handleChangeText={(e) => setForm({ ...form, email: e })}
-            otherStyles="mt-7"
+            otherStyles="mt-4"
             keyboardType="email-address"
             placeholder="Enter your email"
           />
@@ -89,7 +89,7 @@ const SignUp = () => {
             title="Password"
             value={form.password}
             handleChangeText={(e) => setForm({ ...form, password: e })}
-            otherStyles="mt-7"
+            otherStyles="mt-4"
             placeholder="Enter your password"
             keyboardType="default"
           />
@@ -97,12 +97,12 @@ const SignUp = () => {
           <CustomButton
             title="Sign Up"
             handlePress={submit}
-            containerStyles="mt-7"
+            containerStyles="mt-6"
             isLoading={isSubmitting}
           />
 
-          <View className="flex justify-center items-center pt-5 flex-row">
-            <Text className="text-lg text-gray-100 font-pregular mr-2">
+          <View className="flex justify-center items-center pt-4 flex-row space-x-2">
+            <Text className="text-sm text-gray-100 font-pregular ">
               Don't have an account?
             </Text>
             <TouchableWithoutFeedback

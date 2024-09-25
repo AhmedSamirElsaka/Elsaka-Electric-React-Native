@@ -11,7 +11,7 @@ const MainCategoryNavItem = ({
 }) => {
   return (
     <View className=" space-y-2">
-      <Text className="text-white font-bold text-lg px-6 text-center">
+      <Text className="text-white font-bold text-base px-4 text-center">
         {category.name}
       </Text>
       {isSelected && (

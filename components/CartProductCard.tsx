@@ -135,7 +135,7 @@ const CartProductCard = ({
           <View className="flex-row ">
             <Image
               source={{ uri: cart.product.images[0] }}
-              className="w-24 h-28 rounded-2xl"
+              className="w-20 h-24 rounded-2xl"
             />
             <View className="flex-1">
               <Text
@@ -151,8 +151,8 @@ const CartProductCard = ({
               >
                 {cart.product.description}
               </Text>
-              <Text className="text-white font-bold text-xl mt-2 flex-1 text-right">
-                <Text className="text-primary text-xl">EGP </Text>
+              <Text className="text-white font-bold text-lg mt-3 flex-1 text-right">
+                <Text className="text-primary text-base">EGP </Text>
                 {parseInt(cart.product.price) * parseInt(cart.count)}
               </Text>
             </View>
@@ -168,11 +168,11 @@ const CartProductCard = ({
                 colors={["#252A32", "#0C0F14"]}
                 className="border-2 border-secondaryDarkGreyHex rounded-xl bg-secondaryDarkGreyHex p-2 -m-3 z-50"
               >
-                <Icons.XMarkIcon size={24} color={"white"} />
+                <Icons.XMarkIcon size={20} color={"white"} />
               </LinearGradient>
             </TouchableOpacity>
           </View>
-          <View className="flex-row mt-4 items-center ">
+          <View className="flex-row mt-2 items-center">
             {cart.size && (
               <View
                 className="border-2 border-secondaryDarkGreyHex rounded-2xl 

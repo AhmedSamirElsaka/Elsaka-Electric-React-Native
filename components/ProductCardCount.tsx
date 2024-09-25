@@ -27,9 +27,9 @@ const ProductCardCount = ({
       </TouchableOpacity>
       <View
         className="border-2 border-primary rounded-xl 
-              items-center content-center bg-[#0C0F14] p-2 w-14 h-12"
+              items-center content-center bg-[#0C0F14] p-2 w-12 h-10"
       >
-        <Text className="text-white text-lg" numberOfLines={1}>
+        <Text className="text-white text-base" numberOfLines={1}>
           {quantity}
         </Text>
       </View>

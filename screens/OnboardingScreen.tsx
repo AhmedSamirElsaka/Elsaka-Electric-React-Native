@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   skipText: {
-    fontSize: 24,
+    fontSize: 20,
     color: "white",
   },
 });

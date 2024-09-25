@@ -27,9 +27,9 @@ const LoveIcon = ({
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         colors={["#252A32", "#0C0F14"]}
-        className="border-2 border-secondaryDarkGreyHex rounded-xl bg-secondaryDarkGreyHex p-2 opacity-[0.8]"
+        className="border-2 border-secondaryDarkGreyHex rounded-xl bg-secondaryDarkGreyHex p-1.5 opacity-[0.8]"
       >
-        <Icons.HeartIcon size={24} color={isButtonPressed ? "red" : "white"} />
+        <Icons.HeartIcon size={20} color={isButtonPressed ? "red" : "white"} />
       </LinearGradient>
     </TouchableOpacity>
   );

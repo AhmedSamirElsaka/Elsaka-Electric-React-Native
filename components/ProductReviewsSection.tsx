@@ -9,7 +9,7 @@ const ProductReviewsSection = ({ data }: { data: Product[] }) => {
   return (
     <View>
       <View className="px-6 pt-10 flex-row justify-between">
-        <Text className="text-white font-bold text-2xl ">20 Reviews</Text>
+        <Text className="text-white font-bold text-2xl">20 Reviews</Text>
         <View className="flex-row items-center">
           <TouchableOpacity
             onPress={() => {

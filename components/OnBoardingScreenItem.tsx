@@ -77,8 +77,8 @@ const OnBoardingScreenItem = ({ index, x, item }: Props) => {
         <LottieView
           source={item.animation}
           style={{
-            width: SCREEN_WIDTH * 0.9,
-            height: SCREEN_WIDTH * 0.9,
+            width: 200,
+            height: 200,
           }}
           autoPlay
           loop
@@ -88,14 +88,7 @@ const OnBoardingScreenItem = ({ index, x, item }: Props) => {
         {item.title}
       </Animated.Text>
       <Animated.Text
-        style={[
-          {
-            color: "white",
-            fontSize: 18,
-            textAlign: "center",
-            marginHorizontal: 44,
-          },
-        ]}
+        className={"font-bold text-center mx-10 text-xl text-gray-400"}
       >
         {item.description}
       </Animated.Text>

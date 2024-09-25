@@ -6,7 +6,7 @@ import * as Icons from "react-native-heroicons/solid";
 const ProductRatingSection = ({ product }: { product: Product }) => {
   return (
     <View>
-      <Text className="text-white font-bold text-2xl px-6 pt-10">
+      <Text className="text-white font-bold text-xl px-6 pt-10">
         Rating&Reviews
       </Text>
       <View className="pt-8 px-6 justify-between w-auto flex-row items-center">

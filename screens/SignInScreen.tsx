@@ -61,7 +61,7 @@ const SignIn = () => {
         >
           <Image source={images.logo} className="w-[200px] h-[100px] " />
 
-          <Text className="text-2xl font-semibold text-white mt-6 font-psemibold">
+          <Text className="text-xl font-semibold text-white mt-6 font-psemibold">
             Log in to Elsaka Electric
           </Text>
 
@@ -69,7 +69,7 @@ const SignIn = () => {
             title="Email"
             value={form.email}
             handleChangeText={(e) => setForm({ ...form, email: e })}
-            otherStyles="mt-7"
+            otherStyles="mt-6"
             keyboardType="email-address"
             placeholder="Enter your email"
           />
@@ -78,7 +78,7 @@ const SignIn = () => {
             title="Password"
             value={form.password}
             handleChangeText={(e) => setForm({ ...form, password: e })}
-            otherStyles="mt-7"
+            otherStyles="mt-4"
             placeholder="Enter your password"
             keyboardType="default"
           />
@@ -86,12 +86,12 @@ const SignIn = () => {
           <CustomButton
             title="Sign In"
             handlePress={submit}
-            containerStyles="mt-7"
+            containerStyles="mt-6"
             isLoading={isSubmitting}
           />
 
           <View className="flex justify-center items-center pt-5 flex-row">
-            <Text className="text-lg text-gray-100 font-pregular mr-2">
+            <Text className="text-sm text-gray-100 font-pregular mr-2">
               Don't have an account?
             </Text>
             <TouchableWithoutFeedback

@@ -20,13 +20,13 @@ const Header = ({
   const navigation = useNavigation();
   const { user }: any = useGlobalContext();
   return (
-    <View className="h-auto  w-full  flex-row justify-between items-center  px-6 py-4">
+    <View className="h-auto  w-full  flex-row justify-between items-center  px-4 ">
       {isBackIconRequired ? (
         <BackIcon onPress={onBackIconPress} />
       ) : (
         <GradientHeaderIcon onPress={onOptionsIconPress} />
       )}
-      <Text className="text-white font-bold text-2xl">{title}</Text>
+      <Text className="text-white font-bold text-xl">{title}</Text>
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={() => {

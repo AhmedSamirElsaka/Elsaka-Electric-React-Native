@@ -46,9 +46,9 @@ const FavoriteProductCard = ({
       <View className="flex-row">
         <Image
           source={{ uri: product.images[0] }}
-          className="w-full h-[50vh] rounded-tr-3xl rounded-tl-3xl"
+          className="w-full h-[40vh] rounded-tr-3xl rounded-tl-3xl"
         />
-        <View className="w-11 h-auto z-50 -ml-16 mt-6">
+        <View className="h-auto z-50 -ml-12 mt-4">
           <LoveIcon
             onPress={() => {
               unSaveProductToUserHandler();
@@ -61,25 +61,25 @@ const FavoriteProductCard = ({
       <View className="h-40 bg-mainBackground -mt-40 opacity-[0.7] rounded-tr-3xl rounded-tl-3xl flex-row">
         <View className="px-6">
           <Text
-            className="text-white font-bold text-2xl pt-4 max-w-[240px] "
+            className="text-white font-bold text-xl pt-4 max-w-[250px] "
             numberOfLines={2}
           >
             {product.title}
           </Text>
-          <Text className="text-gray-300 max-w-[240px]" numberOfLines={1}>
+          <Text className="text-gray-300 max-w-[250px]" numberOfLines={1}>
             {product.description}
           </Text>
           <View className="flex-row items-center pt-6 space-x-2">
-            <Icons.StarIcon size={30} color={"#D17842"} />
-            <Text className=" text-white text-xl font-bold">
+            <Icons.StarIcon size={20} color={"#D17842"} />
+            <Text className=" text-white text-lg font-bold">
               {product.rate}
             </Text>
-            <Text className=" text-gray-300 text-lg">
+            <Text className=" text-gray-300 text-base">
               ({product.numberOfRates})
             </Text>
           </View>
         </View>
-        <View className="flex-1 flex-row justify-between pl-6 pr-6 pt-4">
+        <View className="flex-1 flex-row justify-between  pt-4">
           {product.category
             ?.filter((element) => element.name != "All")
             .map((element) => (

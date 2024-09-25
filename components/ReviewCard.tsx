@@ -34,16 +34,14 @@ const ReviewCard = ({
           resizeMode="stretch"
         />
       </View>
-      <Text className="text-white font-semibold text-2xl px-4">
-        Ahmed Samir
-      </Text>
-      <View className="flex-row pl-4 pt-2 justify-between">
+      <Text className="text-white font-semibold text-xl px-4">Ahmed Samir</Text>
+      <View className="flex-row pl-4 pt-2 justify-between items-center">
         <View className="flex-row space-x-1">
-          <SolidIcons.StarIcon size={24} color={"#D17842"} />
-          <SolidIcons.StarIcon size={24} color={"#D17842"} />
-          <SolidIcons.StarIcon size={24} color={"#D17842"} />
-          <SolidIcons.StarIcon size={24} color={"#D17842"} />
-          <OutlineIcons.StarIcon size={24} color={"#D17842"} />
+          <SolidIcons.StarIcon size={20} color={"#D17842"} />
+          <SolidIcons.StarIcon size={20} color={"#D17842"} />
+          <SolidIcons.StarIcon size={20} color={"#D17842"} />
+          <SolidIcons.StarIcon size={20} color={"#D17842"} />
+          <OutlineIcons.StarIcon size={20} color={"#D17842"} />
         </View>
         <Text className="text-gray-300 text-sm pr-2">August 13, 2022</Text>
       </View>
@@ -60,12 +58,12 @@ const ReviewCard = ({
           renderItem={() => (
             <Image
               source={require("../assets/images/imageDemo.png")}
-              className="w-32 h-32 rounded-xl"
+              className="w-28 h-28 rounded-xl"
             />
           )}
           horizontal
           showsHorizontalScrollIndicator={false}
-          ItemSeparatorComponent={() => <View className="w-6" />}
+          ItemSeparatorComponent={() => <View className="w-4" />}
           className="pt-6 px-4"
         />
       )}

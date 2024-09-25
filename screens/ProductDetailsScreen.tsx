@@ -130,15 +130,8 @@ const ProductDetailsScreen = ({
     );
   }
   return (
-    <View className="flex-1 bg-mainBackground ">
-      {/* Transparent StatusBar */}
-      <StatusBar
-        translucent={true}
-        backgroundColor="transparent"
-        barStyle="light-content"
-        hidden={true}
-      />
-      {/* Top Icons Row */}
+    <View className="flex-1 bg-mainBackground">
+      <StatusBar barStyle="light-content" hidden={true} translucent />
       <View className="flex-row justify-between px-6 content-center z-50 mt-8">
         <BackIcon
           onPress={() => {
@@ -157,7 +150,6 @@ const ProductDetailsScreen = ({
         />
       </View>
 
-      {/* Product Image */}
       <ScrollView className="w-full h-[60vh] -mt-20">
         <FlatList
           data={product.images}
@@ -180,7 +172,7 @@ const ProductDetailsScreen = ({
         <View className="h-40 bg-mainBackground -mt-40 opacity-[0.7] rounded-tr-3xl rounded-tl-3xl flex-row">
           <View className="px-4 flex-1">
             <Text
-              className="text-white font-bold text-xl pt-4"
+              className="text-white font-bold text-lg pt-4"
               numberOfLines={2}
             >
               {product.title}
@@ -189,7 +181,7 @@ const ProductDetailsScreen = ({
               {product.description}
             </Text>
             <View className="flex-row items-center pt-4 space-x-2">
-              <Icons.StarIcon size={30} color={"#D17842"} />
+              <Icons.StarIcon size={24} color={"#D17842"} />
               <Text className=" text-white text-xl font-bold">
                 {product.rate}
               </Text>
@@ -198,7 +190,7 @@ const ProductDetailsScreen = ({
               </Text>
             </View>
           </View>
-          <View className=" flex-row justify-between pl-10 pr-4 pt-4">
+          <View className=" flex-row justify-between pl-2 pr-4 pt-4">
             {product.category
               ?.filter((element) => element.name != "All")
               .map((element) => (
@@ -209,16 +201,20 @@ const ProductDetailsScreen = ({
           </View>
         </View>
         <View className="pb-4">
-          <Text className="text-white font-bold text-xl px-6 pt-4">
+          <Text className="text-white font-bold text-lg px-6 pt-4">
             Description
           </Text>
-          <Text className="text-gray-200 px-6 pt-4" ellipsizeMode="tail">
+          <Text
+            className="text-gray-300 px-6 pt-2 text-base"
+            ellipsizeMode="tail"
+            numberOfLines={6}
+          >
             {product.description}
           </Text>
 
           {product.productSize && product.productSize.length > 0 && (
             <View>
-              <Text className="text-white font-bold text-xl px-6 pt-6">
+              <Text className="text-white font-bold text-lg px-6 pt-6">
                 Size
               </Text>
 
@@ -249,7 +245,7 @@ const ProductDetailsScreen = ({
             }}
             showsHorizontalScrollIndicator={false}
             ItemSeparatorComponent={() => <View className="w-4" />}
-            className="mx-4 pt-4"
+            className="ml-4 pt-4"
             horizontal
           />
           <ProductReviewsSection data={productsToShow} />
@@ -262,18 +258,18 @@ const ProductDetailsScreen = ({
           navigation.push("writeReview");
         }}
       >
-        <View className="px-6 py-4 bg-primary rounded-full w-44 flex-row space-x-2 items-center content-center">
+        <View className="px-4 py-4 bg-primary rounded-full w-44 flex-row space-x-2 items-center content-center">
           <Icons.PencilIcon size={20} color={"#FFFFFF"} />
-          <Text className="text-white font-bold text-center">
+          <Text className="text-white font-bold text-center text-sm">
             Write A Review
           </Text>
         </View>
       </TouchableOpacity>
-      <View className="flex-row  pt-4 justify-between mb-4">
-        <View className="justify-center items-center pr-10  pl-6">
-          <Text className="text-white font-bold text-lg">Price</Text>
-          <Text className="text-white font-bold text-xl">
-            <Text className="text-primary text-lg">EGP </Text>
+      <View className="flex-row  pt-2 justify-between mb-4">
+        <View className="justify-center items-center pr-6  pl-6">
+          <Text className="text-white font-bold text-lg ">Price</Text>
+          <Text className="text-white font-bold text-lg text-center">
+            <Text className="text-primary text-base">EGP </Text>
             {product.price}
           </Text>
         </View>
@@ -284,7 +280,7 @@ const ProductDetailsScreen = ({
             dispatch(addCart(product));
           }}
           textStyles="text-white text-lg text-bold"
-          containerStyles="bg-primary flex-1 mr-6"
+          containerStyles="bg-primary flex-1 mr-4  min-h-[30px]"
         />
       </View>
     </View>

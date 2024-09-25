@@ -33,12 +33,12 @@ const TabIcon = ({
         className="w-6 h-6"
       /> */}
 
-      {home && <Icons.HomeIcon size={24} color={color} />}
-      {cart && <Icons.ShoppingBagIcon size={24} color={color} />}
+      {home && <Icons.HomeIcon size={20} color={color} />}
+      {cart && <Icons.ShoppingBagIcon size={20} color={color} />}
 
-      {profile && <Icons.UserIcon size={24} color={color} />}
-      {favorites && <Icons.HeartIcon size={24} color={color} />}
-      {shop && <Icons.ShoppingCartIcon size={24} color={color} />}
+      {profile && <Icons.UserIcon size={20} color={color} />}
+      {favorites && <Icons.HeartIcon size={20} color={color} />}
+      {shop && <Icons.ShoppingCartIcon size={20} color={color} />}
 
       <Text
         className={`${focused ? "font-psemibold" : "font-pregular"} text-s`}
@@ -62,7 +62,7 @@ const TabsNavigator = () => {
           backgroundColor: "#000",
           borderTopWidth: 1,
           borderTopColor: "#232533",
-          height: 70,
+          height: 60,
         },
       }}
     >

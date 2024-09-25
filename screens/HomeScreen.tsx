@@ -151,13 +151,12 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
       <Header title="Home" />
       <ScrollView>
         <View className="flex-1  bg-mainBackground">
-          <Text className="text-white font-bold text-2xl pl-8 pr-12 pt-4">
+          <Text className="text-white font-bold text-xl pl-4 pr-16 mt-6">
             Find the best
             <Text className="text-primary"> Electrical Product</Text> for your
             home
           </Text>
-
-          <View className="pt-8 px-6 mb-8">
+          <View className="pt-6 px-4 mb-8">
             <SearchInput
               initialQuery={""}
               onSearchPress={(text) => {
@@ -165,8 +164,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
               }}
             />
           </View>
-
-          <View className="px-6">
+          <View className="pl-4">
             <CategoriesList
               categories={categories}
               selectedItem="All"
@@ -181,13 +179,12 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
               }}
             />
           </View>
-
           <HomeProductList
             title=""
             items={shuffle(productsToShow)}
             navigation={navigation}
           />
-          <View className="mt-6">
+          <View className="mt-4">
             <HomeProductList
               title="New"
               items={shuffle(products)}
@@ -195,43 +192,44 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
               isSeeAll={true}
             />
           </View>
-          <View className="mt-6">
+          <View className="mt-4">
             <HomeProductList
               title="Sale"
               items={shuffle(products)}
               navigation={navigation}
+              isSeeAll={true}
             />
           </View>
-
-          <View className="mt-6">
+          <View className="mt-4">
             <HomeProductList
               title="Featured"
               items={shuffle(products)}
               navigation={navigation}
+              isSeeAll={true}
             />
           </View>
-
-          <View className="mt-6">
+          <View className="mt-4">
             <HomeProductList
               title="Trending"
               items={shuffle(products)}
               navigation={navigation}
+              isSeeAll={true}
             />
           </View>
-
-          <View className="mt-6">
+          <View className="mt-4">
             <HomeProductList
               title="Best Selling"
               items={shuffle(products)}
               navigation={navigation}
+              isSeeAll={true}
             />
           </View>
-
-          <View className="mt-6">
+          <View className="mt-4">
             <HomeProductList
               title="Top Rated"
               items={shuffle(products)}
               navigation={navigation}
+              isSeeAll={true}
             />
           </View>
         </View>

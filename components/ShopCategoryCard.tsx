@@ -21,19 +21,19 @@ const ShopCategoryCard = ({
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         colors={["#252A32", "#0C0F14"]}
-        className="  flex-row justify-between rounded-xl items-center pl-6 border-2 border-secondaryDarkGreyHex   bg-secondaryDarkGreyHex "
+        className="  flex-row justify-between rounded-xl items-center pl-4 border-2 border-secondaryDarkGreyHex   bg-secondaryDarkGreyHex "
       >
         <Text
-          className="text-white font-semibold text-lg max-w-[200px] "
-          numberOfLines={2}
+          className="text-white font-bold text-base max-w-[200px] "
+          numberOfLines={3}
         >
           {product.title}
         </Text>
-        <View className="rounded-r-xl w-40 h-24 justify-end content-end">
+        <View className="w-24 h-24 ml-8">
           <Image
             source={{ uri: product.images[0] }}
             resizeMode="stretch"
-            className="ml-8 flex-1 min-w-40 min-h-24"
+            className="flex-1 w-24 h-24 rounded-r-xl"
           />
         </View>
       </LinearGradient>

@@ -39,33 +39,39 @@ const WriteReviewScreen = () => {
   };
   // console.log(form);
   return (
-    <SafeAreaView className="flex-1 bg-mainBackground pt-8">
-      <StatusBar barStyle="light-content" backgroundColor={"#0C0F14"} />
+    <SafeAreaView className="flex-1 bg-mainBackground pt-4">
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={"#0C0F14"}
+        hidden={false}
+      />
       <View className="h-12 w-12 items-center justify-center ml-6">
         <BackIcon onPress={() => navigation.goBack()} />
       </View>
-      <Text className="text-white text-center text-2xl font-bold mb-4 mt-4">
+      <Text className="text-white text-center text-xl font-bold  mt-4">
         What is your rate ?
       </Text>
-      <AirbnbRating
-        count={5}
-        reviews={["Terrible", "Bad", "OK", "Good", "Very Good"]}
-        defaultRating={0}
-        size={40}
-        onFinishRating={ratingCompleted}
-      />
+      <View>
+        <AirbnbRating
+          count={5}
+          reviews={["Terrible", "Bad", "OK", "Good", "Very Good"]}
+          defaultRating={0}
+          size={40}
+          onFinishRating={ratingCompleted}
+        />
+      </View>
 
-      <Text className="text-white text-center text-2xl font-semibold italic pt-8">
+      <Text className="text-white text-center text-xl font-semibold italic pt-8">
         Please share your opinion
       </Text>
-      <Text className="text-white text-center text-2xl font-semibold italic">
+      <Text className="text-white text-center text-xl font-semibold italic">
         about the product
       </Text>
       <LinearGradient
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         colors={["#252A32", "#0C0F14"]}
-        className="border-2 rounded-lg mx-6 py-2 mb-6  mt-6 h-48 p-4 border-secondaryDarkGreyHex  bg-secondaryDarkGreyHex "
+        className="border-2 rounded-lg mx-6 py-2 mb-6  mt-6 h-40 p-4 border-secondaryDarkGreyHex  bg-secondaryDarkGreyHex "
       >
         <TextInput
           className="text-start text-lg text-white "
@@ -84,9 +90,9 @@ const WriteReviewScreen = () => {
         }}
         activeOpacity={0.7}
       >
-        <View className="justify-center items-center pt-8">
-          <View className="rounded-full bg-primary w-14 h-14 items-center justify-center">
-            <Icons.CameraIcon size={30} color={"white"} />
+        <View className="justify-center items-center pt-4">
+          <View className="rounded-full bg-primary w-12 h-12 items-center justify-center">
+            <Icons.CameraIcon size={24} color={"white"} />
           </View>
           <Text className="text-white  text-lg font-semibold italic ">
             Add your photos

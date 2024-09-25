@@ -44,7 +44,7 @@ const SearchInput = ({
           }
         }}
       >
-        <Icons.MagnifyingGlassIcon color={"#CDCDE0"} size={24} />
+        <Icons.MagnifyingGlassIcon color={"#CDCDE0"} size={20} />
       </TouchableOpacity>
     </View>
   );

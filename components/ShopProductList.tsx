@@ -41,7 +41,7 @@ const ShopProductList = ({
             <ShopProductCard product={item} navigation={navigation} />
           )}
           ItemSeparatorComponent={() => <View className="h-6" />}
-          className="pt-4"
+          className="pt-2"
           key={2}
         />
       )}

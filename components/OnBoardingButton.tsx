@@ -50,13 +50,13 @@ const OnBoardingButton = ({
     return {
       width:
         flatListIndex.value === dataLength - 1
-          ? withTiming(140)
+          ? withTiming(120)
           : withTiming(60),
 
       height:
         flatListIndex.value === dataLength - 1
-          ? withTiming(50)
-          : withTiming(50),
+          ? withTiming(40)
+          : withTiming(40),
     };
   });
   const nextAnimationStyle = useAnimatedStyle(() => {
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   nextText: {
-    fontSize: 24,
+    fontSize: 20,
     alignContent: "center",
     justifyContent: "center",
     textAlign: "right",
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   },
   getStartedText: {
     color: "white",
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "bold",
     flex: 1,
     position: "absolute",

@@ -25,14 +25,14 @@ const CategoriesList = ({
       >
         <View className=" items-center space-y-1">
           <Text
-            className={`text-gray-200 text-lg ${
+            className={`text-gray-200 text-base ${
               item === selectedItemState && "text-primary"
             }`}
           >
             {item}
           </Text>
           {item === selectedItemState && (
-            <View className="w-2 h-2 rounded-full bg-primary" />
+            <View className="w-1 h-1 rounded-full bg-primary" />
           )}
         </View>
       </TouchableOpacity>

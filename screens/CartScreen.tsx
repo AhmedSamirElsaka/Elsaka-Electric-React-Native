@@ -90,14 +90,14 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
         }}
         textValue={promoCode}
       />
-      <View className="flex-row  pt-4 justify-between mb-2">
-        <View className="justify-center items-center pr-10  pl-8 ">
+      <View className="flex-row  pt-3 justify-between mb-2">
+        <View className="justify-center items-center pr-8  pl-8 ">
           <View className="flex-1">
             <Text className="text-white font-bold text-lg text-center ">
               Price
             </Text>
-            <Text className="text-white font-bold text-xl text-center">
-              <Text className="text-primary text-xl">EGP </Text>
+            <Text className="text-white font-bold text-lg text-center">
+              <Text className="text-primary text-base">EGP </Text>
               {price}
             </Text>
           </View>
@@ -112,7 +112,7 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
             }
           }}
           textStyles="text-white text-lg text-bold"
-          containerStyles="bg-primary flex-1 mr-6"
+          containerStyles="bg-primary flex-1 mr-4"
         />
       </View>
       <BottomSheet

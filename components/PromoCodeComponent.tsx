@@ -27,7 +27,7 @@ const PromoCodeComponent = ({
       className="  flex-row justify-between px-4 bg-secondaryDarkGreyHex mx-4 mr-8 rounded-xl mt-4"
     >
       <TextInput
-        className="bg-[#fff0] flex-1 rounded-xl px-4 text-white"
+        className="bg-[#fff0] flex-1 rounded-xl px-4 py-2 text-white"
         placeholder="Enter promo code"
         multiline={false}
         onFocus={onFocus}
@@ -37,11 +37,11 @@ const PromoCodeComponent = ({
         value={textValue}
       />
       <TouchableOpacity
-        className="bg-white rounded-full p-2 -mr-6"
+        className="bg-white rounded-full p-2 -mr-6 items-center justify-center"
         activeOpacity={0.7}
         onPress={onPress}
       >
-        <Icons.ArrowRightIcon color="black" size={30} />
+        <Icons.ArrowRightIcon color="black" size={24} />
       </TouchableOpacity>
     </LinearGradient>
   );
