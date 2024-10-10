@@ -18,7 +18,7 @@ Welcome to Elsaka Electric, an e-commerce app designed to provide a seamless sho
 
 ## 🎥 Video
 
-
+https://www.linkedin.com/feed/update/urn:li:activity:7244764820422483968/
 ## 🛠 Dependencies
 
 - **React Native**: Core framework for building the app.
